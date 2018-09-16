@@ -1,0 +1,50 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~font-awesome/css/font-awesome.css";
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+/* You can add global styles to this file, and also import other style files */
+@media print {
+  .no_print {
+    display: none;
+  }
+  .mat-button {
+    display: none;
+  }
+
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4em;
+  }
+
+  @page {
+    margin: 1cm;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  .col_cnpj_cpf {
+    width: 10%;
+  }
+
+  .col_clifor {
+    width: 30%;
+  }
+
+  .col_manifestos {
+    width: 55%;
+  }
+
+  .col_total {
+    width: 5%;
+  }
+}

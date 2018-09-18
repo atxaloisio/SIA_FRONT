@@ -16,7 +16,7 @@ import 'rxjs/add/operator/debounceTime';
 import { Servico, ServicoFilter } from './servico';
 
 export class DsServico extends DataSource<Servico> {
-  _filterChange = new BehaviorSubject( {id: '', descricao: '', tipo_atividade: ''} );
+  _filterChange = new BehaviorSubject( {id: '', descricao: ''} );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

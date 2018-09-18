@@ -19,7 +19,6 @@ import { OnlyNumberDirective } from './../only-number.directive';
 import { Servico } from './servico';
 import { ActivatedRoute, Params} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
-import { TipoAtividade } from '../tipoatividade/tipoatividade';
 
 @Component({
   selector: 'app-servico-form',
@@ -32,8 +31,6 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
   servico_ant: Servico;
   emProcessamento = false;
   exibeIncluir = false;
-  tipoatividades: TipoAtividade[];
-  TipoAtividadeEnum: typeof TipoAtividadeEnum = TipoAtividadeEnum;
 
   valDescricao = new FormControl('', [Validators.required]);
 
@@ -41,7 +38,6 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
   @ViewChild('focuscomp') focuscomp: ElementRef;
 
   constructor(private _servicoService: ServicoService,
-    private _tipoatividadeService: TipoAtividadeService,
     private _tokenManager: TokenManagerService,
     private _route: ActivatedRoute,
     private dialog: DialogService) {}
@@ -56,35 +52,21 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
     this.emProcessamento = true;
     this.servico = new Servico();
     this.servico_ant = new Servico();
-    const ta = this._tipoatividadeService.getListTipoAtividades(this._tokenManager.retrieve())
-      .retry(3)
-      .subscribe(
-        data => {
-          this.tipoatividades = JSON.parse(data._body);
-          // console.log(2);
-          this._route.params.forEach((params: Params) => {
-            const id: number = +params['id'];
-            if (id) {
-              this._servicoService.getServico(this._tokenManager.retrieve(), id)
-              .retry(3)
-              .subscribe( dt => {
-                this.servico = JSON.parse(dt._body);
-                this.servico_ant = JSON.parse(dt._body);
-                // console.log(1);
-                this.emProcessamento = false;
-              });
-            } else {
-              this.emProcessamento = false;
-            }
-          });
-        },
-        error => {
+    this._route.params.forEach((params: Params) => {
+      const id: number = +params['id'];
+      if (id) {
+        this._servicoService.getServico(this._tokenManager.retrieve(), id)
+        .retry(3)
+        .subscribe( dt => {
+          this.servico = JSON.parse(dt._body);
+          this.servico_ant = JSON.parse(dt._body);
+          // console.log(1);
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao carregar o registro.', error.error + ' - Detalhe: ' + error.message);
-        }
-      );
-
-
+        });
+      } else {
+        this.emProcessamento = false;
+      }
+    });
   }
 
   ngAfterViewChecked(): void {

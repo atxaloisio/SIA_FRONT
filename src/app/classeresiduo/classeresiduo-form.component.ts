@@ -94,11 +94,11 @@ export class ClasseResiduoFormComponent implements OnInit, AfterViewInit, AfterV
             this.classeresiduo = data;
             this.classeresiduo_ant = data;
             this.exibeIncluir = true;
-            this.dialog.success('SGR', 'Classe de Residuo salvo com sucesso.');
+            this.dialog.success('SIA', 'Classe de Residuo salvo com sucesso.');
           },
           error => {
             this.emProcessamento = false;
-            this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+            this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
           },
         );
       } else {
@@ -112,17 +112,17 @@ export class ClasseResiduoFormComponent implements OnInit, AfterViewInit, AfterV
             this.classeresiduo = data;
             this.classeresiduo_ant = data;
             this.exibeIncluir = true;
-            this.dialog.success('SGR', 'Classe de Residuo salvo com sucesso.');
+            this.dialog.success('SIA', 'Classe de Residuo salvo com sucesso.');
           },
           error => {
             this.emProcessamento = false;
-            this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+            this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
           },
         );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

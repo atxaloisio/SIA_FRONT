@@ -5,12 +5,12 @@
 
 export const environment = {
   production: false,
-  urlbase: 'http://sgr.localhost'
+  urlbase: 'http://sia.localhost'
 };
 
 // export const environment = {
 //   production: false,
-//   urlbase: 'http://sgr.ambienteverde.eco.br'
+//   urlbase: 'http://SIA.ambienteverde.eco.br'
 // };
 
 

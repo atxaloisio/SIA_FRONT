@@ -131,29 +131,29 @@ export class ContratoClienteFormComponent
 
   validaServicos(): boolean {
     let retorno: boolean;
-    const msgRetorno = '';
+    const mSIAetorno = '';
     retorno = true;
     // for (let index = 0; index < this.contratoclienteresiduos.length; index++) {
     //   const cfs = this.contratoclienteresiduos[index];
     //   if (cfs.selecionado) {
     //     if (cfs.unidade === '') {
-    //       msgRetorno = 'Unidade do serviço ' + cfs.descricao + ' deve ser informada.';
+    //       mSIAetorno = 'Unidade do serviço ' + cfs.descricao + ' deve ser informada.';
     //       break;
     //     }
 
-    //     if (msgRetorno === '') {
+    //     if (mSIAetorno === '') {
     //       if (((isNullOrUndefined(cfs.preco_compra)) || (cfs.preco_compra === 0)) &&
     //         ((isNullOrUndefined(cfs.preco_servico)) || (cfs.preco_servico === 0))) {
-    //           msgRetorno = 'Preço de compra ou preço de serviço deve ser informado em ' + cfs.descricao;
+    //           mSIAetorno = 'Preço de compra ou preço de serviço deve ser informado em ' + cfs.descricao;
     //           break;
     //       }
     //     }
     //   }
     // }
 
-    if (msgRetorno !== '') {
+    if (mSIAetorno !== '') {
       retorno = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos. ', msgRetorno);
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos. ', mSIAetorno);
     }
 
     return retorno;
@@ -308,7 +308,7 @@ export class ContratoClienteFormComponent
               this.contratocliente_ant = data;
               // this.emProcessamento = false;
               //     this.exibeIncluir = true;
-              //     this.dialog.success('SGR', 'Contrato salvo com sucesso.');
+              //     this.dialog.success('SIA', 'Contrato salvo com sucesso.');
               // Salvando lista de serviços
               for (let index = 0; index < this.contratoclienteresiduos.length; index++) {
                 this.contratoclienteresiduos[index].id_contrato_cliente = this.contratocliente.id;
@@ -338,28 +338,28 @@ export class ContratoClienteFormComponent
                     this.contratoclienteequipamento = new ContratoClienteEquipamento();
                     this.emProcessamento = false;
                     this.exibeIncluir = true;
-                    this.dialog.success('SGR', 'Contrato salvo com sucesso.');
+                    this.dialog.success('SIA', 'Contrato salvo com sucesso.');
                   },
                   error => {
                     this.emProcessamento = false;
-                    this.dialog.error('SGR', 'Erro ao salvar lista de equipamentos.', error.error + ' - Detalhe: ' + error.message);
+                    this.dialog.error('SIA', 'Erro ao salvar lista de equipamentos.', error.error + ' - Detalhe: ' + error.message);
                   });
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               if (fileBrowser.files.length > 0) {
                 this.uploadContrato(this.contratocliente, fileBrowser.files[0]);
               }
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.contratocliente.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -396,29 +396,29 @@ export class ContratoClienteFormComponent
                     this.contratoclienteequipamento = new ContratoClienteEquipamento();
                     this.emProcessamento = false;
                     this.exibeIncluir = true;
-                    this.dialog.success('SGR', 'Contrato salvo com sucesso.');
+                    this.dialog.success('SIA', 'Contrato salvo com sucesso.');
                   },
                   error => {
                     this.emProcessamento = false;
-                    this.dialog.error('SGR', 'Erro ao salvar lista de equipamentos.', error.error + ' - Detalhe: ' + error.message);
+                    this.dialog.error('SIA', 'Erro ao salvar lista de equipamentos.', error.error + ' - Detalhe: ' + error.message);
                   });
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               if (fileBrowser.files.length > 0) {
                 this.uploadContrato(this.contratocliente, fileBrowser.files[0]);
               }
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.contratocliente.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
               this.dialog.error(
-                'SGR',
+                'SIA',
                 'Erro ao salvar o registro.',
                 error.error + ' - Detalhe: ' + error.message
               );
@@ -449,7 +449,7 @@ export class ContratoClienteFormComponent
         }
       }
 
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos', msgDetalhe);
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos', msgDetalhe);
     }
   }
 
@@ -600,15 +600,15 @@ export class ContratoClienteFormComponent
           this.contratoclienteresiduo.preco_servico = 0;
           this.loadContratos(this.contratoclienteresiduo.id_servico, this.contratoclienteresiduo.id_residuo, event.value).subscribe();
         } else {
-          this.dialog.warning('SGR', 'Serviço não informado');
+          this.dialog.warning('SIA', 'Serviço não informado');
           document.getElementById('id_servico').focus();
         }
       } else {
-        this.dialog.warning('SGR', 'Residuo não informado');
+        this.dialog.warning('SIA', 'Residuo não informado');
         document.getElementById('id_residuo').focus();
       }
     } else {
-      this.dialog.warning('SGR', 'Cliente não informado');
+      this.dialog.warning('SIA', 'Cliente não informado');
       // document.getElementById('id_cliente').focus();
     }
     // console.log('mudou estado ' + event.value);
@@ -683,7 +683,7 @@ export class ContratoClienteFormComponent
         this.contratoclienteresiduo = new ContratoClienteResiduo();
         document.getElementById('id_servico').focus();
     } else {
-      this.dialog.warning('SGR', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
+      this.dialog.warning('SIA', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
     }
   }
 
@@ -696,23 +696,23 @@ export class ContratoClienteFormComponent
 
   remlinha(serv: ContratoClienteResiduo) {
     if (!isNullOrUndefined(serv.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o servico: ' + serv.servico + ' do resíduo:' + serv.residuo + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o servico: ' + serv.servico + ' do resíduo:' + serv.residuo + ' ?').subscribe(
       result => {
         if (result.retorno) {
           this._contratoclienteresiduoService.deleteContratoClienteResiduo(this._tokenManager.retrieve(), serv.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Servico excluído do contrato com sucesso.');
+              this.dialog.success('SIA', 'Servico excluído do contrato com sucesso.');
               const index = this.contratoclienteresiduos.indexOf(serv);
               this.contratoclienteresiduos.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o serviço.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o serviço.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o servico: ' + serv.servico + ' do resíduo:' + serv.residuo + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o servico: ' + serv.servico + ' do resíduo:' + serv.residuo + ' ?').subscribe(
       result => {
         if (result.retorno) {
           const index = this.contratoclienteresiduos.indexOf(serv);
@@ -724,7 +724,7 @@ export class ContratoClienteFormComponent
 
   editlinha(serv: ContratoClienteResiduo) {
     if (!isNullOrUndefined(this.contratoclienteresiduo.id_contrato_fornecedor)) {
-      this.dialog.question('SGR', 'Deseja cancelar a edição?').subscribe(
+      this.dialog.question('SIA', 'Deseja cancelar a edição?').subscribe(
         result => {
           if (result.retorno) {
             this.addlinha();
@@ -786,7 +786,7 @@ export class ContratoClienteFormComponent
       this.contratoclienteequipamento = new ContratoClienteEquipamento();
       document.getElementById('id_equipamento').focus();
     } else {
-      this.dialog.warning('SGR', 'Equipamento não adicionado', 'Detalhe: ' + mensagem);
+      this.dialog.warning('SIA', 'Equipamento não adicionado', 'Detalhe: ' + mensagem);
     }
   }
 
@@ -798,23 +798,23 @@ export class ContratoClienteFormComponent
 
   deleteGridEquipamentos(item: ContratoClienteEquipamento) {
     if (!isNullOrUndefined(item.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Equipamento: ' + item.equipamento + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Equipamento: ' + item.equipamento + ' ?').subscribe(
       result => {
         if (result.retorno) {
           this._contratoclienteequipamentoService.deleteContratoClienteEquipamento(this._tokenManager.retrieve(), item.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Equipamento excluído do contrato com sucesso.');
+              this.dialog.success('SIA', 'Equipamento excluído do contrato com sucesso.');
               const index = this.contratoclienteequipamentos.indexOf(item);
               this.contratoclienteequipamentos.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o Equipamento.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o Equipamento.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Equipamento: ' + item.equipamento + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Equipamento: ' + item.equipamento + ' ?').subscribe(
       result => {
         if (result.retorno) {
           const index = this.contratoclienteequipamentos.indexOf(item);

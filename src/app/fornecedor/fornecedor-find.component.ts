@@ -110,7 +110,7 @@ export class FornecedorFindComponent implements OnInit, AfterViewInit {
  */
   validaSelecao(): boolean {
     if (this.selectedRowIndex === -1) {
-      this.dialog.warning('SGR', 'Nenhum registro selecionado na grade.');
+      this.dialog.warning('SIA', 'Nenhum registro selecionado na grade.');
       return false;
     } else {
       return true;

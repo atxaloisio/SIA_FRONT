@@ -94,11 +94,11 @@ export class EquipamentoFormComponent implements OnInit, AfterViewInit, AfterVie
               this.equipamento = data;
               this.equipamento_ant = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'Equipamento salvo com sucesso.');
+              this.dialog.success('SIA', 'Equipamento salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -111,17 +111,17 @@ export class EquipamentoFormComponent implements OnInit, AfterViewInit, AfterVie
           this.equipamento = data;
           this.equipamento_ant = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'Equipamento salvo com sucesso.');
+          this.dialog.success('SIA', 'Equipamento salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

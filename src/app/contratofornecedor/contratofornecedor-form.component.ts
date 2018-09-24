@@ -260,11 +260,11 @@ export class ContratoFornecedorFormComponent
                   this.contratofornecedorresiduos_ant = ctrfres;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Documento salvo com sucesso.');
+                  this.dialog.success('SIA', 'Documento salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               if (fileBrowser.files.length > 0) {
@@ -273,7 +273,7 @@ export class ContratoFornecedorFormComponent
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -299,11 +299,11 @@ export class ContratoFornecedorFormComponent
                   this.contratofornecedorresiduos_ant = ctrfres;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Documento salvo com sucesso.');
+                  this.dialog.success('SIA', 'Documento salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de resíduos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
 
@@ -314,7 +314,7 @@ export class ContratoFornecedorFormComponent
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       }
@@ -342,7 +342,7 @@ export class ContratoFornecedorFormComponent
         }
       }
 
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos', msgDetalhe);
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos', msgDetalhe);
     }
   }
 
@@ -373,7 +373,7 @@ export class ContratoFornecedorFormComponent
   }
 
   btnDuplicar_click() {
-    this.dialog.question('SGR', 'Deseja realmente duplicar o contrato?').subscribe(
+    this.dialog.question('SIA', 'Deseja realmente duplicar o contrato?').subscribe(
       result => {
         this.contratofornecedor.id = null;
         for (let index = 0; index < this.contratofornecedorresiduos.length; index++) {
@@ -501,7 +501,7 @@ export class ContratoFornecedorFormComponent
            p.unidade === this.contratofornecedorresiduo.unidade);
 
     if ((!isNullOrUndefined(index)) && (index > -1)) {
-      this.dialog.warning('SGR', 'Resíduo já foi relacionado');
+      this.dialog.warning('SIA', 'Resíduo já foi relacionado');
     } else {
       this.contratofornecedorresiduo.residuo = this.residuos.find(p => p.id === this.contratofornecedorresiduo.id_residuo).descricao;
       this.contratofornecedorresiduo.servico = this.servicos.find(p => p.id === this.contratofornecedorresiduo.id_servico).descricao;
@@ -517,23 +517,23 @@ export class ContratoFornecedorFormComponent
 
   remLinha(res: ContratoFornecedorResiduo) {
     if (!isNullOrUndefined(res.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o resíduo: ' + res.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o resíduo: ' + res.residuo + '?').subscribe(
       result => {
         if (result.retorno) {
           this._contratofornecedorresiduoService.deleteContratoFornecedorResiduo(this._tokenManager.retrieve(), res.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Resíduo excluído do contrato com sucesso.');
+              this.dialog.success('SIA', 'Resíduo excluído do contrato com sucesso.');
               const index = this.contratofornecedorresiduos.indexOf(res);
               this.contratofornecedorresiduos.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o resíduo.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o resíduo.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o resíduo: ' + res.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o resíduo: ' + res.residuo + '?').subscribe(
       result => {
         const index = this.contratofornecedorresiduos.indexOf(res);
         this.contratofornecedorresiduos.splice(index, 1);

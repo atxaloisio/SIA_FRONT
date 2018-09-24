@@ -126,40 +126,40 @@ export class PesagemFormComponent
 
   // validaServicos(): boolean {
   //   let retorno: boolean;
-  //   let msgRetorno = '';
+  //   let mSIAetorno = '';
   //   retorno = true;
   //   for (let index = 0; index < this.itempesagems.length; index++) {
   //     const servico = this.itempesagems[index];
   //     if ((isNullOrUndefined(servico.quantidade)) || (servico.quantidade === 0)) {
-  //       msgRetorno = 'Quantidade do residuo ' + servico.residuo + ' não informada.';
+  //       mSIAetorno = 'Quantidade do residuo ' + servico.residuo + ' não informada.';
   //       break;
   //     }
-  //     if (msgRetorno === '') {
+  //     if (mSIAetorno === '') {
   //       if (isNullOrUndefined(servico.id_acondicionamento)) {
-  //           msgRetorno = 'Acondicionamento do resíduo ' + servico.residuo + ' não informado.';
+  //           mSIAetorno = 'Acondicionamento do resíduo ' + servico.residuo + ' não informado.';
   //           break;
   //       }
   //     }
 
-  //     if (msgRetorno === '') {
+  //     if (mSIAetorno === '') {
   //       if (isNullOrUndefined(servico.id_tratamento)) {
-  //           msgRetorno = 'Tipo de Tratamento do resíduo ' + servico.residuo + ' não informado.';
+  //           mSIAetorno = 'Tipo de Tratamento do resíduo ' + servico.residuo + ' não informado.';
   //           break;
   //       }
   //     }
 
-  //     if (msgRetorno === '') {
+  //     if (mSIAetorno === '') {
   //       if (isNullOrUndefined(servico.id_tipo_residuo)) {
-  //           msgRetorno = 'Tipo do resíduo ' + servico.residuo + ' não informado.';
+  //           mSIAetorno = 'Tipo do resíduo ' + servico.residuo + ' não informado.';
   //           break;
   //       }
   //     }
 
   //   }
 
-  //   if (msgRetorno !== '') {
+  //   if (mSIAetorno !== '') {
   //     retorno = false;
-  //     this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos. ', msgRetorno);
+  //     this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos. ', mSIAetorno);
   //   }
 
   //   return retorno;
@@ -245,7 +245,7 @@ export class PesagemFormComponent
               this.pesagem_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Pesagem salvo com sucesso.');
+              // this.dialog.success('SIA', 'Pesagem salvo com sucesso.');
               // Salvando lista de serviços
 
               for (let index = 0; index < this.itempesagems.length; index++) {
@@ -260,20 +260,20 @@ export class PesagemFormComponent
                   this.itempesagems_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Pesagem salvo com sucesso.');
+                  this.dialog.success('SIA', 'Pesagem salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.pesagem.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -301,21 +301,21 @@ export class PesagemFormComponent
                   this.itempesagems_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Pesagem salvo com sucesso.');
+                  this.dialog.success('SIA', 'Pesagem salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.pesagem.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
               this.dialog.error(
-                'SGR',
+                'SIA',
                 'Erro ao salvar o registro.',
                 error.error + ' - Detalhe: ' + error.message
               );
@@ -324,7 +324,7 @@ export class PesagemFormComponent
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 
@@ -418,7 +418,7 @@ export class PesagemFormComponent
 
   openPesquisaCTR(): void {
     if (isNullOrUndefined(this.pesagem.id_cliente)) {
-      this.dialog.warning('SGR', 'Código do cliente não informado.');
+      this.dialog.warning('SIA', 'Código do cliente não informado.');
     } else {
       const dialogLoginRef = this.pesquisa.open(ContratoClienteFindComponent, {
         width: '1000px',
@@ -451,7 +451,7 @@ export class PesagemFormComponent
     // if (!isNullOrUndefined(this.itempesagem.id_servico)) {
     //   this.loadContratos(this.itempesagem.id_servico, event.value);
     // } else {
-    //   this.dialog.warning('SGR', 'Serviço não preenchido');
+    //   this.dialog.warning('SIA', 'Serviço não preenchido');
     // }
 
     // console.log('mudou estado ' + event.value);
@@ -472,10 +472,10 @@ export class PesagemFormComponent
 
   // setupItens() {
   //   if (isNullOrUndefined(this.pesagem.id_contrato_cliente)) {
-  //     this.dialog.warning('SGR', 'Contrato do Cliente não informado.');
+  //     this.dialog.warning('SIA', 'Contrato do Cliente não informado.');
   //   } else {
   //     if ((!isNullOrUndefined(this.pesagem.id)) && (this.itempesagems.length > 0) ) {
-  //       this.dialog.question('SGR', 'Lista de itens já foi salva. Deseja reiniciar-la?').subscribe(
+  //       this.dialog.question('SIA', 'Lista de itens já foi salva. Deseja reiniciar-la?').subscribe(
   //         result => {
   //           if (result.retorno) {
   //             for (let index = 0; index < this.itempesagems.length; index++) {
@@ -579,11 +579,11 @@ export class PesagemFormComponent
   //   //        p.id_servico === this.itempesagem.id_servico);
 
   //   // if ((!isNullOrUndefined(index)) && (index > -1)) {
-  //   //   this.dialog.warning('SGR', 'Serviço já foi relacionado');
+  //   //   this.dialog.warning('SIA', 'Serviço já foi relacionado');
   //   // } else {
   //   //   if (((isNullOrUndefined(this.itempesagem.preco_compra)) || (this.itempesagem.preco_compra === 0)) &&
   //   //      ((isNullOrUndefined(this.itempesagem.preco_servico) || (this.itempesagem.preco_servico === 0)))) {
-  //   //     this.dialog.warning('SGR', 'Campo preço não informado.');
+  //   //     this.dialog.warning('SIA', 'Campo preço não informado.');
   //   //   } else {
   //   //     this.itempesagem.residuo = this.residuos.find(p => p.id === this.itempesagem.id_residuo).descricao;
   //   //     this.itempesagem.servico = this.servicos.find(p => p.id === this.itempesagem.id_servico).descricao;
@@ -609,7 +609,7 @@ export class PesagemFormComponent
     const index2 = this.itempesagems.findIndex(p => p.id_residuo === this.itempesagem.id_residuo);
 
     if ((!isNullOrUndefined(index2)) && (index2 > -1)) {
-      this.dialog.warning('SGR', 'Resíduo já foi relacionado ao Pesagem');
+      this.dialog.warning('SIA', 'Resíduo já foi relacionado ao Pesagem');
     } else {
       this.itempesagems.push(this.itempesagem);
       this.itempesagem = new ItemPesagem();
@@ -664,7 +664,7 @@ export class PesagemFormComponent
     //     this.contratoclienteresiduo = new ContratoClienteResiduo();
     //     document.getElementById('id_servico').focus();
     // } else {
-    //   this.dialog.warning('SGR', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
+    //   this.dialog.warning('SIA', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
     // }
 
     // const index = this.contratoclienteresiduos.findIndex(
@@ -675,12 +675,12 @@ export class PesagemFormComponent
 
     // if ((!isNullOrUndefined(index)) && (index > -1)) {
     //   mensagem = 'Resíduo já foi relacionado';
-    //   this.dialog.warning('SGR', 'Resíduo já foi relacionado');
+    //   this.dialog.warning('SIA', 'Resíduo já foi relacionado');
     // } else {
     //   if (((isNullOrUndefined(this.contratoclienteresiduo.preco_compra)) || (this.contratoclienteresiduo.preco_compra === 0)) &&
     //      ((isNullOrUndefined(this.contratoclienteresiduo.preco_servico) || (this.contratoclienteresiduo.preco_servico === 0)))) {
     //     mensagem = 'Campo preço não informado.';
-    //     this.dialog.warning('SGR', 'Campo preço não informado.');
+    //     this.dialog.warning('SIA', 'Campo preço não informado.');
     //   } else {
     //     this.contratoclienteresiduo.residuo = this.residuos.find(p => p.id === this.contratoclienteresiduo.id_residuo).descricao;
     //     this.contratoclienteresiduos.push(this.contratoclienteresiduo);
@@ -692,23 +692,23 @@ export class PesagemFormComponent
 
   remlinha(serv: ItemPesagem) {
     if (!isNullOrUndefined(serv.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
       result => {
         if (result.retorno) {
           this._itempesagemService.deleteItemPesagem(this._tokenManager.retrieve(), serv.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Resíduo excluído do Pesagem com sucesso.');
+              this.dialog.success('SIA', 'Resíduo excluído do Pesagem com sucesso.');
               const index = this.itempesagems.indexOf(serv);
               this.itempesagems.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o Resíduo.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o Resíduo.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
       result => {
         const index = this.itempesagems.indexOf(serv);
         this.itempesagems.splice(index, 1);

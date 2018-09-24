@@ -126,7 +126,7 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
               this.emProcessamento = false;
               const err = new HttpErrorResponse(error);
               console.log(err);
-              this.dialog.error('SGR', 'Erro ao gerar o relatório.', '');
+              this.dialog.error('SIA', 'Erro ao gerar o relatório.', '');
             }
         );
   }
@@ -157,7 +157,7 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
     //     this.emProcessamento = false;
     //     const err = new HttpErrorResponse(error);
     //     console.log(err);
-    //     this.dialog.error('SGR', 'Erro ao gerar o relatório.', '');
+    //     this.dialog.error('SIA', 'Erro ao gerar o relatório.', '');
     //   },
     // );
   }
@@ -173,11 +173,11 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
     //           this.emProcessamento = false;
     //           this.relatorio = data;
     //           this.exibeIncluir = true;
-    //           this.dialog.success('SGR', 'Relatorio salvo com sucesso.');
+    //           this.dialog.success('SIA', 'Relatorio salvo com sucesso.');
     //         },
     //         error => {
     //           this.emProcessamento = false;
-    //           this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+    //           this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
     //         },
     //       );
     //   } else {
@@ -189,17 +189,17 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
     //       this.emProcessamento = false;
     //       this.relatorio = data;
     //       this.exibeIncluir = true;
-    //       this.dialog.success('SGR', 'Relatorio salvo com sucesso.');
+    //       this.dialog.success('SIA', 'Relatorio salvo com sucesso.');
     //     },
     //     error => {
     //       this.emProcessamento = false;
-    //       this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+    //       this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
     //     },
     //   );
     //   }
     // } else {
     //   this.emProcessamento = false;
-    //   this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+    //   this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     // }
   }
 
@@ -315,7 +315,7 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
         this.emProcessamento = false;
         const err = new HttpErrorResponse(error);
         console.log(err);
-        this.dialog.error('SGR', 'Erro ao gerar o relatório.', '');
+        this.dialog.error('SIA', 'Erro ao gerar o relatório.', '');
       },
     );
 
@@ -344,7 +344,7 @@ export class MapaResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
   //       this.emProcessamento = false;
   //       const err = new HttpErrorResponse(error);
   //       console.log(err);
-  //       this.dialog.error('SGR', 'Erro ao gerar o relatório.', '');
+  //       this.dialog.error('SIA', 'Erro ao gerar o relatório.', '');
   //     },
   //   );
 

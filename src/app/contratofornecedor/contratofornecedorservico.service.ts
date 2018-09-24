@@ -122,9 +122,9 @@ export class ContratoFornecedorServicoService {
       );
   }
 
-  getContratoFornecedorServicosGrid(accessToken: string, sort: string, order: string, page: number,
+  getContratoFornecedorServicoSIAid(accessToken: string, sort: string, order: string, page: number,
     pagesize: number, filter: ContratoFornecedorServicoGridFilter) {
-      const gridUrl = environment.urlbase + '/api/contratofornecedorservicosgrid';
+      const gridUrl = environment.urlbase + '/api/contratofornecedorservicoSIAid';
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')

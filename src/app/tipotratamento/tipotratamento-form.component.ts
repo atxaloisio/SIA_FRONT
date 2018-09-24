@@ -94,11 +94,11 @@ export class TipoTratamentoFormComponent implements OnInit, AfterViewInit, After
               this.tipotratamento = data;
               this.tipotratamento_ant = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'TipoTratamento salvo com sucesso.');
+              this.dialog.success('SIA', 'TipoTratamento salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -111,17 +111,17 @@ export class TipoTratamentoFormComponent implements OnInit, AfterViewInit, After
           this.tipotratamento = data;
           this.tipotratamento_ant = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'TipoTratamento salvo com sucesso.');
+          this.dialog.success('SIA', 'TipoTratamento salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

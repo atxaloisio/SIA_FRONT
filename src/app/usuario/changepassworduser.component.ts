@@ -90,7 +90,7 @@ export class ChangePasswordUserComponent implements OnInit {
       this.password, this.confpassword).subscribe(
         data => {
           this.emProcessamento = false;
-          this.openSnackBar('Senha alterada com sucesso.', 'SGR');
+          this.openSnackBar('Senha alterada com sucesso.', 'SIA');
           this.dialogLoginRef.close(this.data);
         },
         error => {

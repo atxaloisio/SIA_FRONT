@@ -247,7 +247,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
         listfornecedor = data.data;
         if (listfornecedor.length > 0) {
           if (listfornecedor[0].id !== this.fornecedor.id) {
-            this.dialog.warning('SGR', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
+            this.dialog.warning('SIA', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
             this.fornecedor.cnpj_cpf = '';
           }
         }
@@ -271,7 +271,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   //       listfornecedor = JSON.parse(data._body);
   //       if (listfornecedor.length > 0) {
   //         if (listfornecedor[0].id !== fornecedor.id) {
-  //           this.dialog.warning('SGR', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
+  //           this.dialog.warning('SIA', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
   //           this.fornecedor.cnpj_cpf = '';
   //         }
   //       }
@@ -386,7 +386,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
               this.fornecedor_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Fornecedor salvo com sucesso.');
+              // this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
               for (let index = 0; index < this.fornecedordocumentos.length; index++) {
                 this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
               }
@@ -403,17 +403,17 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
                   this.limpaValidadores();
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Fornecedor salvo com sucesso.');
+                  this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -429,7 +429,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
               this.fornecedor_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Fornecedor salvo com sucesso.');
+              // this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
               for (let index = 0; index < this.fornecedordocumentos.length; index++) {
                 this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
               }
@@ -446,23 +446,23 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
                   this.limpaValidadores();
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Fornecedor salvo com sucesso.');
+                  this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 
@@ -597,7 +597,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
       this.fornecedordocumento = new FornecedorDocumento();
       document.getElementById('id_tipodocumento').focus();
     } else {
-      this.dialog.warning('SGR', 'Documento não adicionado', 'Detalhe: ' + mensagem);
+      this.dialog.warning('SIA', 'Documento não adicionado', 'Detalhe: ' + mensagem);
     }
   }
 
@@ -610,25 +610,25 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
 
   remlinha(doc: FornecedorDocumento) {
     if (!isNullOrUndefined(doc.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
       result => {
         if (result.retorno) {
           this._fornecedordocumentoService.deleteFornecedorDocumento(this._tokenManager.retrieve(), doc.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Documento excluído do contrato com sucesso.');
+              this.dialog.success('SIA', 'Documento excluído do contrato com sucesso.');
               const index = this.fornecedordocumentos.indexOf(doc);
               this.fornecedordocumentos.splice(index, 1);
               const index2 = this.fornecedordocumentoAnexos.indexOf(doc);
               this.fornecedordocumentoAnexos.splice(index2, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o documento.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o documento.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
       result => {
         if (result.retorno) {
           const index = this.fornecedordocumentos.indexOf(doc);

@@ -93,11 +93,11 @@ export class AcondicionamentoFormComponent implements OnInit, AfterViewInit, Aft
               this.acondicionamento = data;
               this.acondicionamento_ant = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'Acondicionamento salvo com sucesso.');
+              this.dialog.success('SIA', 'Acondicionamento salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -110,17 +110,17 @@ export class AcondicionamentoFormComponent implements OnInit, AfterViewInit, Aft
           this.acondicionamento = data;
           this.acondicionamento_ant = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'Acondicionamento salvo com sucesso.');
+          this.dialog.success('SIA', 'Acondicionamento salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

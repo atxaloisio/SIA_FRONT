@@ -66,7 +66,7 @@ export class DsContratoFornecedorFind extends DataSource<ContratoFornecedor> {
     .startWith(null)
     .switchMap(() => {
       this.onChange.emit(true);
-      return this._contratofornecedorService.getContratoFornecedoresGrid(this._tokenManager.retrieve(),
+      return this._contratofornecedorService.getContratoFornecedoreSIAid(this._tokenManager.retrieve(),
         this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter);
     })
     .retry(3)

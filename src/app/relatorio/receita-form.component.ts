@@ -100,7 +100,7 @@ export class ReceitaFormComponent implements OnInit, AfterViewInit, AfterViewChe
     //     },
     //     error => {
     //       this.emProcessamento = false;
-    //       this.dialog.error('SGR', 'Erro ao carregar o registro.', error.error + ' - Detalhe: ' + error.message);
+    //       this.dialog.error('SIA', 'Erro ao carregar o registro.', error.error + ' - Detalhe: ' + error.message);
     //     }
     //   );
     const idFilter$ = this.valCodigo.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
@@ -147,7 +147,7 @@ export class ReceitaFormComponent implements OnInit, AfterViewInit, AfterViewChe
         this.emProcessamento = false;
         const err = new HttpErrorResponse(error);
         console.log(err);
-        this.dialog.error('SGR', 'Erro ao gerar o relatório.', '');
+        this.dialog.error('SIA', 'Erro ao gerar o relatório.', '');
       },
     );
   }
@@ -163,11 +163,11 @@ export class ReceitaFormComponent implements OnInit, AfterViewInit, AfterViewChe
               this.emProcessamento = false;
               this.relatorio = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'Relatorio salvo com sucesso.');
+              this.dialog.success('SIA', 'Relatorio salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -179,17 +179,17 @@ export class ReceitaFormComponent implements OnInit, AfterViewInit, AfterViewChe
           this.emProcessamento = false;
           this.relatorio = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'Relatorio salvo com sucesso.');
+          this.dialog.success('SIA', 'Relatorio salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

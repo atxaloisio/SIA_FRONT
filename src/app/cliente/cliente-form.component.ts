@@ -256,7 +256,7 @@ export class ClienteFormComponent
         listcliente = data.data;
         if (listcliente.length > 0) {
           if (listcliente[0].id !== this.cliente.id) {
-            this.dialog.warning('SGR', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
+            this.dialog.warning('SIA', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
             this.cliente.cnpj_cpf = '';
           }
         }
@@ -280,7 +280,7 @@ export class ClienteFormComponent
   //       listcliente = JSON.parse(data._body);
   //       if (listcliente.length > 0) {
   //         if (listcliente[0].id !== cliente.id) {
-  //           this.dialog.warning('SGR', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
+  //           this.dialog.warning('SIA', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
   //           this.cliente.cnpj_cpf = '';
   //         }
   //       }
@@ -395,7 +395,7 @@ export class ClienteFormComponent
               this.cliente_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Cliente salvo com sucesso.');
+              // this.dialog.success('SIA', 'Cliente salvo com sucesso.');
               for (let index = 0; index < this.clientedocumentos.length; index++) {
                 this.clientedocumentos[index].id_cliente = this.cliente.id;
               }
@@ -411,17 +411,17 @@ export class ClienteFormComponent
                   this.limpaValidadores();
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Cliente salvo com sucesso.');
+                  this.dialog.success('SIA', 'Cliente salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -437,7 +437,7 @@ export class ClienteFormComponent
               this.cliente_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Cliente salvo com sucesso.');
+              // this.dialog.success('SIA', 'Cliente salvo com sucesso.');
               for (let index = 0; index < this.clientedocumentos.length; index++) {
                 this.clientedocumentos[index].id_cliente = this.cliente.id;
               }
@@ -453,23 +453,23 @@ export class ClienteFormComponent
                   this.limpaValidadores();
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Cliente salvo com sucesso.');
+                  this.dialog.success('SIA', 'Cliente salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 
@@ -603,7 +603,7 @@ export class ClienteFormComponent
       this.clientedocumento = new ClienteDocumento();
       document.getElementById('id_tipodocumento').focus();
     } else {
-      this.dialog.warning('SGR', 'Documento não adicionado', 'Detalhe: ' + mensagem);
+      this.dialog.warning('SIA', 'Documento não adicionado', 'Detalhe: ' + mensagem);
     }
   }
 
@@ -616,25 +616,25 @@ export class ClienteFormComponent
 
   remlinha(doc: ClienteDocumento) {
     if (!isNullOrUndefined(doc.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
       result => {
         if (result.retorno) {
           this._clientedocumentoService.deleteClienteDocumento(this._tokenManager.retrieve(), doc.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Documento excluído do contrato com sucesso.');
+              this.dialog.success('SIA', 'Documento excluído do contrato com sucesso.');
               const index = this.clientedocumentos.indexOf(doc);
               this.clientedocumentos.splice(index, 1);
               const index2 = this.clientedocumentoAnexos.indexOf(doc);
               this.clientedocumentoAnexos.splice(index2, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o documento.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o documento.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
       result => {
         if (result.retorno) {
           const index = this.clientedocumentos.indexOf(doc);

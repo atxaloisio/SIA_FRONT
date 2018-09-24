@@ -99,19 +99,19 @@ export class LocacaoFormComponent
 
   validaEquipamentos(): boolean {
     let retorno: boolean;
-    let msgRetorno = '';
+    let mSIAetorno = '';
     retorno = true;
     for (let index = 0; index < this.locacaoequipamentos.length; index++) {
       const servico = this.locacaoequipamentos[index];
       if ((isNullOrUndefined(servico.quantidade)) || (servico.quantidade === 0)) {
-        msgRetorno = 'Quantidade do equipamento ' + servico.equipamento + ' não informada.';
+        mSIAetorno = 'Quantidade do equipamento ' + servico.equipamento + ' não informada.';
         break;
       }
     }
 
-    if (msgRetorno !== '') {
+    if (mSIAetorno !== '') {
       retorno = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos. ', msgRetorno);
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos. ', mSIAetorno);
     }
 
     return retorno;
@@ -205,17 +205,17 @@ export class LocacaoFormComponent
                   this.locacaoequipamentos_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Locacao salvo com sucesso.');
+                  this.dialog.success('SIA', 'Locacao salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -243,18 +243,18 @@ export class LocacaoFormComponent
                   this.locacaoequipamentos_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Locacao salvo com sucesso.');
+                  this.dialog.success('SIA', 'Locacao salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
             },
             error => {
               this.emProcessamento = false;
               this.dialog.error(
-                'SGR',
+                'SIA',
                 'Erro ao salvar o registro.',
                 error.error + ' - Detalhe: ' + error.message
               );
@@ -263,7 +263,7 @@ export class LocacaoFormComponent
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 
@@ -358,7 +358,7 @@ export class LocacaoFormComponent
 
   openPesquisaCTR(): void {
     if (isNullOrUndefined(this.locacao.id_cliente)) {
-      this.dialog.warning('SGR', 'Código do cliente não informado.');
+      this.dialog.warning('SIA', 'Código do cliente não informado.');
     } else {
       const dialogLoginRef = this.pesquisa.open(ContratoClienteFindComponent, {
         width: '1000px',
@@ -402,7 +402,7 @@ export class LocacaoFormComponent
     const index2 = this.locacaoequipamentos.findIndex(p => p.id_equipamento === this.locacaoequipamento.id_equipamento);
 
     if ((!isNullOrUndefined(index2)) && (index2 > -1)) {
-      this.dialog.warning('SGR', 'Equipamento já foi relacionado a Apuração de Locação');
+      this.dialog.warning('SIA', 'Equipamento já foi relacionado a Apuração de Locação');
     } else {
       this.locacaoequipamentos.push(this.locacaoequipamento);
       this.locacaoequipamento = new LocacaoEquipamento();
@@ -411,23 +411,23 @@ export class LocacaoFormComponent
 
   remlinha(serv: LocacaoEquipamento) {
     if (!isNullOrUndefined(serv.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Equipamento: ' + serv.equipamento + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Equipamento: ' + serv.equipamento + '?').subscribe(
       result => {
         if (result.retorno) {
           this._locacaoequipamentoService.deleteLocacaoEquipamento(this._tokenManager.retrieve(), serv.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Equipamento excluído da Apuração de Locação com sucesso.');
+              this.dialog.success('SIA', 'Equipamento excluído da Apuração de Locação com sucesso.');
               const index = this.locacaoequipamentos.indexOf(serv);
               this.locacaoequipamentos.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o Equipamento.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o Equipamento.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Equipamento: ' + serv.equipamento + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Equipamento: ' + serv.equipamento + '?').subscribe(
       result => {
         const index = this.locacaoequipamentos.indexOf(serv);
         this.locacaoequipamentos.splice(index, 1);

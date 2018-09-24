@@ -94,11 +94,11 @@ export class TipoResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
               this.tiporesiduo = data;
               this.tiporesiduo_ant = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'TipoResiduo salvo com sucesso.');
+              this.dialog.success('SIA', 'TipoResiduo salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -111,17 +111,17 @@ export class TipoResiduoFormComponent implements OnInit, AfterViewInit, AfterVie
           this.tiporesiduo = data;
           this.tiporesiduo_ant = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'TipoResiduo salvo com sucesso.');
+          this.dialog.success('SIA', 'TipoResiduo salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

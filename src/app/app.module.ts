@@ -1,3 +1,7 @@
+import { CentroCustoModule } from './centrocusto/centrocusto.module';
+import { OrdemPagamentoModule } from './ordempagamento/ordempagamento.module';
+import { FuncaoModule } from './funcao/funcao.module';
+import { ContratanteModule } from './contratante/contratante.module';
 import { ChangePasswordUserComponent } from './usuario/changepassworduser.component';
 import { EditUserComponent } from './usuario/edituser.component';
 import { UpperCaseModule } from './uppercase/uppercase.module';
@@ -103,6 +107,10 @@ import { PesagemModule } from './pesagem/pesagem.module';
     EquipamentoModule,
     LocacaoModule,
     PesagemModule,
+    ContratanteModule,
+    FuncaoModule,
+    CentroCustoModule,
+    OrdemPagamentoModule,
     UpperCaseModule,
     AppRoutingModule
   ],

@@ -153,40 +153,40 @@ export class ManifestoFormComponent
 
   validaServicos(): boolean {
     let retorno: boolean;
-    let msgRetorno = '';
+    let mSIAetorno = '';
     retorno = true;
     for (let index = 0; index < this.manifestoservicos.length; index++) {
       const servico = this.manifestoservicos[index];
       if ((isNullOrUndefined(servico.quantidade)) || (servico.quantidade === 0)) {
-        msgRetorno = 'Quantidade do residuo ' + servico.residuo + ' não informada.';
+        mSIAetorno = 'Quantidade do residuo ' + servico.residuo + ' não informada.';
         break;
       }
-      if (msgRetorno === '') {
+      if (mSIAetorno === '') {
         if (isNullOrUndefined(servico.id_acondicionamento)) {
-            msgRetorno = 'Acondicionamento do resíduo ' + servico.residuo + ' não informado.';
+            mSIAetorno = 'Acondicionamento do resíduo ' + servico.residuo + ' não informado.';
             break;
         }
       }
 
-      if (msgRetorno === '') {
+      if (mSIAetorno === '') {
         if (isNullOrUndefined(servico.id_tratamento)) {
-            msgRetorno = 'Tipo de Tratamento do resíduo ' + servico.residuo + ' não informado.';
+            mSIAetorno = 'Tipo de Tratamento do resíduo ' + servico.residuo + ' não informado.';
             break;
         }
       }
 
-      if (msgRetorno === '') {
+      if (mSIAetorno === '') {
         if (isNullOrUndefined(servico.id_tipo_residuo)) {
-            msgRetorno = 'Tipo do resíduo ' + servico.residuo + ' não informado.';
+            mSIAetorno = 'Tipo do resíduo ' + servico.residuo + ' não informado.';
             break;
         }
       }
 
     }
 
-    if (msgRetorno !== '') {
+    if (mSIAetorno !== '') {
       retorno = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos. ', msgRetorno);
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos. ', mSIAetorno);
     }
 
     return retorno;
@@ -334,7 +334,7 @@ export class ManifestoFormComponent
               this.manifesto_ant = data;
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Manifesto salvo com sucesso.');
+              // this.dialog.success('SIA', 'Manifesto salvo com sucesso.');
               // Salvando lista de serviços
 
               for (let index = 0; index < this.manifestoservicos.length; index++) {
@@ -350,23 +350,23 @@ export class ManifestoFormComponent
                   this.manifestoservicos_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Manifesto salvo com sucesso.');
+                  this.dialog.success('SIA', 'Manifesto salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de itens.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               if (fileBrowser.files.length > 0) {
                 this.uploadManifesto(this.manifesto, fileBrowser.files[0]);
               }
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.manifesto.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             }
           );
       } else {
@@ -394,24 +394,24 @@ export class ManifestoFormComponent
                   this.manifestoservicos_ant = ctrfsrv;
                   this.emProcessamento = false;
                   this.exibeIncluir = true;
-                  this.dialog.success('SGR', 'Manifesto salvo com sucesso.');
+                  this.dialog.success('SIA', 'Manifesto salvo com sucesso.');
                 },
                 error => {
                   this.emProcessamento = false;
-                  this.dialog.error('SGR', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
+                  this.dialog.error('SIA', 'Erro ao salvar lista de serviços.', error.error + ' - Detalhe: ' + error.message);
                 }
               );
               if (fileBrowser.files.length > 0) {
                 this.uploadManifesto(this.manifesto, fileBrowser.files[0]);
               }
               // this.exibeIncluir = true;
-              // this.dialog.success('SGR', 'Documento salvo com sucesso.');
+              // this.dialog.success('SIA', 'Documento salvo com sucesso.');
               // this.valTipoDocumento.setValue(this.manifesto.id_tipo_documento);
             },
             error => {
               this.emProcessamento = false;
               this.dialog.error(
-                'SGR',
+                'SIA',
                 'Erro ao salvar o registro.',
                 error.error + ' - Detalhe: ' + error.message
               );
@@ -420,7 +420,7 @@ export class ManifestoFormComponent
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 
@@ -630,7 +630,7 @@ export class ManifestoFormComponent
 
   openPesquisaCTR(): void {
     if (isNullOrUndefined(this.manifesto.id_cliente)) {
-      this.dialog.warning('SGR', 'Código do cliente não informado.');
+      this.dialog.warning('SIA', 'Código do cliente não informado.');
     } else {
       const dialogLoginRef = this.pesquisa.open(ContratoClienteFindComponent, {
         width: '1000px',
@@ -664,7 +664,7 @@ export class ManifestoFormComponent
     // if (!isNullOrUndefined(this.manifestoservico.id_servico)) {
     //   this.loadContratos(this.manifestoservico.id_servico, event.value);
     // } else {
-    //   this.dialog.warning('SGR', 'Serviço não preenchido');
+    //   this.dialog.warning('SIA', 'Serviço não preenchido');
     // }
 
     // console.log('mudou estado ' + event.value);
@@ -685,10 +685,10 @@ export class ManifestoFormComponent
 
   // setupItens() {
   //   if (isNullOrUndefined(this.manifesto.id_contrato_cliente)) {
-  //     this.dialog.warning('SGR', 'Contrato do Cliente não informado.');
+  //     this.dialog.warning('SIA', 'Contrato do Cliente não informado.');
   //   } else {
   //     if ((!isNullOrUndefined(this.manifesto.id)) && (this.manifestoservicos.length > 0) ) {
-  //       this.dialog.question('SGR', 'Lista de itens já foi salva. Deseja reiniciar-la?').subscribe(
+  //       this.dialog.question('SIA', 'Lista de itens já foi salva. Deseja reiniciar-la?').subscribe(
   //         result => {
   //           if (result.retorno) {
   //             for (let index = 0; index < this.manifestoservicos.length; index++) {
@@ -792,11 +792,11 @@ export class ManifestoFormComponent
   //   //        p.id_servico === this.manifestoservico.id_servico);
 
   //   // if ((!isNullOrUndefined(index)) && (index > -1)) {
-  //   //   this.dialog.warning('SGR', 'Serviço já foi relacionado');
+  //   //   this.dialog.warning('SIA', 'Serviço já foi relacionado');
   //   // } else {
   //   //   if (((isNullOrUndefined(this.manifestoservico.preco_compra)) || (this.manifestoservico.preco_compra === 0)) &&
   //   //      ((isNullOrUndefined(this.manifestoservico.preco_servico) || (this.manifestoservico.preco_servico === 0)))) {
-  //   //     this.dialog.warning('SGR', 'Campo preço não informado.');
+  //   //     this.dialog.warning('SIA', 'Campo preço não informado.');
   //   //   } else {
   //   //     this.manifestoservico.residuo = this.residuos.find(p => p.id === this.manifestoservico.id_residuo).descricao;
   //   //     this.manifestoservico.servico = this.servicos.find(p => p.id === this.manifestoservico.id_servico).descricao;
@@ -824,7 +824,7 @@ export class ManifestoFormComponent
     const index2 = this.manifestoservicos.findIndex(p => p.id_residuo === this.manifestoservico.id_residuo);
 
     if ((!isNullOrUndefined(index2)) && (index2 > -1)) {
-      this.dialog.warning('SGR', 'Resíduo já foi relacionado ao Manifesto');
+      this.dialog.warning('SIA', 'Resíduo já foi relacionado ao Manifesto');
     } else {
       this.manifestoservicos.push(this.manifestoservico);
       this.manifestoservico = new ManifestoServico();
@@ -879,7 +879,7 @@ export class ManifestoFormComponent
     //     this.contratoclienteresiduo = new ContratoClienteResiduo();
     //     document.getElementById('id_servico').focus();
     // } else {
-    //   this.dialog.warning('SGR', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
+    //   this.dialog.warning('SIA', 'Resíduo não adicionado', 'Detalhe: ' + mensagem);
     // }
 
     // const index = this.contratoclienteresiduos.findIndex(
@@ -890,12 +890,12 @@ export class ManifestoFormComponent
 
     // if ((!isNullOrUndefined(index)) && (index > -1)) {
     //   mensagem = 'Resíduo já foi relacionado';
-    //   this.dialog.warning('SGR', 'Resíduo já foi relacionado');
+    //   this.dialog.warning('SIA', 'Resíduo já foi relacionado');
     // } else {
     //   if (((isNullOrUndefined(this.contratoclienteresiduo.preco_compra)) || (this.contratoclienteresiduo.preco_compra === 0)) &&
     //      ((isNullOrUndefined(this.contratoclienteresiduo.preco_servico) || (this.contratoclienteresiduo.preco_servico === 0)))) {
     //     mensagem = 'Campo preço não informado.';
-    //     this.dialog.warning('SGR', 'Campo preço não informado.');
+    //     this.dialog.warning('SIA', 'Campo preço não informado.');
     //   } else {
     //     this.contratoclienteresiduo.residuo = this.residuos.find(p => p.id === this.contratoclienteresiduo.id_residuo).descricao;
     //     this.contratoclienteresiduos.push(this.contratoclienteresiduo);
@@ -907,23 +907,23 @@ export class ManifestoFormComponent
 
   remlinha(serv: ManifestoServico) {
     if (!isNullOrUndefined(serv.id)) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
       result => {
         if (result.retorno) {
           this._manifestoservicoService.deleteManifestoServico(this._tokenManager.retrieve(), serv.id).subscribe(
             data => {
-              this.dialog.success('SGR', 'Resíduo excluído do Manifesto com sucesso.');
+              this.dialog.success('SIA', 'Resíduo excluído do Manifesto com sucesso.');
               const index = this.manifestoservicos.indexOf(serv);
               this.manifestoservicos.splice(index, 1);
             },
             error => {
-              this.dialog.error('SGR', 'Erro ao excluir o Resíduo.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao excluir o Resíduo.', error.error + ' - Detalhe: ' + error.message);
             },
           );
         }
       });
     } else {
-      this.dialog.question('SGR', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o Resíduo: ' + serv.residuo + '?').subscribe(
       result => {
         const index = this.manifestoservicos.indexOf(serv);
         this.manifestoservicos.splice(index, 1);

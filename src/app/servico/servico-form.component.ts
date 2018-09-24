@@ -98,11 +98,11 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
               this.servico = data;
               this.servico_ant = data;
               this.exibeIncluir = true;
-              this.dialog.success('SGR', 'Servico salvo com sucesso.');
+              this.dialog.success('SIA', 'Servico salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
-              this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+              this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
             },
           );
       } else {
@@ -115,17 +115,17 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
           this.servico = data;
           this.servico_ant = data;
           this.exibeIncluir = true;
-          this.dialog.success('SGR', 'Servico salvo com sucesso.');
+          this.dialog.success('SIA', 'Servico salvo com sucesso.');
         },
         error => {
           this.emProcessamento = false;
-          this.dialog.error('SGR', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
+          this.dialog.error('SIA', 'Erro ao salvar o registro.', error.error + ' - Detalhe: ' + error.message);
         },
       );
       }
     } else {
       this.emProcessamento = false;
-      this.dialog.warning('SGR', 'Campos obrigatórios não preenchidos');
+      this.dialog.warning('SIA', 'Campos obrigatórios não preenchidos');
     }
   }
 

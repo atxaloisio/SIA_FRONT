@@ -165,7 +165,7 @@ export class ContratoFornecedorService {
   /** Metodo que retorna um observable com dados da listagem de contratofornecedors
    *  parametro: acessToken: string
   */
-  getContratoFornecedoresGrid(accessToken: string, sort: string, order: string, page: number,
+  getContratoFornecedoreSIAid(accessToken: string, sort: string, order: string, page: number,
     pagesize: number, filter: ContratoFornecedorFilterGrid) {
     const headers = new Headers({
     Accept: 'application/json',

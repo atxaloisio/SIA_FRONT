@@ -113,7 +113,7 @@ export class AddUserComponent implements OnInit {
       this.name, this.email, this.password, this.confpassword, this.perfil).subscribe(
         data => {
           this.emProcessamento = false;
-          this.openSnackBar('Usuário ' + this.name + ' adicionado com sucesso.', 'SGR');
+          this.openSnackBar('Usuário ' + this.name + ' adicionado com sucesso.', 'SIA');
           this.dialogLoginRef.close(this.data);
         },
         error => {

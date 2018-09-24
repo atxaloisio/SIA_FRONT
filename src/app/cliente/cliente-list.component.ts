@@ -113,7 +113,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
  */
   validaSelecao(): boolean {
     if (this.selectedRowIndex === -1) {
-      this.dialog.warning('SGR', 'Nenhum registro selecionado na grade.');
+      this.dialog.warning('SIA', 'Nenhum registro selecionado na grade.');
       return false;
     } else {
       return true;
@@ -136,16 +136,16 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
 
   excluirRegistro() {
     if (this.validaSelecao()) {
-      this.dialog.question('SGR', 'Deseja realmente excluir o cliente: ' + this.selectedRow.id + '?').subscribe(
+      this.dialog.question('SIA', 'Deseja realmente excluir o cliente: ' + this.selectedRow.id + '?').subscribe(
         result => {
           if (result.retorno) {
             this._clienteService.deleteCliente(this._tokenManager.retrieve(), this.selectedRow.id).subscribe(
               data => {
-                this.dialog.success('SGR', 'Cliente excluído com sucesso.');
+                this.dialog.success('SIA', 'Cliente excluído com sucesso.');
                 this.ngOnInit();
               },
               error => {
-                this.dialog.error('SGR', 'Erro ao excluir o registro.', error.error + ' - Detalhe: ' + error.message);
+                this.dialog.error('SIA', 'Erro ao excluir o registro.', error.error + ' - Detalhe: ' + error.message);
               },
             );
             this.selectedRowIndex = -1;

@@ -34,6 +34,32 @@ export class TipoAtividadeService {
 
   }
 
+  listTipoAtividade(accessToken: string, _descricao: string): Observable<any> {
+    const headers = new Headers({
+      Accept: 'application/json'
+    });
+
+    // const _params: HttpParams = new HttpParams();
+    // const _body = { descricao: _descricao };
+    const _body = {
+      call: 'ListarCategorias',
+      app_key: '1560731700',
+      app_secret: '226dcf372489bb45ceede61bfd98f0f1',
+      param: [{
+        pagina: 1,
+        registros_por_pagina : 150}]
+      };
+    // _params.set('codigo', '1');
+
+    return this._http
+      .post(this.tipoatividadeUrl, _body, { headers: headers})
+      .map((res: Response) => res.json())
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+
+  }
+
   editTipoAtividade(accessToken: string, _id: number, _descricao: string): Observable<any> {
     const headers = new Headers({
       Accept: 'application/json',
@@ -68,6 +94,20 @@ export class TipoAtividadeService {
   }
 
   getTipoAtividade(accessToken: string, _id: number)  {
+    const headers = new Headers({
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+    });
+
+    return this._http
+      .get(this.tipoatividadeUrl + '/' + _id.toString(), { headers: headers })
+      .map((res: Response) => res)
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+  }
+
+  getTipoAtividade2(accessToken: string, _id: number)  {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')

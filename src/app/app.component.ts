@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
       duration: 0
     };
 
-    this._alert.create(type, 'This is a message', 'SGR', settings);
+    this._alert.create(type, 'This is a message', 'SIA', settings);
   }
 
   verificaLogin() {
@@ -601,7 +601,7 @@ export class AppComponent implements OnInit {
       height: '250px',
       disableClose: true,
       data: {
-        title: 'SGR',
+        title: 'SIA',
         message: environment.urlbase,
         showOkButton: false,
         showYesNoButton: true,

@@ -1,3 +1,4 @@
+import { OmieService } from './omie/omie.service';
 import { ChangePasswordUserComponent } from './usuario/changepassworduser.component';
 import { EditUserComponent } from './usuario/edituser.component';
 import { DialogService } from './dialog/dialog.service';
@@ -26,6 +27,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Perfil } from './perfil';
 import { ResetComponent } from './usuario/reset.component';
 import { booleanToStrSN, strToBoolean } from './utilitario/utilitarios';
+import { CategoriaRequest, Categoria } from './omie/categoria';
 
 // const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const DIRECTIONS = ['row', 'row-reverse', 'column', 'column-reverse'];
@@ -44,6 +46,7 @@ export class AppComponent implements OnInit {
   Usuario: User;
   perfil: Perfil;
   users: User[];
+  categorias: Categoria[];
   private loginUrl = environment.urlbase + '/api/login';
   private usersUrl = environment.urlbase + '/api/users';
 
@@ -51,6 +54,7 @@ export class AppComponent implements OnInit {
     private tokenManager: TokenManagerService,
     private loginService: LoginService,
     private userService: UserService,
+    private omieService: OmieService,
     public modal: MatDialog,
     private dialog: DialogService,
     private _alert: AlertsService,
@@ -67,6 +71,7 @@ export class AppComponent implements OnInit {
       this.perfil = new Perfil();
     }
     // this.logOut();
+    this.categorias = new Array<Categoria>();
   }
 
   open(type: AlertType) {
@@ -709,6 +714,19 @@ export class AppComponent implements OnInit {
       data: {
         usuario: this.Usuario
       }
+    });
+  }
+
+  testlistarcategoria(): void {
+    // let categorias: Categoria[];
+
+    this.omieService.getListCategorias(this.tokenManager.retrieve()).subscribe(
+      data => {
+      this.categorias = JSON.parse(data._body);
+      console.log(this.categorias);
+    },
+    error => {
+      console.log(error);
     });
   }
 

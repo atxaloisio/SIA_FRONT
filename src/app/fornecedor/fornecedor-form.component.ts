@@ -29,6 +29,12 @@ import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
 import { environment } from '../../environments/environment';
 import { booleanToStrSN, strToBoolean } from '../utilitario/utilitarios';
+import { Funcao } from '../funcao/funcao';
+import { Servico } from '../servico/servico';
+import { FuncaoService } from '../funcao/funcao.service';
+import { ServicoService } from '../servico/servico.service';
+import { UserService } from '../user.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-fornecedor-form',
@@ -51,6 +57,9 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   id_documento: number;
   estados: Estado[];
   cidades: Cidade[];
+  funcoes: Funcao[];
+  servicos: Servico[];
+  usuarios: User[];
   ptn = '[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}|[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}';
 
   valRazaoSocial = new FormControl('', [Validators.required]);
@@ -72,10 +81,20 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   ]);
   cidadeFilter = new FormControl();
 
-  valTipoDocumento = new FormControl('', [Validators.required]);
-  valNroLicenca = new FormControl('', [Validators.required]);
-  valDtEmissao = new FormControl('', [Validators.required]);
-  valDtVencimento = new FormControl('', [Validators.required]);
+  valTipoDocumento = new FormControl();
+  valNroLicenca = new FormControl();
+  valDtnascimento = new FormControl();
+  valDtVencimento = new FormControl();
+  valNaturalidade = new FormControl();
+  valNacionalidade = new FormControl();
+  valEstadoCivil = new FormControl();
+  valRaca = new FormControl();
+  valGrauEscolaridade = new FormControl();
+  valFuncao = new FormControl();
+  valRG = new FormControl();
+  valINSSPIS = new FormControl();
+  valContratante = new FormControl();
+  valServico = new FormControl();
 
   filteredOptions: Observable<Cidade[]>;
 
@@ -89,10 +108,10 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
 
   @Input('extensao')
   set extensao(extensao: boolean){
-    this.fornecedordocumento.extensao = booleanToStrSN(extensao);
+    this.fornecedor.recolhe_inss = booleanToStrSN(extensao);
   }
   get extensao(): boolean {
-    return strToBoolean(this.fornecedordocumento.extensao);
+    return strToBoolean(this.fornecedor.recolhe_inss);
   }
 
   @ViewChildren('input') vc;
@@ -106,6 +125,9 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
     private _enderecoService: EnderecoService,
     private _fornecedordocumentoService: FornecedorDocumentoService,
     private _tipodocumentoService: TipoDocumentoService,
+    private _funcaoService: FuncaoService,
+    private _servicoService: ServicoService,
+    private _userService: UserService,
     private dialog: DialogService
   ) {}
 
@@ -129,6 +151,18 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
       this.tipodocumentos = JSON.parse(data._body);
     });
 
+    this._funcaoService.getListFuncao(this._tokenManager.retrieve()).subscribe( data => {
+      this.funcoes = JSON.parse(data._body);
+    });
+
+    this._servicoService.getListServicos(this._tokenManager.retrieve()).subscribe( data => {
+      this.servicos = JSON.parse(data._body);
+    });
+
+    this._userService.getListUsers(this._tokenManager.retrieve()).subscribe( data => {
+      this.usuarios = JSON.parse(data._body);
+    });
+
     this._enderecoService
       .getListEstados(this._tokenManager.retrieve())
       .subscribe(data => {
@@ -146,19 +180,19 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
             if (!isNullOrUndefined(this.fornecedor.estado)) {
               this.loadCidades(this.fornecedor.estado);
             }
-            this._fornecedordocumentoService.getFornecedorDocumento(this._tokenManager.retrieve(), this.fornecedor.id).subscribe(
-              clidoc => {
-                this.fornecedordocumentos.length = 0;
-                this.fornecedordocumentosList.length = 0;
-                this.fornecedordocumentos = JSON.parse(clidoc._body);
-                this.fornecedordocumentos_ant = JSON.parse(clidoc._body);
-                this.fornecedordocumentosList = JSON.parse(clidoc._body);
-              });
-              this._fornecedordocumentoService.getFornecedorDocumentoAnexo(this._tokenManager.retrieve(), this.fornecedor.id).subscribe(
-                clidocAnexo => {
-                  this.fornecedordocumentoAnexos.length = 0;
-                  this.fornecedordocumentoAnexos = JSON.parse(clidocAnexo._body);
-                });
+            // this._fornecedordocumentoService.getFornecedorDocumento(this._tokenManager.retrieve(), this.fornecedor.id).subscribe(
+            //   clidoc => {
+            //     this.fornecedordocumentos.length = 0;
+            //     this.fornecedordocumentosList.length = 0;
+            //     this.fornecedordocumentos = JSON.parse(clidoc._body);
+            //     this.fornecedordocumentos_ant = JSON.parse(clidoc._body);
+            //     this.fornecedordocumentosList = JSON.parse(clidoc._body);
+            //   });
+            //   this._fornecedordocumentoService.getFornecedorDocumentoAnexo(this._tokenManager.retrieve(), this.fornecedor.id).subscribe(
+            //     clidocAnexo => {
+            //       this.fornecedordocumentoAnexos.length = 0;
+            //       this.fornecedordocumentoAnexos = JSON.parse(clidocAnexo._body);
+            //     });
             this.emProcessamento = false;
           });
       } else {
@@ -384,32 +418,33 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
             data => {
               this.fornecedor = data;
               this.fornecedor_ant = data;
+              this.limpaValidadores();
+              this.emProcessamento = false;
+              this.exibeIncluir = true;
+              this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
               // this.emProcessamento = false;
               // this.exibeIncluir = true;
               // this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
-              for (let index = 0; index < this.fornecedordocumentos.length; index++) {
-                this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
-              }
+              // for (let index = 0; index < this.fornecedordocumentos.length; index++) {
+              //   this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
+              // }
 
-              this._fornecedordocumentoService.addFornecedorDocumento(this._tokenManager.retrieve(),
-                this.fornecedor.id, this.fornecedordocumentos)
-                .subscribe( clidoc => {
-                  this.fornecedordocumentos.length = 0;
-                  this.fornecedordocumentos_ant.length = 0;
-                  this.fornecedordocumentosList.length = 0;
-                  this.fornecedordocumentos = clidoc;
-                  this.fornecedordocumentos_ant = clidoc;
-                  this.fornecedordocumentosList = clidoc;
-                  this.limpaValidadores();
-                  this.emProcessamento = false;
-                  this.exibeIncluir = true;
-                  this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
-                },
-                error => {
-                  this.emProcessamento = false;
-                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
-                }
-              );
+              // this._fornecedordocumentoService.addFornecedorDocumento(this._tokenManager.retrieve(),
+              //   this.fornecedor.id, this.fornecedordocumentos)
+              //   .subscribe( clidoc => {
+              //     this.fornecedordocumentos.length = 0;
+              //     this.fornecedordocumentos_ant.length = 0;
+              //     this.fornecedordocumentosList.length = 0;
+              //     this.fornecedordocumentos = clidoc;
+              //     this.fornecedordocumentos_ant = clidoc;
+              //     this.fornecedordocumentosList = clidoc;
+
+              //   },
+              //   error => {
+              //     this.emProcessamento = false;
+              //     this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+              //   }
+              // );
             },
             error => {
               this.emProcessamento = false;
@@ -427,32 +462,33 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
             data => {
               this.fornecedor = data;
               this.fornecedor_ant = data;
-              // this.emProcessamento = false;
-              // this.exibeIncluir = true;
-              // this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
-              for (let index = 0; index < this.fornecedordocumentos.length; index++) {
-                this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
-              }
+              this.limpaValidadores();
+              this.emProcessamento = false;
+              this.exibeIncluir = true;
+              this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
+              // for (let index = 0; index < this.fornecedordocumentos.length; index++) {
+              //   this.fornecedordocumentos[index].id_fornecedor = this.fornecedor.id;
+              // }
 
-              this._fornecedordocumentoService.addFornecedorDocumento(this._tokenManager.retrieve(),
-                this.fornecedor.id, this.fornecedordocumentos)
-                .subscribe( clidoc => {
-                  this.fornecedordocumentos.length = 0;
-                  this.fornecedordocumentos_ant.length = 0;
-                  this.fornecedordocumentosList.length = 0;
-                  this.fornecedordocumentos = clidoc;
-                  this.fornecedordocumentos_ant = clidoc;
-                  this.fornecedordocumentosList = clidoc;
-                  this.limpaValidadores();
-                  this.emProcessamento = false;
-                  this.exibeIncluir = true;
-                  this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
-                },
-                error => {
-                  this.emProcessamento = false;
-                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
-                }
-              );
+              // this._fornecedordocumentoService.addFornecedorDocumento(this._tokenManager.retrieve(),
+              //   this.fornecedor.id, this.fornecedordocumentos)
+              //   .subscribe( clidoc => {
+              //     this.fornecedordocumentos.length = 0;
+              //     this.fornecedordocumentos_ant.length = 0;
+              //     this.fornecedordocumentosList.length = 0;
+              //     this.fornecedordocumentos = clidoc;
+              //     this.fornecedordocumentos_ant = clidoc;
+              //     this.fornecedordocumentosList = clidoc;
+              //     this.limpaValidadores();
+              //     this.emProcessamento = false;
+              //     this.exibeIncluir = true;
+              //     this.dialog.success('SIA', 'Fornecedor salvo com sucesso.');
+              //   },
+              //   error => {
+              //     this.emProcessamento = false;
+              //     this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
+              //   }
+              // );
             },
             error => {
               this.emProcessamento = false;
@@ -572,10 +608,6 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
       mensagem = 'Número da liçenca não informado.';
     }
 
-    if ((this.valDtEmissao.invalid) && (mensagem === '')) {
-      mensagem = 'Data de emissão não informada.';
-    }
-
     if ((this.valDtVencimento.invalid) && (mensagem === '')) {
       mensagem = 'Data de Vencimento não informada.';
     }
@@ -604,7 +636,6 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   limpaValidadores() {
     this.valTipoDocumento.clearValidators();
     this.valNroLicenca.clearValidators();
-    this.valDtEmissao.clearValidators();
     this.valDtVencimento.clearValidators();
   }
 

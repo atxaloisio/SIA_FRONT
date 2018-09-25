@@ -58,7 +58,22 @@ export class FornecedorService {
       cnae: _fornecedor.cnae,
       obsEndereco: _fornecedor.obsEndereco,
       obsTelefonesEmail: _fornecedor.obsTelefonesEmail,
-      inativo: _fornecedor.inativo
+      inativo: _fornecedor.inativo,
+      id_servico: _fornecedor.id_servico,
+      id_funcao: _fornecedor.id_funcao,
+      id_contratante: _fornecedor.id_contratante,
+      estado_civil: _fornecedor.estado_civil,
+      raca: _fornecedor.raca,
+      grau_escolaridade: _fornecedor.grau_escolaridade,
+      recolhe_inss: _fornecedor.recolhe_inss,
+      registro_geral: _fornecedor.registro_geral,
+      numero_inss_pis: _fornecedor.numero_inss_pis,
+      nacionalidade: _fornecedor.nacionalidade,
+      naturalidade: _fornecedor.naturalidade,
+      nr_dependentes_ir: _fornecedor.nr_dependentes_ir,
+      banco: _fornecedor.banco,
+      agencia: _fornecedor.agencia,
+      conta: _fornecedor.conta
     };
     // _params.set('codigo', '1');
 
@@ -114,7 +129,22 @@ export class FornecedorService {
       cnae: _fornecedor.cnae,
       obsEndereco: _fornecedor.obsEndereco,
       obsTelefonesEmail: _fornecedor.obsTelefonesEmail,
-      inativo: _fornecedor.inativo
+      inativo: _fornecedor.inativo,
+      id_servico: _fornecedor.id_servico,
+      id_funcao: _fornecedor.id_funcao,
+      id_contratante: _fornecedor.id_contratante,
+      estado_civil: _fornecedor.estado_civil,
+      raca: _fornecedor.raca,
+      grau_escolaridade: _fornecedor.grau_escolaridade,
+      recolhe_inss: _fornecedor.recolhe_inss,
+      registro_geral: _fornecedor.registro_geral,
+      numero_inss_pis: _fornecedor.numero_inss_pis,
+      nacionalidade: _fornecedor.nacionalidade,
+      naturalidade: _fornecedor.naturalidade,
+      nr_dependentes_ir: _fornecedor.nr_dependentes_ir,
+      banco: _fornecedor.banco,
+      agencia: _fornecedor.agencia,
+      conta: _fornecedor.conta
     };
     // _params.set('id', _id.toString());
 

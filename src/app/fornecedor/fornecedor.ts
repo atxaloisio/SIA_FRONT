@@ -39,7 +39,7 @@ export class Fornecedor {
     public estado: string = '',
     public cep: string = '',
     public codigo_pais: string = '',
-    public nascimento: string = '',
+    public nascimento: Date = null,
     public contato: string = '',
     public telefone1_ddd: string = '',
     public telefone1_numero: string = '',
@@ -68,7 +68,22 @@ export class Fornecedor {
     public sincronizar: string = '',
     public id_empresa: number = null,
     public id_filial: number = null,
+    public id_servico: number = null,
     public created_at: string = '',
-    public updated_at: string = ''
+    public updated_at: string = '',
+    public id_funcao: number = null,
+    public id_contratante: number =  null,
+    public estado_civil: number = null,
+    public raca: number = null,
+    public grau_escolaridade = null,
+    public recolhe_inss: string = 'N',
+    public registro_geral: number = null,
+    public numero_inss_pis: number = null,
+    public nacionalidade: string = '',
+    public naturalidade: string = '',
+    public nr_dependentes_ir: number = null,
+    public banco: string = '',
+    public agencia: string = '',
+    public conta: string = ''
   ) {}
 }

@@ -19,18 +19,18 @@
       <span style="color: white" class="no_print">Cadastros</span>
     </button>
     <mat-menu #cadastros="matMenu" [overlapTrigger]="false" class="no_print">
-        <button mat-menu-item [routerLink]="['/tipoatividades']" *ngIf="perfil.cadastros_servico == 'S'">
-          <mat-icon fontSet="fontawesome" fontIcon="fa-handshake-o"></mat-icon>
-          <span>Atividades</span>
-        </button>
+      <!-- <button mat-menu-item [routerLink]="['/tipoatividades']" *ngIf="perfil.cadastros_servico == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-handshake-o"></mat-icon>
+        <span>Atividades</span>
+      </button> -->
       <button mat-menu-item [routerLink]="['/servicos']" *ngIf="perfil.cadastros_servico == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-handshake-o"></mat-icon>
         <span>Serviços</span>
       </button>
-      <button mat-menu-item [routerLink]="['/contratantes']" *ngIf="perfil.cadastros_cliente == 'S'">
+      <!-- <button mat-menu-item [routerLink]="['/contratantes']" *ngIf="perfil.cadastros_cliente == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-group"></mat-icon>
         <span>Contratante</span>
-      </button>
+      </button> -->
       <!-- <button mat-menu-item [matMenuTriggerFor]="contrato" *ngIf="perfil.cadastros_contrato == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-book"></mat-icon>
         <span>Contrato</span>
@@ -85,7 +85,7 @@
   </mat-menu> -->
     <!-- Residuo -->
     <!-- <mat-menu #residuo="matMenu" class="no_print"> -->
-      <!-- <button mat-menu-item [routerLink]="['/acondicionamentos']" *ngIf="perfil.cadastros_residuo_acondicionamento == 'S'">
+    <!-- <button mat-menu-item [routerLink]="['/acondicionamentos']" *ngIf="perfil.cadastros_residuo_acondicionamento == 'S'">
 
         <span>Acondicionamento</span>
       </button>
@@ -93,24 +93,24 @@
 
         <span>Classe de Resíduos</span>
       </button> -->
-      <!-- <button mat-menu-item [routerLink]="['/tipoatividades']">
+    <!-- <button mat-menu-item [routerLink]="['/tipoatividades']">
       <span>Tipo de Atividades</span>
     </button> -->
-      <!-- <button mat-menu-item [routerLink]="['/residuos']" *ngIf="perfil.cadastros_residuo_residuos == 'S'"> -->
-        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
-        <!-- <span>Resíduos</span> -->
-      <!-- </button> -->
-      <!-- <button mat-menu-item [routerLink]="['/tipotratamentos']" *ngIf="perfil.cadastros_residuo_tipo_tratamento == 'S'"> -->
-        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
-        <!-- <span>Tipo de Tratamento</span> -->
-      <!-- </button> -->
-      <!-- <button mat-menu-item [routerLink]="['/tiporesiduos']" *ngIf="perfil.cadastros_residuo_tipo_residuo == 'S'"> -->
-        <!-- <span>Tipo de Resíduo</span> -->
-      <!-- </button> -->
-      <!-- <button mat-menu-item [routerLink]="['/unidades']" *ngIf="perfil.cadastros_residuo_unidade == 'S'"> -->
-        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
-        <!-- <span>Unidade</span> -->
-      <!-- </button> -->
+    <!-- <button mat-menu-item [routerLink]="['/residuos']" *ngIf="perfil.cadastros_residuo_residuos == 'S'"> -->
+    <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
+    <!-- <span>Resíduos</span> -->
+    <!-- </button> -->
+    <!-- <button mat-menu-item [routerLink]="['/tipotratamentos']" *ngIf="perfil.cadastros_residuo_tipo_tratamento == 'S'"> -->
+    <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
+    <!-- <span>Tipo de Tratamento</span> -->
+    <!-- </button> -->
+    <!-- <button mat-menu-item [routerLink]="['/tiporesiduos']" *ngIf="perfil.cadastros_residuo_tipo_residuo == 'S'"> -->
+    <!-- <span>Tipo de Resíduo</span> -->
+    <!-- </button> -->
+    <!-- <button mat-menu-item [routerLink]="['/unidades']" *ngIf="perfil.cadastros_residuo_unidade == 'S'"> -->
+    <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-truck"></mat-icon> -->
+    <!-- <span>Unidade</span> -->
+    <!-- </button> -->
     <!-- </mat-menu> -->
     <!-- Processos -->
     <button mat-button [matMenuTriggerFor]="processos" *ngIf="Logado && perfil.processos == 'S'">
@@ -121,7 +121,7 @@
         <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-recycle"></mat-icon> -->
         <span>Ordem de Pagamento</span>
       </button>
-      <button mat-menu-item [routerLink]="['/monitordocumento']" *ngIf="perfil.processos_monitor_documento == 'S'">
+      <button mat-menu-item [routerLink]="['/aprovacaopagamentos']" *ngIf="perfil.processos_monitor_documento == 'S'">
         <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-group"></mat-icon> -->
         <span>Aprovação de Pagamento</span>
       </button>
@@ -149,13 +149,13 @@
         <span>Gerencial</span>
       </button>
       <button mat-menu-item [routerLink]="['/relatorios/receita']">
-      <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
-      <span>Receitas</span>
-    </button>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
+        <span>Receitas</span>
+      </button>
       <button mat-menu-item [routerLink]="['/relatorios/despesa']">
-      <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
-      <span>Despesas</span>
-    </button>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
+        <span>Despesas</span>
+      </button>
       <button mat-menu-item [routerLink]="['/relatorios/maparesiduos']" *ngIf="perfil.relatorios_mapa_residuos == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-list-alt"></mat-icon>
         <span>Mapa de Resíduos</span>
@@ -176,23 +176,23 @@
       </button>
     </mat-menu>
     <!-- Utilitários -->
-  <button mat-button [matMenuTriggerFor]="utilitarios" *ngIf="Logado">
-    <span style="color: white">Utilitários</span>
-  </button>
-  <mat-menu #utilitarios="matMenu" [overlapTrigger]="false">
-    <button mat-menu-item>
-      <mat-icon fontSet="fontawesome" fontIcon="fa-group"></mat-icon>
-      <span>Clientes</span>
+    <button mat-button [matMenuTriggerFor]="utilitarios" *ngIf="Logado">
+      <span style="color: white">Utilitários</span>
     </button>
-    <button mat-menu-item>
-      <mat-icon fontSet="fontawesome" fontIcon="fa-cubes"></mat-icon>
-      <span>Produtos</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon fontSet="fontawesome" fontIcon="fa-exchange"></mat-icon>
-      <span>Movimentações</span>
-    </button>
-  </mat-menu>
+    <mat-menu #utilitarios="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-group"></mat-icon>
+        <span>Clientes</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-cubes"></mat-icon>
+        <span>Produtos</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-exchange"></mat-icon>
+        <span>Movimentações</span>
+      </button>
+    </mat-menu>
     <!-- Financeiro -->
     <!-- <button mat-button [matMenuTriggerFor]="financeiro" *ngIf="Logado">
     <span style="color: white">Financeiro</span>
@@ -218,9 +218,9 @@
         <span>Adicionar Usuário</span>
       </button>
       <button mat-menu-item *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'" (click)="openEditUsuario()">
-          <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
-          <span>Alterar Usuário</span>
-        </button>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
+        <span>Alterar Usuário</span>
+      </button>
       <button mat-menu-item (click)="openChangePasswordtUsuario()">
         <mat-icon fontSet="fontawesome" fontIcon="fa-lock"></mat-icon>
         <i class="fa fa-exchange" aria-hidden="true"></i>
@@ -238,5 +238,13 @@
   </mat-toolbar>
 </div>
 <!-- <app-alerts [defaultSettings]="options"></app-alerts> -->
-<!-- <button mat-raised-button (click)="converte()"> open </button> -->
+<!-- <button mat-raised-button (click)="testlistarcategoria()"> open </button>
+<mat-form-field class="frm_contratocliente_servico">
+  <mat-select placeholder="Serviços">
+
+    <mat-option *ngFor="let categoria of categorias" [value]="categoria.codigo">
+      {{ categoria.descricao }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
 <router-outlet *ngIf="Logado"></router-outlet>

@@ -52,7 +52,7 @@
         <span>Função</span>
       </button>
       <button mat-menu-item [routerLink]="['/centrocustos']" *ngIf="perfil.cadastros_equipamento == 'S'">
-        <mat-icon fontSet="fontawesome" fontIcon="fa-wrench"></mat-icon>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-creative-commons"></mat-icon>
         <span>Centro de Custo</span>
       </button>
       <!-- <button mat-menu-item [routerLink]="['/']">
@@ -144,7 +144,7 @@
       <span style="color: white" class="no_print">Relatórios</span>
     </button>
     <mat-menu #relatorios="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item [matMenuTriggerFor]="relatoriosgerenciais" *ngIf="perfil.relatorios_gerencial == 'S'">
+      <!-- <button mat-menu-item [matMenuTriggerFor]="relatoriosgerenciais" *ngIf="perfil.relatorios_gerencial == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-user"></mat-icon>
         <span>Gerencial</span>
       </button>
@@ -159,13 +159,13 @@
       <button mat-menu-item [routerLink]="['/relatorios/maparesiduos']" *ngIf="perfil.relatorios_mapa_residuos == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-list-alt"></mat-icon>
         <span>Mapa de Resíduos</span>
-      </button>
-      <button mat-menu-item [routerLink]="['/relatorios/pesagem']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-        <mat-icon fontSet="fontawesome" fontIcon="fa-balance-scale"></mat-icon>
-        <span>Controle de Pesagem</span>
+      </button> -->
+      <button mat-menu-item [routerLink]="['#']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
+        <span>Ordens de Pagamento</span>
       </button>
     </mat-menu>
-    <mat-menu #relatoriosgerenciais="matMenu" [overlapTrigger]="false">
+    <!-- <mat-menu #relatoriosgerenciais="matMenu" [overlapTrigger]="false">
       <button mat-menu-item [routerLink]="['/relatorios/cliente']" *ngIf="perfil.relatorios_gerencia_cliente == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-group"></mat-icon>
         <span>Cliente</span>
@@ -174,9 +174,9 @@
         <mat-icon fontSet="fontawesome" fontIcon="fa-cubes"></mat-icon>
         <span>Ambiente Verde</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
     <!-- Utilitários -->
-    <button mat-button [matMenuTriggerFor]="utilitarios" *ngIf="Logado">
+    <!-- <button mat-button [matMenuTriggerFor]="utilitarios" *ngIf="Logado">
       <span style="color: white">Utilitários</span>
     </button>
     <mat-menu #utilitarios="matMenu" [overlapTrigger]="false">
@@ -192,7 +192,7 @@
         <mat-icon fontSet="fontawesome" fontIcon="fa-exchange"></mat-icon>
         <span>Movimentações</span>
       </button>
-    </mat-menu>
+    </mat-menu> -->
     <!-- Financeiro -->
     <!-- <button mat-button [matMenuTriggerFor]="financeiro" *ngIf="Logado">
     <span style="color: white">Financeiro</span>

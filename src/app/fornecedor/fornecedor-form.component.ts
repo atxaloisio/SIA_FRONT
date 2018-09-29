@@ -35,11 +35,39 @@ import { FuncaoService } from '../funcao/funcao.service';
 import { ServicoService } from '../servico/servico.service';
 import { UserService } from '../user.service';
 import { User } from '../user';
+import { Moment } from 'moment/moment';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_FORMATS
+} from '@angular/material/material-moment-adapter';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  DateAdapter,
+  MAT_DATE_LOCALE,
+  MAT_DATE_FORMATS,
+  FloatPlaceholderType
+} from '@angular/material';
+import * as _moment from 'moment';
+
+const moment = _moment;
 
 @Component({
   selector: 'app-fornecedor-form',
   templateUrl: './fornecedor-form.component.html',
-  styleUrls: ['./fornecedor-form.component.css']
+  styleUrls: ['./fornecedor-form.component.css'],
+  providers: [
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+  ],
 })
 export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
@@ -95,6 +123,7 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   valINSSPIS = new FormControl();
   valContratante = new FormControl();
   valServico = new FormControl();
+  date = new FormControl();
 
   filteredOptions: Observable<Cidade[]>;
 
@@ -112,6 +141,14 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
   }
   get extensao(): boolean {
     return strToBoolean(this.fornecedor.recolhe_inss);
+  }
+
+  @Input('dtNascimento')
+  set dtNascimento(dt: any){
+    this.fornecedor.nascimento = new Date(dt);
+  }
+  get dtNascimento(): any {
+    return new Date(this.fornecedor.nascimento);
   }
 
   @ViewChildren('input') vc;
@@ -176,6 +213,11 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
           .getFornecedor(this._tokenManager.retrieve(), id)
           .subscribe(data => {
             this.fornecedor = JSON.parse(data._body);
+            // this.date.setValue(moment(this.fornecedor.nascimento));
+            // this.fornecedor.naturalidade = moment(this.date.value).toISOString().substring(0, 10);
+            // const dt = new Date(moment(this.date.value).toISOString().substring(0, 10));
+            // this.fornecedor.naturalidade = dt.toISOString().substring(0, 10);
+            // this.fornecedor.nascimento = new Date(this.fornecedor.nascimento);
             this.fornecedor_ant = JSON.parse(data._body);
             if (!isNullOrUndefined(this.fornecedor.estado)) {
               this.loadCidades(this.fornecedor.estado);
@@ -410,6 +452,11 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
 
   btnSalvar_click() {
     this.emProcessamento = true;
+    // const dt = moment(this.date.value);
+    // const dt = new Date(moment(this.date.value).toISOString().substring(0, 10));
+    // const dtnas = new Date(moment(this.date.value).toISOString().substring(0, 10));
+    // const dtnas = new Date();
+    // this.fornecedor.nascimento = dtnas;
     if (this.validaCampos()) {
       if (isNullOrUndefined(this.fornecedor.id)) {
         this._fornecedorService
@@ -511,6 +558,26 @@ export class FornecedorFormComponent implements OnInit, AfterViewInit, AfterView
     this.fornecedordocumentosList.length = 0;
     this.fornecedordocumentoAnexos.length = 0;
   }
+
+  getErrorMessage(control: FormControl) {
+    let mensagem = '';
+
+    if (control.hasError('required')) {
+      mensagem = mensagem + 'Campo obrigatório.';
+    }
+
+    if (control.hasError('date')) {
+      const data = new Date(control.getError('date').value);
+      data.setDate(data.getDate() + 1);
+      mensagem = mensagem + 'Data informada inferior a ' + data.toLocaleDateString();
+    }
+
+    if (control.hasError('date.null')) {
+      mensagem = mensagem + control.getError('date.null').value;
+    }
+    return mensagem;
+  }
+
 
   getRazaoSocialErrorMessage() {
     let mensagem = '';

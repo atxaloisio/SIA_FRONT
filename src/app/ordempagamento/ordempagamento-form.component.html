@@ -1,0 +1,167 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
+  <div fxFlex="140px" style="padding: 10px;" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="height: 100%">
+      <div fxFlex="80%" fxFlexFill fxFlexAlign="center">
+        <button id="btnSalvar" mat-raised-button color="primary" style="width: 100%" (click)="btnSalvar_click()">
+          <mat-icon>save</mat-icon>
+          <span>Salvar</span>
+        </button>
+        <button id="btnIncluir" mat-raised-button color="primary" style="width: 100%" (click)="btnIncluir_click()"
+          *ngIf="exibeIncluir">
+          <mat-icon>insert_drive_file</mat-icon>
+          <span>Incluir</span>
+        </button>
+      </div>
+      <div fxFlex="40px" fxFlexFill fxFlexAlign="end">
+
+        <a routerLink="/ordempagamentos" mat-raised-button color="primary" style="width: 120px">
+          <mat-icon>close</mat-icon>
+          <span>Fechar</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="90%">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+      <div fxFlex="50px" fxFlexAlign="start" style="padding: 10px;">
+        <button id="lblTitulo" mat-raised-button style="width: 100%" disabled>
+          <i class="fa fa-leaf" aria-hidden="true"></i>
+          <span>ORDENS DE PAGAMENTO</span>
+        </button>
+      </div>
+      <div fxFlex="80%" fxFlexAlign="center">
+        <div fxLayout="column" class="frm_ordempagamento-loading-shade" fxLayoutAlign="center center" *ngIf="emProcessamento">
+          <div fxFlex="70" fxFlexAlign="center">
+            <mat-spinner></mat-spinner>
+          </div>
+          <div fxFlex="10" fxFlexAlign="center">
+            &nbsp;
+          </div>
+          <div fxFlex="20" fxFlexAlign="center">
+            <label>Aguarde...</label>
+          </div>
+        </div>
+        <mat-card *ngIf="!emProcessamento" style="width: 600px;">
+          <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+
+            <div fxFlex="60px" fxFlexAlign="start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
+                <div fxFlex="120px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_codigo">
+                    <input matInput disabled #codigo maxlength="9" type="number" tabindex="2" placeholder="Código"
+                      required [(ngModel)]="ordempagamento.id">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="450px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_descricao">
+                    <input matInput uppercase autofocus #descricao #focuscomp maxlength="50" [formControl]="valDescricao"
+                      placeholder="Descrição" required tabindex="1" [(ngModel)]="ordempagamento.descricao">
+                    <mat-hint align="end">{{descricao.value?.length || 0}}/50</mat-hint>
+                    <mat-error *ngIf="valDescricao.invalid">{{getDescricaoErrorMessage()}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="60px" fxFlexAlign="start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
+                <div fxFlex="250px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_centrocusto">
+                    <mat-select placeholder="Centro de Custo" [(value)]="ordempagamento.id_centro_custo" tabindex="8">
+                      <mat-option *ngFor="let centrocusto of centrocustos" [value]="centrocusto.id">
+                        {{ centrocusto.descricao }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="350px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_servico">
+                    <mat-select placeholder="Serviço" [(value)]="ordempagamento.id_servico" tabindex="8">
+                      <mat-option *ngFor="let servico of servicos" [value]="servico.id">
+                        {{ servico.descricao }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="60px" fxFlexAlign="start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
+                <div fxFlex="90px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_codigo">
+                    <input matInput autofocus #focuscomp #codigofor maxlength="9" [formControl]="valCodigo" placeholder="Fornecedor"
+                      required tabindex="1" [(ngModel)]="ordempagamento.id_fornecedor" (keyup)="validaSaida($event.target.value)"
+                      (keypress)="onlyNumber($event)" id="id_fornecedor">
+                    <mat-hint align="end">{{codigofor.value?.length || 0}}/9</mat-hint>
+                    <mat-error *ngIf="valCodigo.invalid">{{getErrorMessage(valCodigo)}}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="30px" fxFlexAlign="center" fxFlexFill>
+                  <button mat-icon-button color="primary" (click)="openPesquisa()" tabindex="2">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </div>
+                <div fxFlex="470px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_razao_social">
+                    <input matInput disabled [(ngModel)]="ordempagamento.fornecedor">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="60px" fxFlexAlign="start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
+                <div fxFlex="350px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_usuarios">
+                    <mat-select placeholder="Contratante" [(value)]="ordempagamento.usuario_inclusao" tabindex="8">
+                      <mat-option *ngFor="let usuario of usuarios" [value]="usuario.name">
+                        {{ usuario.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="250px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_notafiscal">
+                    <input matInput uppercase autofocus #notafiscal #focuscomp maxlength="20" [formControl]="valNotaFiscal"
+                      placeholder="Nota Fiscal" required tabindex="1" [(ngModel)]="ordempagamento.nota_fiscal">
+                    <mat-hint align="end">{{notafiscal.value?.length || 0}}/20</mat-hint>
+                    <mat-error *ngIf="valNotaFiscal.invalid">{{getErrorMessage(valNotaFiscal)}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="60px" fxFlexAlign="start">
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
+                <div fxFlex="90px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_parcela">
+                    <input matInput uppercase autofocus #nrparcela #focuscomp maxlength="9" [formControl]="valParcela"
+                      placeholder="Nº Parcela" required tabindex="1" [(ngModel)]="ordempagamento.parcela">
+                    <mat-hint align="end">{{nrparcela.value?.length || 0}}/9</mat-hint>
+                    <mat-error *ngIf="valParcela.invalid">{{getErrorMessage(valParcela)}}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="120px" fxFlexAlign="start" fxFlexFill>
+                  <div class="group">
+                    <input currencyMask type="text" class="atrainput" [(ngModel)]="ordempagamento.valor_parcela" style="height: 25px; width: 105px;"
+                      tabindex="11" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="atralabel">Valor Parcela</label>
+                  </div>
+                </div>
+                <div fxFlex="120px" fxFlexAlign="start" fxFlexFill>
+                    <div class="group">
+                      <input currencyMask type="text" class="atrainput2" [(ngModel)]="ordempagamento.valor_total" style="height: 25px; width: 105px;"
+                        tabindex="11" required>
+                      <span class="highlight"></span>
+                      <span class="bar"></span>
+                      <label class="atralabel2">Valor Total</label>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</div>

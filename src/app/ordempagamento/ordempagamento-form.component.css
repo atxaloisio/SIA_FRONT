@@ -1,0 +1,188 @@
+.frm_ordempagamento_codigo {
+  min-width: 120px;
+  max-width: 120px;
+}
+
+.frm_ordempagamento_descricao {
+  min-width: 450px;
+  max-width: 500px;
+}
+
+.frm_ordempagamento_servico {
+  min-width: 350px;
+  max-width: 350px;
+}
+.frm_ordempagamento_notafiscal {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+.frm_ordempagamento_usuarios {
+  min-width: 350px;
+  max-width: 350px;
+}
+
+.frm_ordempagamento_centrocusto {
+  min-width: 250px;
+  max-width: 250px;
+}
+
+.frm_ordempagamento_razao_social {
+  min-width: 470px;
+  max-width: 470px;
+}
+
+.frm_ordempagamento_parcela {
+  min-width: 90px;
+  max-width: 90px;
+}
+
+.frm_ordempagamento-loading-shade {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0; */
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.atrainput {
+  font-size: 16px;
+  font-family: roboto;
+  padding: 10px 10px 10px 0px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+.atrainput:focus {
+  outline: none;
+}
+
+/* LABEL ======================================= */
+.atralabel {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 127px;
+  top: 307px;
+  transition: 0.2s ease all;
+}
+
+/* active state */
+.atrainput:focus ~ .atralabel,
+.atrainput:valid ~ .atralabel {
+  top: 275px;
+  font-size: 12px;
+  color: #5264ae;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+  position: relative;
+  display: block;
+  width: 120px;
+}
+.bar:before,
+.bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264ae;
+  transition: 0.2s ease all;
+}
+.bar:before {
+  left: 50%;
+}
+.bar:after {
+  right: 50%;
+}
+
+/* active state */
+.atrainput:focus ~ .bar:before,
+.atrainput:focus ~ .bar:after {
+  width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* active state */
+.atrainput:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@keyframes inputHighlighter {
+  from {
+    background: #5264ae;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.atrainput2 {
+  font-size: 16px;
+  font-family: roboto;
+  padding: 10px 10px 10px 0px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #757575;
+}
+
+.atrainput2:focus {
+  outline: none;
+}
+
+/* LABEL ======================================= */
+.atralabel2 {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 257px;
+  top: 307px;
+  transition: 0.2s ease all;
+}
+
+/* active state */
+.atrainput2:focus ~ .atralabel2,
+.atrainput2:valid ~ .atralabel2 {
+  top: 275px;
+  font-size: 12px;
+  color: #5264ae;
+}
+
+
+
+/* active state */
+.atrainput2:focus ~ .bar:before,
+.atrainput2:focus ~ .bar:after {
+  width: 50%;
+}
+
+/* active state */
+.atrainput2:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
+}
+

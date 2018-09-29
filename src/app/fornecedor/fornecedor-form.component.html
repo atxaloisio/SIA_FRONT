@@ -259,12 +259,13 @@
                   <div fxLayou="column" fxLayoutAlign="start center" fxLayoutGap="10px">
                     <div fxFlex="70px" fxFlexAlign="start" fxFlexFill>
                       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                        <div fxFlex="150px" fxFlexFill>
+                        <div fxFlex="150px" fxFlexAlign="start" fxFlexFill>
                           <mat-form-field class="frm_fornecedor_dtemissao">
-                            <input matInput [formControl]="valDtnascimento" type="date" #dtnascimento maxlength="10"
-                              placeholder="Data Nascimento" tabindex="32" required [ngModel]="fornecedor.nascimento"
-                              (ngModelChange)="fornecedor.nascimento = $event" [value]="fornecedor.nascimento | formatDate">
-                            <mat-hint align="end">{{dtnascimento.value?.length || 0}}/10</mat-hint>
+                            <input matInput type="date" #dtNasc maxlength="10" placeholder="Data de Nascimento" name="dtNascimento"
+                              tabindex="4" required [ngModel]="fornecedor.nascimento" (ngModelChange)="fornecedor.nascimento = $event"
+                              [value]="fornecedor.nascimento | date:'yyyy-MM-dd'" [formControl]="valDtnascimento" id="dtNascimento">
+                            <mat-hint align="end">{{dtNasc.value?.length || 0}}/10</mat-hint>
+                            <mat-error *ngIf="valDtnascimento.invalid">{{getErrorMessage(valDtnascimento)}}</mat-error>
                           </mat-form-field>
                         </div>
                         <div fxFlex="150px" fxFlexFill>
@@ -296,7 +297,7 @@
                                 Divorciado(a)
                               </mat-option>
                               <mat-option [value]=4>
-                                  Viuvo(a)
+                                Viuvo(a)
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
@@ -332,8 +333,8 @@
                         </div>
                         <div fxFlex="230px" fxFlexFill>
                           <mat-form-field class="frm_fornecedor_tipodocumento">
-                            <mat-select [formControl]="valGrauEscolaridade" placeholder="Grau de Escolaridade" [(ngModel)]="fornecedor.grau_escolaridade"
-                              required tabindex="30" id="id_tipodocumento">
+                            <mat-select [formControl]="valGrauEscolaridade" placeholder="Grau de Escolaridade"
+                              [(ngModel)]="fornecedor.grau_escolaridade" required tabindex="30" id="id_tipodocumento">
                               <mat-option [value]=1>
                                 Ensino Fundamental Incompleto
                               </mat-option>
@@ -393,8 +394,8 @@
                             </div> -->
                             <div fxFlex="150px" fxFlexFill>
                               <mat-form-field class="frm_fornecedor_nrolicenca">
-                                <input matInput [formControl]="valRG" uppercase #rg maxlength="20"
-                                  placeholder="RG" tabindex="31" required [(ngModel)]="fornecedor.registro_geral">
+                                <input matInput [formControl]="valRG" uppercase #rg maxlength="20" placeholder="RG"
+                                  tabindex="31" required [(ngModel)]="fornecedor.registro_geral">
                                 <mat-hint align="end">{{rg.value?.length || 0}}/20</mat-hint>
                               </mat-form-field>
                             </div>
@@ -513,24 +514,21 @@
                           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
                             <div fxFlex="180px" fxFlexFill>
                               <mat-form-field class="frm_fornecedor_inscrmunicipal">
-                                <input matInput #banco maxlength="20" placeholder="Banco" tabindex="27"
-                                  [(ngModel)]="fornecedor.banco">
+                                <input matInput #banco maxlength="20" placeholder="Banco" tabindex="27" [(ngModel)]="fornecedor.banco">
                                 <mat-hint align="end">{{banco.value?.length || 0}}/20</mat-hint>
                               </mat-form-field>
                             </div>
                             <div fxFlex="180px" fxFlexFill>
-                                <mat-form-field class="frm_fornecedor_inscrmunicipal">
-                                  <input matInput #agencia maxlength="20" placeholder="Agência" tabindex="27"
-                                    [(ngModel)]="fornecedor.agencia">
-                                  <mat-hint align="end">{{agencia.value?.length || 0}}/20</mat-hint>
-                                </mat-form-field>
+                              <mat-form-field class="frm_fornecedor_inscrmunicipal">
+                                <input matInput #agencia maxlength="20" placeholder="Agência" tabindex="27" [(ngModel)]="fornecedor.agencia">
+                                <mat-hint align="end">{{agencia.value?.length || 0}}/20</mat-hint>
+                              </mat-form-field>
                             </div>
                             <div fxFlex="180px" fxFlexFill>
-                                <mat-form-field class="frm_fornecedor_inscrmunicipal">
-                                  <input matInput #conta maxlength="20" placeholder="Conta" tabindex="27"
-                                    [(ngModel)]="fornecedor.conta">
-                                  <mat-hint align="end">{{conta.value?.length || 0}}/20</mat-hint>
-                                </mat-form-field>
+                              <mat-form-field class="frm_fornecedor_inscrmunicipal">
+                                <input matInput #conta maxlength="20" placeholder="Conta" tabindex="27" [(ngModel)]="fornecedor.conta">
+                                <mat-hint align="end">{{conta.value?.length || 0}}/20</mat-hint>
+                              </mat-form-field>
                             </div>
                             <!-- <div fxFlex="330px" fxFlexFill>
                               <mat-form-field class="frm_fornecedor_documento">
@@ -555,30 +553,30 @@
                         </div>
                       </div>
                       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0px">
-                          <div fxFlex="75px" fxFlexAlign="start">
-                              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-                                  <div fxFlex="230px" fxFlexFill>
-                                      <mat-form-field class="frm_fornecedor_tipodocumento">
-                                        <mat-select [formControl]="valContratante" placeholder="Contratante" [(ngModel)]="fornecedor.id_contratante"
-                                          required tabindex="30" id="id_tipodocumento">
-                                          <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">
-                                            {{ usuario.name }}
-                                          </mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                  </div>
-                                  <div fxFlex="230px" fxFlexFill>
-                                    <mat-form-field class="frm_fornecedor_tipodocumento">
-                                      <mat-select [formControl]="valServico" placeholder="Serviço" [(ngModel)]="fornecedor.id_servico"
-                                        required tabindex="30" id="id_tipodocumento">
-                                        <mat-option *ngFor="let servico of servicos" [value]="servico.id">
-                                          {{ servico.descricao }}
-                                        </mat-option>
-                                      </mat-select>
-                                    </mat-form-field>
-                                  </div>
-                              </div>
+                        <div fxFlex="75px" fxFlexAlign="start">
+                          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                            <div fxFlex="230px" fxFlexFill>
+                              <mat-form-field class="frm_fornecedor_tipodocumento">
+                                <mat-select [formControl]="valContratante" placeholder="Contratante" [(ngModel)]="fornecedor.id_contratante"
+                                  required tabindex="30" id="id_tipodocumento">
+                                  <mat-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                                    {{ usuario.name }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div fxFlex="230px" fxFlexFill>
+                              <mat-form-field class="frm_fornecedor_tipodocumento">
+                                <mat-select [formControl]="valServico" placeholder="Serviço" [(ngModel)]="fornecedor.id_servico"
+                                  required tabindex="30" id="id_tipodocumento">
+                                  <mat-option *ngFor="let servico of servicos" [value]="servico.id">
+                                    {{ servico.descricao }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
                           </div>
+                        </div>
                         <!-- <div fxFlex="40px" fxFlexAlign="start" fxFlexFill>
                           <table>
                             <tr>

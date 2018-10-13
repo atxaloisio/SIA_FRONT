@@ -8,6 +8,11 @@
   max-width: 400px;
 }
 
+.frm_centrocusto_contacorrente {
+  min-width: 300px;
+  max-width: 300px;
+}
+
 .frm_centrocusto_descricao {
   min-width: 450px;
   max-width: 500px;

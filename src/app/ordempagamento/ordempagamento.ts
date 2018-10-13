@@ -1,6 +1,9 @@
 export interface OrdemPagamentoFilter {
   id: string;
   descricao: string;
+  servico: string;
+  centrocusto: string;
+  fornecedor: string;
 }
 export class OrdemPagamento {
   constructor(

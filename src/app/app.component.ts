@@ -194,9 +194,9 @@ export class AppComponent implements OnInit {
   openLoginDialog(): void {
     const dialogLoginRef = this.modal.open(LoginComponent, {
       width: '500px',
-      height: '330px',
+      height: '400px',
       disableClose: true,
-      data: { email: '', password: '' }
+      data: { email: '', password: '', id_empresa: null }
     });
 
     dialogLoginRef.afterClosed().subscribe(result => {

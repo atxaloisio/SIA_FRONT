@@ -146,14 +146,34 @@ mat-row:nth-child(odd) {
 }
 
 .mat-column-descricao {
-  max-width: 500px;
+  max-width: 250px;
 }
 
-.mat-column-unidade {
-  max-width: 80px;
+.mat-column-servico {
+  max-width: 200px;
 }
 
-.mat-column-quantidade_estoque {
+.mat-column-centrocusto {
+  max-width: 200px;
+}
+
+.mat-column-servico {
+  max-width: 200px;
+}
+
+.mat-column-fornecedor {
+  max-width: 250px;
+}
+
+.mat-column-contratante {
+  max-width: 250px;
+}
+
+.mat-column-vencimento {
+  max-width: 150px;
+}
+
+.mat-column-valortotal {
   max-width: 150px;
 }
 

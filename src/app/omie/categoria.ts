@@ -7,6 +7,7 @@ export class CategoriaRequest {
 }
 export class Categoria {
   constructor(
+    public id: number = null,
     public codigo: number = null,
     public descricao: string = '',
     public descricao_padrao: string = '',

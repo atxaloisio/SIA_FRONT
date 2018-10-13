@@ -19,6 +19,18 @@
         </div>
         <div fxFlex="80" fxLayoutAlign="start center">
           <div fxLayout="column" style="width: 100%;">
+            <div fxFlex="70px" fxFlexAlign="start">
+              <mat-form-field style="width:350px">
+                <mat-select placeholder="Empresa" [(ngModel)]="data.id_empresa" tabindex="0"
+                  [formControl]="valEmpresa" id="empresa">
+                  <!-- <mat-option></mat-option> -->
+                  <mat-option *ngFor="let empresa of empresas" [value]="empresa.id">
+                    {{ empresa.nome_fantasia }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="valEmpresa.invalid">{{getErrorMessage(valEmpresa)}}</mat-error>
+              </mat-form-field>
+            </div>
             <div fxFlex="100">
               <mat-form-field style="width:100%">
                 <input matInput tabindex="1" [(ngModel)]="data.email" [formControl]="valEmail" placeholder="E-Mail" required (click)="setErroLogin('')">

@@ -45,9 +45,12 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
   exibeIncluir = false;
 
   valCodigo = new FormControl('', [Validators.required]);
-  valDescricao = new FormControl('', [Validators.required]);
-  valNotaFiscal = new FormControl('', [Validators.required]);
+  valDescricao = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+  valNotaFiscal = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   valParcela = new FormControl('', [Validators.required]);
+  valDtVencimento = new FormControl('', [Validators.required]);
+  valCentroCusto = new FormControl('', [Validators.required]);
+  valServico = new FormControl('', [Validators.required]);
 
   @ViewChildren('input') vc;
   @ViewChild('focuscomp') focuscomp: ElementRef;
@@ -80,14 +83,14 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
     );
 
     this._centroCustoService.getListCentroCusto(this._tokenManager.retrieve()).subscribe(
-      data => {
-        this.centrocustos = JSON.parse(data._body);
+      data2 => {
+        this.centrocustos = JSON.parse(data2._body);
       }
     );
 
     this._userService.getListUsers(this._tokenManager.retrieve()).subscribe(
-      data => {
-        this.usuarios = JSON.parse(data._body);
+      data3 => {
+        this.usuarios = JSON.parse(data3._body);
       }
     );
 
@@ -95,9 +98,9 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
       const id: number = +params['id'];
       if (id) {
         this._ordempagamentoService.getOrdemPagamento(this._tokenManager.retrieve(), id)
-        .subscribe( data => {
-          this.ordempagamento = JSON.parse(data._body);
-          this.ordempagamento_ant = JSON.parse(data._body);
+        .subscribe( data1 => {
+          this.ordempagamento = JSON.parse(data1._body);
+          this.ordempagamento_ant = JSON.parse(data1._body);
           this.emProcessamento = false;
         });
       } else {
@@ -124,7 +127,7 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
 
   ngAfterViewInit(): void {
     // this.vc.first.nativeElement.focus();
-    Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
+    // Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
   }
 
   onlyNumber(event: any) {
@@ -253,6 +256,14 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
         this.ordempagamento.fornecedor = result.razao_social;
       }
     });
+  }
+
+  compareServico(s1: Servico, s2: Servico): boolean {
+    return s1 && s2 ? s1.id === s2.id : s1 === s2;
+  }
+
+  compareCentroCusto(c1: CentroCusto, c2: CentroCusto): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
   canDeactivate(): Observable<boolean> | boolean {

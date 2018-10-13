@@ -66,6 +66,40 @@
             <mat-cell *matCellDef="let row"> {{row.descricao}} </mat-cell>
           </ng-container>
 
+          <!-- Name Column -->
+          <ng-container matColumnDef="servico">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Serviço </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.servico}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="centrocusto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Centro de Custo </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.centro_custo}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="fornecedor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Fornecedor </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.fornecedor}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="contratante">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Contratante </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.usuario_contratante}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="vencimento">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Vencimento </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.vencimento | date: 'dd/MM/yyyy'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Total </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.valor_total | currency:'BRL':true}} </mat-cell>
+          </ng-container>
+
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)" (dblclick)="dblck(row)"></mat-row>
         </mat-table>

@@ -67,10 +67,10 @@ export class DsCentroCusto extends DataSource<CentroCusto> {
       // this.isLoadingResults = false;
       this.onChange.emit(false);
       this.paginaInicial = 1;
-      this.paginaFinal = data.meta.last_page;
-      this.registroDe = data.meta.from;
-      this.registroAte = data.meta.to;
-      this.nrRegistros = data.meta.total;
+      this.paginaFinal = data.last_page;
+      this.registroDe = data.from;
+      this.registroAte = data.to;
+      this.nrRegistros = data.total;
       return data.data;
     })
     .catch(err => {

@@ -96,6 +96,7 @@ export class OrdemPagamentoService {
 
   aprovarOrdemPagamento(accessToken: string, _id: number): Observable<any> {
     let usuario: User;
+    const urlAprov = environment.urlbase + '/api/aprovacaopagamentos';
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
@@ -114,7 +115,7 @@ export class OrdemPagamentoService {
     // _params.set('id', _id.toString());
 
     return this._http
-      .put(this.ordempagamentoUrl + '/' + _id.toString(), _body, { headers: headers })
+      .put(urlAprov + '/' + _id.toString(), _body, { headers: headers })
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')

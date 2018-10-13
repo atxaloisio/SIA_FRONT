@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlbase: 'http://www.atxsoftware.com.br'
+  urlbase: 'http://sia.atratec.com.br'
 };

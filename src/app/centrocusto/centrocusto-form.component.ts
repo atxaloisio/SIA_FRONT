@@ -19,6 +19,7 @@ import { ActivatedRoute, Params} from '@angular/router';
 import {FormControl, Validators} from '@angular/forms';
 import { OmieService } from '../omie/omie.service';
 import { Categoria } from '../omie/categoria';
+import { ContaCorrente } from '../omie/contacorrente';
 
 @Component({
   selector: 'app-centrocusto-form',
@@ -32,9 +33,11 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
   emProcessamento = false;
   exibeIncluir = false;
   categorias: Categoria[];
+  contacorrentes: ContaCorrente[];
 
   valDescricao = new FormControl('', [Validators.required]);
   valCategoria = new FormControl();
+  valContaCorrente = new FormControl();
 
   @ViewChildren('input') vc;
   @ViewChild('focuscomp') focuscomp: ElementRef;
@@ -55,9 +58,16 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
     this.emProcessamento = true;
     this.centrocusto = new CentroCusto();
     this.centrocusto_ant = new CentroCusto();
+
     this._omieService.getListCategorias(this._tokenManager.retrieve()).subscribe(
       data => {
         this.categorias = JSON.parse(data._body);
+      }
+    );
+
+    this._omieService.getListContaCorrente(this._tokenManager.retrieve()).subscribe(
+      data => {
+        this.contacorrentes = JSON.parse(data._body);
       }
     );
 
@@ -166,6 +176,10 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
       mensagem = mensagem + control.getError('date.null').value;
     }
     return mensagem;
+  }
+
+  limpaValidadores() {
+
   }
 
   canDeactivate(): Observable<boolean> | boolean {

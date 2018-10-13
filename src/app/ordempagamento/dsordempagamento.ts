@@ -16,7 +16,13 @@ import 'rxjs/add/operator/debounceTime';
 import { OrdemPagamento, OrdemPagamentoFilter } from './ordempagamento';
 
 export class DsOrdemPagamento extends DataSource<OrdemPagamento> {
-  _filterChange = new BehaviorSubject( {id: '', descricao: ''} );
+  _filterChange = new BehaviorSubject( {
+    id: '',
+    descricao: '',
+    servico: '',
+    centrocusto: '',
+    fornecedor: ''
+  } );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 

@@ -45,6 +45,24 @@
                 <input matInput uppercase #filter placeholder="Descrição" [formControl]="descricaoFilter">
               </mat-form-field>
             </td>
+            <td class="mat-column-servico">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-servico">
+                <input matInput #filter placeholder="Serviço" [formControl]="servicoFilter">
+              </mat-form-field>
+            </td>
+            <td class="mat-column-centrocusto">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-centrocusto">
+                <input matInput #filter placeholder="Centro de Custo" [formControl]="centrocustoFilter">
+              </mat-form-field>
+            </td>
+            <td class="mat-column-fornecedor">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-fornecedor">
+                <input matInput #filter placeholder="Fornecedor" [formControl]="fornecedorFilter">
+              </mat-form-field>
+            </td>
           </tr>
         </table>
       </div>
@@ -64,6 +82,40 @@
           <ng-container matColumnDef="descricao">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.descricao}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="servico">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Serviço </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.servico}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="centrocusto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Centro de Custo </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.centro_custo}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="fornecedor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Fornecedor </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.fornecedor}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="contratante">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Contratante </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.usuario_contratante}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="vencimento">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Vencimento </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.vencimento | date: 'dd/MM/yyyy'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Total </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.valor_total | currency:'BRL':true}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -7,6 +7,8 @@ import { Data } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators} from '@angular/forms';
+import { OmieService } from '../omie/omie.service';
+import { Empresa } from '../omie/empresa';
 
 @Component({
   selector: 'app-login',
@@ -18,15 +20,23 @@ export class LoginComponent implements OnInit {
   erroLogin: boolean;
   msgErroLogin = '';
   emProcessamento = false;
+  empresas: Empresa[];
 
+  valEmpresa = new FormControl('', [Validators.required]);
   valEmail = new FormControl('', [Validators.email, Validators.required]);
   valPassword = new FormControl('', [Validators.required]);
 
   constructor(private loginService: LoginService,
+    private _omieService: OmieService,
     public dialogLoginRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    this._omieService.getListEmpresas().subscribe(
+      data => {
+        this.empresas = JSON.parse(data._body);
+      }
+    );
   }
 
   onEntrarClick(): void {
@@ -118,6 +128,25 @@ export class LoginComponent implements OnInit {
 
     if (this.valPassword.hasError('required')) {
       mensagem = mensagem + 'Campo senha não informado.';
+    }
+    return mensagem;
+  }
+
+  getErrorMessage(control: FormControl) {
+    let mensagem = '';
+
+    if (control.hasError('required')) {
+      mensagem = mensagem + 'Campo obrigatório.';
+    }
+
+    if (control.hasError('date')) {
+      const data = new Date(control.getError('date').value);
+      data.setDate(data.getDate() + 1);
+      mensagem = mensagem + 'Data informada inferior a ' + data.toLocaleDateString();
+    }
+
+    if (control.hasError('date.null')) {
+      mensagem = mensagem + control.getError('date.null').value;
     }
     return mensagem;
   }

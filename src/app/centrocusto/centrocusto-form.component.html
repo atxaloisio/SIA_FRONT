@@ -46,7 +46,7 @@
 
             <div fxFlex="60px" fxFlexAlign="start">
               <mat-form-field class="frm_centrocusto_codigo">
-                <input matInput disabled #codigo maxlength="9" type="number" tabindex="2" placeholder="Código" required
+                <input matInput disabled #codigo maxlength="9" type="number" tabindex="1" placeholder="Código" required
                   [(ngModel)]="centrocusto.id">
                 <!-- <mat-hint align="end">{{codigo.value?.length || 0}}/9</mat-hint>
                 <mat-error *ngIf="valCodigo.invalid">{{getCodigoErrorMessage()}}</mat-error> -->
@@ -55,21 +55,33 @@
             <div fxFlex="60px" fxFlexAlign="start">
               <mat-form-field class="frm_centrocusto_descricao">
                 <input matInput uppercase autofocus #descricao #focuscomp maxlength="50" [formControl]="valDescricao"
-                  placeholder="Descrição" required tabindex="1" [(ngModel)]="centrocusto.descricao">
+                  placeholder="Descrição" required tabindex="2" [(ngModel)]="centrocusto.descricao">
                 <mat-hint align="end">{{descricao.value?.length || 0}}/50</mat-hint>
                 <mat-error *ngIf="valDescricao.invalid">{{getDescricaoErrorMessage()}}</mat-error>
               </mat-form-field>
             </div>
             <div fxFlex="60px" fxFlexAlign="start">
               <mat-form-field class="frm_centrocusto_categoria">
-                <mat-select placeholder="Categoria Omie" [(ngModel)]="centrocusto.categoria" tabindex="9" required
-                   [formControl]="valCategoria" id="unidade">
+                <mat-select placeholder="Categoria Omie" [(ngModel)]="centrocusto.id_categoria" tabindex="3"
+                  [formControl]="valCategoria" id="categoria">
                   <!-- <mat-option></mat-option> -->
-                  <mat-option *ngFor="let categoria of categorias" [value]="categoria.codigo">
+                  <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
                     {{ categoria.codigo }} - {{categoria.descricao}}
                   </mat-option>
                 </mat-select>
                 <mat-error *ngIf="valCategoria.invalid">{{getErrorMessage(valCategoria)}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="60px" fxFlexAlign="start">
+              <mat-form-field class="frm_centrocusto_contacorrente">
+                <mat-select placeholder="Conta Corrente Omie" [(ngModel)]="centrocusto.id_conta_corrente" tabindex="4"
+                  [formControl]="valContaCorrente" id="contacorrente">
+                  <!-- <mat-option></mat-option> -->
+                  <mat-option *ngFor="let contacorrente of contacorrentes" [value]="contacorrente.id">
+                    {{contacorrente.descricao}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="valContaCorrente.invalid">{{getErrorMessage(valContaCorrente)}}</mat-error>
               </mat-form-field>
             </div>
 

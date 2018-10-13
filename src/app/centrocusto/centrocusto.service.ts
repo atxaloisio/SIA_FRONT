@@ -24,7 +24,8 @@ export class CentroCustoService {
     // const _params: HttpParams = new HttpParams();
     const _body = {
       descricao: _CentroCusto.descricao,
-      categoria: _CentroCusto.categoria
+      id_categoria: _CentroCusto.id_categoria,
+      id_conta_corrente: _CentroCusto.id_conta_corrente
     };
     // _params.set('codigo', '1');
 
@@ -47,7 +48,8 @@ export class CentroCustoService {
     const _body = {
       id: _CentroCusto.id,
       descricao: _CentroCusto.descricao,
-      categoria: _CentroCusto.categoria
+      id_categoria: _CentroCusto.id_categoria,
+      id_conta_corrente: _CentroCusto.id_conta_corrente
     };
     // _params.set('id', _id.toString());
 

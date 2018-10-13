@@ -66,20 +66,24 @@
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
                 <div fxFlex="250px" fxFlexAlign="start" fxFlexFill>
                   <mat-form-field class="frm_ordempagamento_centrocusto">
-                    <mat-select placeholder="Centro de Custo" [(value)]="ordempagamento.id_centro_custo" tabindex="8">
+                    <mat-select placeholder="Centro de Custo" [(ngModel)]="ordempagamento.id_centro_custo" tabindex="8"
+                    [formControl]="valCentroCusto" [compareWith]="compareCentroCusto">
                       <mat-option *ngFor="let centrocusto of centrocustos" [value]="centrocusto.id">
                         {{ centrocusto.descricao }}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="valCentroCusto.invalid">{{getErrorMessage(valCentroCusto)}}</mat-error>
                   </mat-form-field>
                 </div>
                 <div fxFlex="350px" fxFlexAlign="start" fxFlexFill>
                   <mat-form-field class="frm_ordempagamento_servico">
-                    <mat-select placeholder="Serviço" [(value)]="ordempagamento.id_servico" tabindex="8">
+                    <mat-select placeholder="Serviço" [(ngModel)]="ordempagamento.id_servico" tabindex="8"
+                    [formControl]="valServico" [compareWith]="compareServico">
                       <mat-option *ngFor="let servico of servicos" [value]="servico.id">
                         {{ servico.descricao }}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="valServico.invalid">{{getErrorMessage(valServico)}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -111,7 +115,7 @@
               <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
                 <div fxFlex="350px" fxFlexAlign="start" fxFlexFill>
                   <mat-form-field class="frm_ordempagamento_usuarios">
-                    <mat-select placeholder="Contratante" [(value)]="ordempagamento.usuario_inclusao" tabindex="8">
+                    <mat-select placeholder="Contratante" [(value)]="ordempagamento.usuario_contratante" tabindex="8">
                       <mat-option *ngFor="let usuario of usuarios" [value]="usuario.name">
                         {{ usuario.name }}
                       </mat-option>
@@ -148,14 +152,23 @@
                   </div>
                 </div>
                 <div fxFlex="120px" fxFlexAlign="start" fxFlexFill>
-                    <div class="group">
-                      <input currencyMask type="text" class="atrainput2" [(ngModel)]="ordempagamento.valor_total" style="height: 25px; width: 105px;"
-                        tabindex="11" required>
-                      <span class="highlight"></span>
-                      <span class="bar"></span>
-                      <label class="atralabel2">Valor Total</label>
-                    </div>
+                  <div class="group">
+                    <input currencyMask type="text" class="atrainput2" [(ngModel)]="ordempagamento.valor_total" style="height: 25px; width: 105px;"
+                      tabindex="11" required>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label class="atralabel2">Valor Total</label>
                   </div>
+                </div>
+                <div fxFlex="150px" fxFlexAlign="start" fxFlexFill>
+                  <mat-form-field class="frm_ordempagamento_vencimento">
+                    <input matInput type="date" #dtNasc maxlength="10" placeholder="Vencimento" name="dtVencimento"
+                      tabindex="4" required [ngModel]="ordempagamento.vencimento" (ngModelChange)="ordempagamento.vencimento = $event"
+                      [value]="ordempagamento.vencimento | date:'yyyy-MM-dd'" [formControl]="valDtVencimento" id="dtVencimento">
+                    <mat-hint align="end">{{dtNasc.value?.length || 0}}/10</mat-hint>
+                    <mat-error *ngIf="valDtVencimento.invalid">{{getErrorMessage(valDtVencimento)}}</mat-error>
+                  </mat-form-field>
+                </div>
               </div>
             </div>
           </div>

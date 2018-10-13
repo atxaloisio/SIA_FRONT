@@ -30,4 +30,38 @@ export class OmieService {
       );
   }
 
+  getListContaCorrente(accessToken: string)  {
+    const listUrl = environment.urlbase + '/api/listcontacorrente';
+    const headers = new Headers({
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+    });
+
+    return this._http
+      .get(listUrl, { headers: headers })
+      .map((res: Response) => res)
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+  }
+
+  getListEmpresas()  {
+    const listUrl = environment.urlbase + '/api/listempresas';
+    // const headers = new Headers({
+    //   Accept: 'application/json',
+    //   Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+    // });
+
+    const headers = new Headers({
+      Accept: 'application/json'
+    });
+
+    return this._http
+      .get(listUrl, { headers: headers })
+      .map((res: Response) => res)
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+  }
+
 }

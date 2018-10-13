@@ -29,7 +29,7 @@ import { DsAprovacaoPagamento } from './dsaprovacaopagamento';
   styleUrls: ['./aprovacaopagamento-list.component.css']
 })
 export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'descricao'];
+  displayedColumns = ['id', 'descricao', 'servico', 'centrocusto', 'fornecedor', 'contratante', 'vencimento', 'valor_total'];
   // displayedColumns = ['id', 'codigo', 'descricao'];
   dataSource: DsAprovacaoPagamento | null;
   selectedRowIndex = -1;
@@ -40,6 +40,9 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
 
   idFilter = new FormControl();
   descricaoFilter = new FormControl();
+  servicoFilter = new FormControl();
+  centrocustoFilter = new FormControl();
+  fornecedorFilter = new FormControl();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -188,10 +191,16 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
 
     const idFilter$ = this.idFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const descricaoFilter$ = this.descricaoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
+    const servicoFilter$ = this.servicoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
+    const centrocustoFilter$ = this.centrocustoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
+    const fornecedorFilter$ = this.fornecedorFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$, descricaoFilter$).debounceTime(500).distinctUntilChanged().
+
+    Observable.combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
+      centrocustoFilter$, fornecedorFilter$).debounceTime(500).distinctUntilChanged().
     map(
-      ([id, descricao ]) => ({id, descricao})).subscribe(filter => {
+      ([id, descricao, servico, centrocusto, fornecedor]) =>
+      ({id, descricao, servico, centrocusto, fornecedor})).subscribe(filter => {
         if (!this.dataSource) { return; }
         this.dataSource.filter = filter;
       });

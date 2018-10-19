@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
     if ((!isNullOrUndefined(this.data.email)) &&
        (!isNullOrUndefined(this.data.password))) {
-        this.loginService.Login(this.data.email, this.data.password).subscribe(data => {
+        this.loginService.Login(this.data.email, this.data.password, this.data.id_empresa).subscribe(data => {
           // console.log(data);
           this.data.Usuario = data.usuario;
           this.data.Perfil = data.perfil;
@@ -75,8 +75,9 @@ export class LoginComponent implements OnInit {
   }
 
   setErroLogin(erro: any) {
-    if ((!isNullOrUndefined(erro.error)) && (isNullOrUndefined(erro.message))) {
-      this.msgErroLogin = erro.error + ' ' + erro.message;
+    // console.log(erro.message);
+    if ((!isNullOrUndefined(erro.error))) {
+      this.msgErroLogin = erro.error + ': ' + erro.message;
     } else {
       this.msgErroLogin = 'Não foi possivel se comunicar com o servidor';
     }

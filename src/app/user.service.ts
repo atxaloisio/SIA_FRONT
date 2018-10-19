@@ -26,11 +26,11 @@ export class UserService {
       );
   }
 
-  public resetPassword(accessToken: string, email: string): Observable<User[]> {
-    const urlreset = environment.urlbase + '/aclcontrol/reset';
+  public resetPassword(email: string): Observable<string> {
+    const urlreset = environment.urlbase + '/api/aclcontrol/reset';
     const headers = new Headers({
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+      Accept: 'application/json'
+      // Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
     });
 
     // const _params: HttpParams = new HttpParams();

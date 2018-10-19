@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
   }
 
   chamalogin() {
-    this.loginService.Login('atxaloisio@hotmail.com', 'mestre').subscribe(
+    this.loginService.Login('atxaloisio@hotmail.com', 'mestre', 1).subscribe(
       data => {
         console.log(data);
         this.Usuario = data.usuario;

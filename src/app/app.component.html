@@ -225,6 +225,10 @@
         <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
         <span>Alterar Usuário</span>
       </button>
+      <button mat-menu-item [routerLink]="['/usuariocentrocustos']" *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
+        <span>Usuário x Centro de Custo</span>
+      </button>
       <button mat-menu-item (click)="openChangePasswordtUsuario()">
         <mat-icon fontSet="fontawesome" fontIcon="fa-lock"></mat-icon>
         <i class="fa fa-exchange" aria-hidden="true"></i>

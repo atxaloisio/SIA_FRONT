@@ -11,7 +11,7 @@ export class LoginService {
 
   constructor(private _http: Http) { }
 
-  public Login(_email: string, _password: string) {
+  public Login(_email: string, _password: string, _id_empresa: number) {
     const headers = new Headers({
       'Content-Type': 'application/json',
       Accept: 'application/json'
@@ -19,7 +19,8 @@ export class LoginService {
 
     const postData = {
       email: _email,
-      password: _password
+      password: _password,
+      id_empresa: _id_empresa
     };
 
     return this._http.post(this.loginUrl, JSON.stringify(postData), {

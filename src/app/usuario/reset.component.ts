@@ -34,7 +34,7 @@ export class ResetComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 3000,
+      duration: 5000,
     });
   }
 
@@ -55,16 +55,17 @@ export class ResetComponent implements OnInit {
 
     if ((!isNullOrUndefined(this.data.email)) &&
        (!isNullOrUndefined(this.data.password))) {
-        this.loginService.Login(this.data.email, this.data.password).subscribe(data => {
+        this.userService.resetPassword(this.data.email).subscribe(data => {
           // console.log(data);
-          this.data.Usuario = data.usuario;
-          this.data.Perfil = data.perfil;
+          // this.data.Usuario = data.usuario;
+          // this.data.Perfil = data.perfil;
           // console.log(this.Usuario.name);
           // console.log(data.token);
           // this.getUsuarios(data.token);
-          this.data.token = data.token;
-          this.data.logado = data.logado;
+          // this.data.token = data.token;
+          // this.data.logado = data.logado;
           // this.emProcessamento = false;
+          this.openSnackBar(data , 'SIA');
           this.dialogLoginRef.close(this.data);
         },
           error => {

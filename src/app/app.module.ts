@@ -1,3 +1,4 @@
+import { UsuarioCentroCustoModule } from './usuariocentrocusto/usuariocentrocusto.module';
 import { OmieModule } from './omie/omie.module';
 import { CentroCustoModule } from './centrocusto/centrocusto.module';
 import { OrdemPagamentoModule } from './ordempagamento/ordempagamento.module';
@@ -112,6 +113,7 @@ import { PesagemModule } from './pesagem/pesagem.module';
     FuncaoModule,
     CentroCustoModule,
     OrdemPagamentoModule,
+    UsuarioCentroCustoModule,
     OmieModule,
     UpperCaseModule,
     AppRoutingModule

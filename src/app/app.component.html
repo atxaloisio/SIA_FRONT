@@ -162,11 +162,11 @@
       </button> -->
       <button mat-menu-item [routerLink]="['#']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
-        <span>Ordens de Pagamento</span>
+        <span>Listagem de Ordens de Pagamento</span>
       </button>
-      <button mat-menu-item [routerLink]="['#']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
+      <button mat-menu-item [routerLink]="['/relatorios/filtroordempagamento']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
-        <span>Recibos de Pagamento</span>
+        <span>Ordens de Pagamentos</span>
       </button>
     </mat-menu>
     <!-- <mat-menu #relatoriosgerenciais="matMenu" [overlapTrigger]="false">

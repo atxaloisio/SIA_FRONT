@@ -4,6 +4,7 @@ export interface OrdemPagamentoFilter {
   servico: string;
   centrocusto: string;
   fornecedor: string;
+  contratante: string;
 }
 export class OrdemPagamento {
   constructor(
@@ -25,6 +26,8 @@ export class OrdemPagamento {
     public usuario_alteracao: string = '',
     public aprovacao: Date = null,
     public usuario_aprovacao: string = '',
+    public reprovacao: Date = null,
+    public usuario_reprovacao: string = '',
     public servico: string = '',
     public centrocusto: string = '',
     public fornecedor: string = '',

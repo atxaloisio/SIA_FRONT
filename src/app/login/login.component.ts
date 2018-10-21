@@ -5,7 +5,7 @@ import { isNullOrUndefined } from 'util';
 import { isEmpty } from 'rxjs/operators';
 import { Data } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import {FormControl, Validators} from '@angular/forms';
 import { OmieService } from '../omie/omie.service';
 import { Empresa } from '../omie/empresa';
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService,
     private _omieService: OmieService,
+    private _snackBar: MatSnackBar,
     public dialogLoginRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -37,6 +38,12 @@ export class LoginComponent implements OnInit {
         this.empresas = JSON.parse(data._body);
       }
     );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 
   onEntrarClick(): void {
@@ -65,6 +72,13 @@ export class LoginComponent implements OnInit {
           // this.getUsuarios(data.token);
           this.data.token = data.token;
           this.data.logado = data.logado;
+          if (data.aprov_pendentes > 0) {
+            if (data.aprov_pendentes > 1) {
+              this.openSnackBar('Você possui ' + data.aprov_pendentes + ' ordens de pagamento pendentes para aprovação' , 'SIA');
+            } else {
+              this.openSnackBar('Você possui ' + data.aprov_pendentes + ' ordem de pagamento pendente para aprovação' , 'SIA');
+            }
+          }
           // this.emProcessamento = false;
           this.dialogLoginRef.close(this.data);
         },

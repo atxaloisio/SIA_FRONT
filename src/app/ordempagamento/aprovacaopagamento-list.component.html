@@ -6,6 +6,10 @@
           <mat-icon>done</mat-icon>
           <span>Aprovar</span>
         </button>
+        <button id="btnExcluir" mat-raised-button color="primary" style="width: 100%" (click)="btnReprovar_click()">
+          <mat-icon>report_problem</mat-icon>
+          <span>Reprovar</span>
+        </button>
         <!-- <button id="btnIncluir" mat-raised-button color="primary" style="width: 100%" (click)="btnIncluir_click()">
           <mat-icon>insert_drive_file</mat-icon>
           <span>Incluir</span>
@@ -27,13 +31,13 @@
     <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
       <div fxFlex="33px" fxFlexAlign="start" style="padding: 10px;">
         <button id="lblTitulo" mat-raised-button style="width: 100%" disabled>
-          <i class="fa fa-leaf" aria-hidden="true"></i>
-          <span>APROVAÇÃO DE ORDENS DE PAGAMENTO</span>
+          <!-- <i class="fa fa-leaf" aria-hidden="true"></i> -->
+          <span>APROVAÇÃO / REPROVAÇÃO DE ORDENS DE PAGAMENTO</span>
         </button>
       </div>
-      <div fxFlex="47px" fxFlexAlign="start" style="width: 100%">
-        <table>
-          <tr>
+      <div fxFlex="60px" fxFlexAlign="start" style="width: 100%; overflow-x: auto; overflow-y: hidden;">
+        <table style="height: 60px">
+          <tr style="height: 60px">
             <td>
               <mat-form-field class="mat-column-id" style="margin-left: 5px">
                 <input matInput #filter placeholder="Código" [formControl]="idFilter" (keypress)="onlyNumber($event)">
@@ -45,6 +49,30 @@
                 <input matInput uppercase #filter placeholder="Descrição" [formControl]="descricaoFilter">
               </mat-form-field>
             </td>
+            <td class="mat-column-servico">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-servico">
+                <input matInput uppercase #filter placeholder="Serviço" [formControl]="servicoFilter">
+              </mat-form-field>
+            </td>
+            <td class="mat-column-centrocusto">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-centrocusto">
+                <input matInput uppercase #filter placeholder="Centro de Custo" [formControl]="centrocustoFilter">
+              </mat-form-field>
+            </td>
+            <td class="mat-column-fornecedor">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-fornecedor">
+                <input matInput uppercase #filter placeholder="Fornecedor" [formControl]="fornecedorFilter">
+              </mat-form-field>
+            </td>
+            <td class="mat-column-contratante">
+              <!-- style="width: 500px" -->
+              <mat-form-field class="mat-column-contratante">
+                <input matInput #filter upercase placeholder="Contratante" [formControl]="contratanteFilter">
+              </mat-form-field>
+            </td>
           </tr>
         </table>
       </div>
@@ -54,6 +82,18 @@
       </div>
       <div fxFlex="400px" fxFlexAlign="start" style="width: 100%">
         <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
@@ -101,7 +141,8 @@
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)" (dblclick)="dblck(row)"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}"
+            (click)="highlight(row)" (dblclick)="dblck(row)"></mat-row>
         </mat-table>
         <mat-paginator #paginator [length]="dataSource.nrRegistros" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 15, 25, 100]">
         </mat-paginator>

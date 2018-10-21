@@ -1,3 +1,4 @@
+import { OrdemPagamento } from './../ordempagamento/ordempagamento';
 import { FiltroPesagem } from './filtropesagem';
 import { environment } from './../../environments/environment';
 import { isEmpty } from 'rxjs/operators';
@@ -14,7 +15,19 @@ import * as moment from 'moment';
 
 @Injectable()
 export class RelatorioService {
+
+  private ordempagamentos: OrdemPagamento[];
   private relatorioUrl = environment.urlbase + '/api/relatorios';
+
+  public setOrdemPagamentos(_ordempagamentos: OrdemPagamento[]) {
+    this.ordempagamentos = new Array<OrdemPagamento>();
+    this.ordempagamentos.length = 0;
+    this.ordempagamentos = _ordempagamentos;
+  }
+
+  public getOrdemPagamentos(): OrdemPagamento[] {
+    return this.ordempagamentos;
+  }
 
   constructor(private _http: Http, private _httpClient: HttpClient) {}
 

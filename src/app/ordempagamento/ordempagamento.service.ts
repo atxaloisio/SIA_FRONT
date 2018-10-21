@@ -94,7 +94,7 @@ export class OrdemPagamentoService {
 
   }
 
-  aprovarOrdemPagamento(accessToken: string, _id: number): Observable<any> {
+  aprovarOrdemPagamento(accessToken: string, _ordempagamentos: OrdemPagamento[]): Observable<any> {
     let usuario: User;
     const urlAprov = environment.urlbase + '/api/aprovacaopagamentos';
     const headers = new Headers({
@@ -106,16 +106,61 @@ export class OrdemPagamentoService {
       usuario = JSON.parse(localStorage.getItem('currentUser'));
     }
 
-    // const _params: HttpParams = new HttpParams();
+    _ordempagamentos.forEach( row => {
+      row.usuario_aprovacao = usuario.name;
+    });
+
     const _body = {
-      id: _id,
-      aprovacao: moment(Date.now()).format('YYYY-MM-DD') ,
-      usuario_aprovacao: usuario.name
+      data: _ordempagamentos
     };
+
+    // const _params: HttpParams = new HttpParams();
+    // const _body = {
+    //   id: _id,
+    //   aprovacao: moment(Date.now()).format('YYYY-MM-DD') ,
+    //   usuario_aprovacao: usuario.name
+    // };
     // _params.set('id', _id.toString());
 
     return this._http
-      .put(urlAprov + '/' + _id.toString(), _body, { headers: headers })
+      .post(urlAprov, _body, { headers: headers })
+      .map((res: Response) => res.json())
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+
+  }
+
+  reprovarOrdemPagamento(accessToken: string, _ordempagamentos: OrdemPagamento[]): Observable<any> {
+    let usuario: User;
+    const urlAprov = environment.urlbase + '/api/reprovacaopagamentos';
+    const headers = new Headers({
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+    });
+
+    if (sessionStorage.getItem('Logado')) {
+      usuario = JSON.parse(localStorage.getItem('currentUser'));
+    }
+
+    _ordempagamentos.forEach( row => {
+      row.usuario_reprovacao = usuario.name;
+    });
+
+    const _body = {
+      data: _ordempagamentos
+    };
+
+    // const _params: HttpParams = new HttpParams();
+    // const _body = {
+    //   id: _id,
+    //   aprovacao: moment(Date.now()).format('YYYY-MM-DD') ,
+    //   usuario_aprovacao: usuario.name
+    // };
+    // _params.set('id', _id.toString());
+
+    return this._http
+      .post(urlAprov, _body, { headers: headers })
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
@@ -188,6 +233,22 @@ export class OrdemPagamentoService {
       search.set('descricao', filter.descricao);
     }
 
+    if ((!isNullOrUndefined(filter.servico)) && (filter.servico.length > 0)) {
+      search.set('servico', filter.servico);
+    }
+
+    if ((!isNullOrUndefined(filter.centrocusto)) && (filter.centrocusto.length > 0)) {
+      search.set('centrocusto', filter.centrocusto);
+    }
+
+    if ((!isNullOrUndefined(filter.fornecedor)) && (filter.fornecedor.length > 0)) {
+      search.set('fornecedor', filter.fornecedor);
+    }
+
+    if ((!isNullOrUndefined(filter.contratante)) && (filter.contratante.length > 0)) {
+      search.set('contratante', filter.contratante);
+    }
+
     return this._http
       .get(this.ordempagamentoUrl, { headers: headers, search: search })
       .map((res: Response) => res.json())
@@ -232,6 +293,22 @@ export class OrdemPagamentoService {
 
   if ((!isNullOrUndefined(filter.descricao)) && (filter.descricao.length > 0)) {
     search.set('descricao', filter.descricao);
+  }
+
+  if ((!isNullOrUndefined(filter.servico)) && (filter.servico.length > 0)) {
+    search.set('servico', filter.servico);
+  }
+
+  if ((!isNullOrUndefined(filter.centrocusto)) && (filter.centrocusto.length > 0)) {
+    search.set('centrocusto', filter.centrocusto);
+  }
+
+  if ((!isNullOrUndefined(filter.fornecedor)) && (filter.fornecedor.length > 0)) {
+    search.set('fornecedor', filter.fornecedor);
+  }
+
+  if ((!isNullOrUndefined(filter.contratante)) && (filter.contratante.length > 0)) {
+    search.set('contratante', filter.contratante);
   }
 
   return this._http

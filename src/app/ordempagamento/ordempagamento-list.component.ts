@@ -42,6 +42,7 @@ export class OrdemPagamentoListComponent implements OnInit, AfterViewInit {
   servicoFilter = new FormControl();
   centrocustoFilter = new FormControl();
   fornecedorFilter = new FormControl();
+  contratanteFilter = new FormControl();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -167,13 +168,13 @@ export class OrdemPagamentoListComponent implements OnInit, AfterViewInit {
     const servicoFilter$ = this.servicoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const centrocustoFilter$ = this.centrocustoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const fornecedorFilter$ = this.fornecedorFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
-
+    const contratanteFilter$ = this.contratanteFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
     Observable.combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
-      centrocustoFilter$, fornecedorFilter$).debounceTime(500).distinctUntilChanged().
+      centrocustoFilter$, fornecedorFilter$, contratanteFilter$).debounceTime(500).distinctUntilChanged().
     map(
-      ([id, descricao, servico, centrocusto, fornecedor]) =>
-      ({id, descricao, servico, centrocusto, fornecedor})).subscribe(filter => {
+      ([id, descricao, servico, centrocusto, fornecedor, contratante]) =>
+      ({id, descricao, servico, centrocusto, fornecedor, contratante})).subscribe(filter => {
         if (!this.dataSource) { return; }
         this.dataSource.filter = filter;
       });

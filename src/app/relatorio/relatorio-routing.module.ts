@@ -1,3 +1,4 @@
+import { FiltroOrdemPagamentoListComponent } from './filtroordempagamento-list.component';
 import { MapaResiduoFormComponent } from './maparesiduo-form.component';
 import { FiltroMapaResiduoFormComponent } from './filtromaparesiduo-form.component';
 import { RelatorioFormComponent } from './relatorio-form.component';
@@ -11,6 +12,7 @@ import { AuthGuard } from './../auth-guard';
 import { NgModule } from '@angular/core';
 import { ReceitaFormComponent } from './receita-form.component';
 import { Routes, RouterModule } from '@angular/router';
+import { RelatorioOrdemFormComponent } from './relatorioordem-form.component';
 
 const routes: Routes = [
   { path: 'relatorios/gerencial', component: FiltroRelatorioFormComponent, canActivate: [AuthGuard] },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'relatorios/pesagemreport', component: RelatorioPesagemFormComponent, canActivate: [AuthGuard] },
   { path: 'relatorios/maparesiduos', component: FiltroMapaResiduoFormComponent, canActivate: [AuthGuard] },
   { path: 'relatorios/relmaparesiduos', component: MapaResiduoFormComponent, canActivate: [AuthGuard] },
+  { path: 'relatorios/ordempagamento', component: RelatorioOrdemFormComponent, canActivate: [AuthGuard] },
+  { path: 'relatorios/filtroordempagamento', component: FiltroOrdemPagamentoListComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

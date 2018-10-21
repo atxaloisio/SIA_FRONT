@@ -1,3 +1,5 @@
+import { UpperCaseModule } from './../uppercase/uppercase.module';
+import { RelatorioOrdemFormComponent } from './relatorioordem-form.component';
 import { MapaResiduoFormComponent } from './maparesiduo-form.component';
 import { FiltroMapaResiduoFormComponent } from './filtromaparesiduo-form.component';
 import { RelatorioFormComponent } from './relatorio-form.component';
@@ -20,6 +22,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RelatorioRoutingModule } from './relatorio-routing.module';
+import { FiltroOrdemPagamentoListComponent } from './filtroordempagamento-list.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,8 @@ import { RelatorioRoutingModule } from './relatorio-routing.module';
     MatNativeDateModule,
     ReactiveFormsModule,
     DatepipeModule,
-    RelatorioRoutingModule
+    RelatorioRoutingModule,
+    UpperCaseModule
   ],
   declarations: [
     ReceitaFormComponent,
@@ -45,7 +49,9 @@ import { RelatorioRoutingModule } from './relatorio-routing.module';
     FiltroPesagemFormComponent,
     RelatorioPesagemFormComponent,
     FiltroMapaResiduoFormComponent,
-    MapaResiduoFormComponent
+    MapaResiduoFormComponent,
+    RelatorioOrdemFormComponent,
+    FiltroOrdemPagamentoListComponent
   ],
   providers: [RelatorioService]
 })

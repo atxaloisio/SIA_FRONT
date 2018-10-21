@@ -2,9 +2,7 @@ import { Router } from '@angular/router';
 import { DialogService } from './../dialog/dialog.service';
 import { by } from 'protractor';
 import { FormControl } from '@angular/forms';
-import { DsOrdemPagamento } from './dsordempagamento';
 import { TokenManagerService } from './../token-manager.service';
-import { OrdemPagamentoService } from './ordempagamento.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -18,20 +16,22 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { OrdemPagamento } from './ordempagamento';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
-import { DsAprovacaoPagamento } from './dsaprovacaopagamento';
+import { DsFiltroOrdemPagamento } from './dsfiltroordempagamento';
+import { OrdemPagamento } from '../ordempagamento/ordempagamento';
+import { RelatorioService } from './relatorio.service';
+import { OrdemPagamentoService } from '../ordempagamento/ordempagamento.service';
 
 @Component({
-  selector: 'app-aprovacaopagamento',
-  templateUrl: './aprovacaopagamento-list.component.html',
-  styleUrls: ['./aprovacaopagamento-list.component.css']
+  selector: 'app-filtroordempagamento',
+  templateUrl: './filtroordempagamento-list.component.html',
+  styleUrls: ['./filtroordempagamento-list.component.css']
 })
-export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
+export class FiltroOrdemPagamentoListComponent implements OnInit, AfterViewInit {
   displayedColumns = ['select', 'id', 'descricao', 'servico', 'centrocusto', 'fornecedor', 'contratante', 'vencimento', 'valor_total'];
   // displayedColumns = ['id', 'codigo', 'descricao'];
-  dataSource: DsAprovacaoPagamento | null;
+  dataSource: DsFiltroOrdemPagamento | null;
   selectedRowIndex = -1;
   selectedRow: any | null;
   ordempagamentos: OrdemPagamento[];
@@ -59,6 +59,7 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
 
   constructor(private _ordempagamentoService: OrdemPagamentoService,
               private _tokenManager: TokenManagerService,
+              public _relatorioService: RelatorioService,
               private dialog: DialogService,
               private _router: Router) {}
 
@@ -107,6 +108,10 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
   btnExcluir_click() {
     this.excluirRegistro();
   }
+
+  btnFiltrar_click() {
+    this.filtrarRegistro();
+  }
   //#endregion
 
  /**
@@ -132,6 +137,13 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
       this.ngOnInit();
       this.selectedRowIndex = -1;
       this.selectedRow = null;
+    }
+  }
+
+  filtrarRegistro() {
+    if (this.selection.selected.length > 0) {
+      this._relatorioService.setOrdemPagamentos(this.selection.selected);
+      this._router.navigate(['/relatorios/ordempagamento']);
     }
   }
 
@@ -223,7 +235,7 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
 
     this.isLoadingResults = false;
 
-    this.dataSource = new DsAprovacaoPagamento(this._tokenManager, this._ordempagamentoService, this.paginator, this.sort);
+    this.dataSource = new DsFiltroOrdemPagamento(this._tokenManager, this._ordempagamentoService, this.paginator, this.sort);
     this.selection.clear();
     this.dataSource.data = new Array<OrdemPagamento>();
 

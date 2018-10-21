@@ -1,5 +1,4 @@
 import { TokenManagerService } from './../token-manager.service';
-import { OrdemPagamentoService } from './ordempagamento.service';
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -13,16 +12,17 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { OrdemPagamento, OrdemPagamentoFilter } from './ordempagamento';
+import { OrdemPagamento, OrdemPagamentoFilter } from '../ordempagamento/ordempagamento';
+import { OrdemPagamentoService } from '../ordempagamento/ordempagamento.service';
 
-export class DsAprovacaoPagamento extends DataSource<OrdemPagamento> {
+export class DsFiltroOrdemPagamento extends DataSource<OrdemPagamento> {
   _filterChange = new BehaviorSubject( {
     id: '',
     descricao: '',
     servico: '',
     centrocusto: '',
     fornecedor: '',
-    contratante: '',
+    contratante: ''
   } );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -66,7 +66,7 @@ export class DsAprovacaoPagamento extends DataSource<OrdemPagamento> {
     .switchMap(() => {
       // this.isLoadingResults = true;
       this.onChange.emit(true);
-      return this._ordempagamentoService.getAprovacaoPagamentos(this._tokenManager.retrieve(),
+      return this._ordempagamentoService.getOrdemPagamentos(this._tokenManager.retrieve(),
         this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter);
     })
     .retry(3)

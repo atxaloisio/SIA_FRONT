@@ -21,7 +21,8 @@ export class DsOrdemPagamento extends DataSource<OrdemPagamento> {
     descricao: '',
     servico: '',
     centrocusto: '',
-    fornecedor: ''
+    fornecedor: '',
+    contratante: ''
   } );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();

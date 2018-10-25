@@ -1,5 +1,5 @@
 import { TokenManagerService } from './../token-manager.service';
-import { FornecedorService } from './fornecedor.service';
+import { UsuarioEmpresaService } from './usuarioempresa.service';
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -13,23 +13,20 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { Fornecedor, FornecedorFilter } from './fornecedor';
+import { UsuarioEmpresa, UsuarioEmpresaFilter } from './usuarioempresa';
 
-export class DsFornecedor extends DataSource<Fornecedor> {
-  _filterChange = new BehaviorSubject( {id: '', codigo_omie: '', cnpj_cpf: '', razao_social: '', contato: '', telefone: '', email: '',
-  inativo: false} );
+export class DsUsuarioEmpresa extends DataSource<UsuarioEmpresa> {
+  _filterChange = new BehaviorSubject( {id: '', descricao: '', id_usuario: null} );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  get filter(): FornecedorFilter {
+  get filter(): UsuarioEmpresaFilter {
     return this._filterChange.value;
   }
 
-  set filter(filter: FornecedorFilter) {
+  set filter(filter: UsuarioEmpresaFilter) {
     this._filterChange.next(filter);
   }
-
-  public filtraAtivos = false;
 
   resultsLength = 0;
   // isLoadingResults: boolean;
@@ -40,16 +37,16 @@ export class DsFornecedor extends DataSource<Fornecedor> {
   registroDe: number;
   registroAte: number;
   nrRegistros: number;
+  data: UsuarioEmpresa[];
 
   constructor(private _tokenManager: TokenManagerService,
-              private _fornecedorService: FornecedorService,
+              private _usuarioempresaService: UsuarioEmpresaService,
               private _paginator: MatPaginator,
               private _sort: MatSort) {
     super();
     this.onChange.emit(false);
-    this.nrRegistros = 0;
   }
-  connect(): Observable<Fornecedor[]> {
+  connect(): Observable<UsuarioEmpresa[]> {
     const displayDataChanges = [
       this._sort.sortChange,
       this._paginator.page,
@@ -62,8 +59,8 @@ export class DsFornecedor extends DataSource<Fornecedor> {
     .switchMap(() => {
       // this.isLoadingResults = true;
       this.onChange.emit(true);
-      return this._fornecedorService.getFornecedors(this._tokenManager.retrieve(),
-        this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter, this.filtraAtivos);
+      return this._usuarioempresaService.getUsuarioEmpresas(this._tokenManager.retrieve(),
+        this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter);
     })
     .retry(3)
     .map(data => {
@@ -71,10 +68,11 @@ export class DsFornecedor extends DataSource<Fornecedor> {
       // this.isLoadingResults = false;
       this.onChange.emit(false);
       this.paginaInicial = 1;
-      this.paginaFinal = data.meta.last_page;
-      this.registroDe = data.meta.from;
-      this.registroAte = data.meta.to;
-      this.nrRegistros = data.meta.total;
+      this.paginaFinal = data.last_page;
+      this.registroDe = data.from;
+      this.registroAte = data.to;
+      this.nrRegistros = data.total;
+      this.data = data.data;
       return data.data;
     })
     .catch(err => {

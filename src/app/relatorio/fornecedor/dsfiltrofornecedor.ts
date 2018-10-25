@@ -1,5 +1,3 @@
-import { TokenManagerService } from './../token-manager.service';
-import { FornecedorService } from './fornecedor.service';
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -13,9 +11,11 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { Fornecedor, FornecedorFilter } from './fornecedor';
+import { Fornecedor, FornecedorFilter } from '../../fornecedor/fornecedor';
+import { TokenManagerService } from '../../token-manager.service';
+import { FornecedorService } from '../../fornecedor/fornecedor.service';
 
-export class DsFornecedor extends DataSource<Fornecedor> {
+export class DsFiltroFornecedor extends DataSource<Fornecedor> {
   _filterChange = new BehaviorSubject( {id: '', codigo_omie: '', cnpj_cpf: '', razao_social: '', contato: '', telefone: '', email: '',
   inativo: false} );
 
@@ -40,6 +40,7 @@ export class DsFornecedor extends DataSource<Fornecedor> {
   registroDe: number;
   registroAte: number;
   nrRegistros: number;
+  data: Fornecedor[];
 
   constructor(private _tokenManager: TokenManagerService,
               private _fornecedorService: FornecedorService,
@@ -47,7 +48,6 @@ export class DsFornecedor extends DataSource<Fornecedor> {
               private _sort: MatSort) {
     super();
     this.onChange.emit(false);
-    this.nrRegistros = 0;
   }
   connect(): Observable<Fornecedor[]> {
     const displayDataChanges = [
@@ -75,6 +75,7 @@ export class DsFornecedor extends DataSource<Fornecedor> {
       this.registroDe = data.meta.from;
       this.registroAte = data.meta.to;
       this.nrRegistros = data.meta.total;
+      this.data = data.data;
       return data.data;
     })
     .catch(err => {

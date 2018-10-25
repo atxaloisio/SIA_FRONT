@@ -61,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { CanDeactivateGuard } from './can-deactivate-guard.service';
 import { PesagemModule } from './pesagem/pesagem.module';
+import { UsuarioEmpresaModule } from './usuarioempresa/usuarioempresa.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,6 +115,7 @@ import { PesagemModule } from './pesagem/pesagem.module';
     CentroCustoModule,
     OrdemPagamentoModule,
     UsuarioCentroCustoModule,
+    UsuarioEmpresaModule,
     OmieModule,
     UpperCaseModule,
     AppRoutingModule

@@ -1,41 +1,23 @@
-import { environment } from './../../environments/environment';
-import { HttpErrorResponse } from '@angular/common/http';
-import { isNullOrUndefined } from 'util';
-import { DialogService } from './../dialog/dialog.service';
-import { TokenManagerService } from './../token-manager.service';
-import { Component, OnInit, AfterViewInit, AfterViewChecked, LOCALE_ID } from '@angular/core';
-import { Router, Data } from '@angular/router';
-import { by, element } from 'protractor';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { ChangeDetectorRef, ViewChildren, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-import { OnlyNumberDirective } from './../only-number.directive';
-import { ActivatedRoute, Params } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
-import { Cliente } from '../cliente/cliente';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, DateAdapter, MAT_DATE_LOCALE,
-         MAT_DATE_FORMATS,  FloatPlaceholderType } from '@angular/material';
-import { Servico } from '../servico/servico';
-import { FormBuilder, FormGroup} from '@angular/forms';
-import { ContratoFornecedor } from '../contratofornecedor/contratofornecedor';
-import { RelatorioService } from './relatorio.service';
-import { FiltroRelatorio } from './filtrorelatorio';
-import * as jsPDF from 'jspdf';
-import * as FileSaver from 'file-saver';
-import { OrdemPagamento } from '../ordempagamento/ordempagamento';
+import { ViewChildren, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { OrdemPagamento } from '../../ordempagamento/ordempagamento';
+import { RelatorioService } from '../relatorio.service';
 
 @Component({
-  selector: 'app-relatorioordem-form',
-  templateUrl: './relatorioordem-form.component.html',
-  styleUrls: ['./relatorioordem-form.component.css'],
+  selector: 'app-relatoriolistagemordem-form',
+  templateUrl: './relatoriolistagemordem-form.component.html',
+  styleUrls: ['./relatoriolistagemordem-form.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RelatorioOrdemFormComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class RelatorioListagemOrdemFormComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   // relatorio: Relatorio;
   emProcessamento = false;
@@ -48,11 +30,7 @@ export class RelatorioOrdemFormComponent implements OnInit, AfterViewInit, After
   @ViewChild('focuscomp') focuscomp: ElementRef;
   @ViewChild('relatorio') el: ElementRef;
 
-  constructor(private _relatorioService: RelatorioService,
-    private _tokenManager: TokenManagerService,
-    private _route: ActivatedRoute,
-    private dialog: DialogService,
-    private pesquisa: MatDialog) {}
+  constructor(private _relatorioService: RelatorioService) {}
 
   ngOnInit() {
     this.emProcessamento = true;
@@ -149,21 +127,21 @@ export class RelatorioOrdemFormComponent implements OnInit, AfterViewInit, After
 
 
 
-  validaSaida(event: string) {
+  validaSaida() {
     // if (event === '') {
     //   this.relatorio.id_cliente = null;
     //   this.relatorio.cliente = '';
     // }
   }
 
-  validaSaidaManifesto(event: string) {
+  validaSaidaManifesto() {
     // if (event === '') {
     //   this.relatorio.id_manifesto = null;
     //   this.relatorio.manifesto = '';
     // }
   }
 
-  buscaCliente(event: any) {
+  buscaCliente() {
     // let cliente: Cliente;
     // if (event.id) {
     //   this._clienteService
@@ -182,7 +160,7 @@ export class RelatorioOrdemFormComponent implements OnInit, AfterViewInit, After
     // }
   }
 
-  buscaManifesto(event: any) {
+  buscaManifesto() {
     // let manifesto: Manifesto;
     // if (event.id) {
     //   this._manifestoService

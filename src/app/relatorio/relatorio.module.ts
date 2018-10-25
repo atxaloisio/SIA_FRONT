@@ -1,5 +1,9 @@
+import { EscolaridadeModule } from './../Escolaridade/escolaridade.module';
+import { RacaModule } from './../Raca/raca.module';
+import { EstadoCivilModule } from './../EstadoCivil/estado-civil.module';
+import { UtilitarioModule } from './../utilitario/utilitario.module';
 import { UpperCaseModule } from './../uppercase/uppercase.module';
-import { RelatorioOrdemFormComponent } from './relatorioordem-form.component';
+import { RelatorioOrdemFormComponent } from './ordempagamento/relatorioordem-form.component';
 import { MapaResiduoFormComponent } from './maparesiduo-form.component';
 import { FiltroMapaResiduoFormComponent } from './filtromaparesiduo-form.component';
 import { RelatorioFormComponent } from './relatorio-form.component';
@@ -22,7 +26,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RelatorioRoutingModule } from './relatorio-routing.module';
-import { FiltroOrdemPagamentoListComponent } from './filtroordempagamento-list.component';
+import { FiltroOrdemPagamentoListComponent } from './ordempagamento/filtroordempagamento-list.component';
+import { FiltroListagemOrdemPagamentoListComponent } from './ordempagamento/filtrolistagemordempagamento-list.component';
+import { RelatorioListagemOrdemFormComponent } from './ordempagamento/relatoriolistagemordem-form.component';
+import { FiltroFornecedorListComponent } from './fornecedor/filtrofornecedor-list.component';
+import { RelatorioFornecedorFormComponent } from './fornecedor/relatoriofornecedor-form.component';
 
 @NgModule({
   imports: [
@@ -36,6 +44,10 @@ import { FiltroOrdemPagamentoListComponent } from './filtroordempagamento-list.c
     MatNativeDateModule,
     ReactiveFormsModule,
     DatepipeModule,
+    EstadoCivilModule,
+    RacaModule,
+    EscolaridadeModule,
+    UtilitarioModule,
     RelatorioRoutingModule,
     UpperCaseModule
   ],
@@ -51,7 +63,11 @@ import { FiltroOrdemPagamentoListComponent } from './filtroordempagamento-list.c
     FiltroMapaResiduoFormComponent,
     MapaResiduoFormComponent,
     RelatorioOrdemFormComponent,
-    FiltroOrdemPagamentoListComponent
+    FiltroOrdemPagamentoListComponent,
+    FiltroListagemOrdemPagamentoListComponent,
+    RelatorioListagemOrdemFormComponent,
+    FiltroFornecedorListComponent,
+    RelatorioFornecedorFormComponent
   ],
   providers: [RelatorioService]
 })

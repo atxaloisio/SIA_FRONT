@@ -1,3 +1,4 @@
+import { Fornecedor } from './../fornecedor/fornecedor';
 import { OrdemPagamento } from './../ordempagamento/ordempagamento';
 import { FiltroPesagem } from './filtropesagem';
 import { environment } from './../../environments/environment';
@@ -17,6 +18,8 @@ import * as moment from 'moment';
 export class RelatorioService {
 
   private ordempagamentos: OrdemPagamento[];
+  private _fornecedores: Fornecedor[];
+
   private relatorioUrl = environment.urlbase + '/api/relatorios';
 
   public setOrdemPagamentos(_ordempagamentos: OrdemPagamento[]) {
@@ -27,6 +30,13 @@ export class RelatorioService {
 
   public getOrdemPagamentos(): OrdemPagamento[] {
     return this.ordempagamentos;
+  }
+
+  public get Fornecedores(): Fornecedor[] {
+    return this._fornecedores;
+  }
+  public set Fornecedores(value: Fornecedor[]) {
+    this._fornecedores = value;
   }
 
   constructor(private _http: Http, private _httpClient: HttpClient) {}

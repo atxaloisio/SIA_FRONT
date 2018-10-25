@@ -160,12 +160,16 @@
         <mat-icon fontSet="fontawesome" fontIcon="fa-list-alt"></mat-icon>
         <span>Mapa de Resíduos</span>
       </button> -->
-      <button mat-menu-item [routerLink]="['#']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-        <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
+      <button mat-menu-item [routerLink]="['/relatorios/fornecedor']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
+        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon> -->
+        <span>Listagem de Fornecedores</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/relatorios/filtrolistagemordempagamento']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
+        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon> -->
         <span>Listagem de Ordens de Pagamento</span>
       </button>
       <button mat-menu-item [routerLink]="['/relatorios/filtroordempagamento']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-        <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon>
+        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-dollar"></mat-icon> -->
         <span>Ordens de Pagamentos</span>
       </button>
     </mat-menu>
@@ -226,8 +230,12 @@
         <span>Alterar Usuário</span>
       </button>
       <button mat-menu-item [routerLink]="['/usuariocentrocustos']" *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'">
-        <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
+        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon> -->
         <span>Usuário x Centro de Custo</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/usuarioempresas']" *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'">
+        <!-- <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon> -->
+        <span>Usuário x Empresa</span>
       </button>
       <button mat-menu-item (click)="openChangePasswordtUsuario()">
         <mat-icon fontSet="fontawesome" fontIcon="fa-lock"></mat-icon>

@@ -1,4 +1,4 @@
-import { TokenManagerService } from './../token-manager.service';
+
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -12,10 +12,12 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { OrdemPagamento, OrdemPagamentoFilter } from '../ordempagamento/ordempagamento';
-import { OrdemPagamentoService } from '../ordempagamento/ordempagamento.service';
+import { OrdemPagamento, OrdemPagamentoFilter } from '../../ordempagamento/ordempagamento';
+import { TokenManagerService } from '../../token-manager.service';
+import { OrdemPagamentoService } from '../../ordempagamento/ordempagamento.service';
 
-export class DsFiltroOrdemPagamento extends DataSource<OrdemPagamento> {
+
+export class DsFiltroListagemOrdemPagamento extends DataSource<OrdemPagamento> {
   _filterChange = new BehaviorSubject( {
     id: '',
     descricao: '',

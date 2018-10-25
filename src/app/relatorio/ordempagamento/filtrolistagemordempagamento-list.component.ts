@@ -1,8 +1,6 @@
 import { Router } from '@angular/router';
-import { DialogService } from './../dialog/dialog.service';
 import { by } from 'protractor';
 import { FormControl } from '@angular/forms';
-import { TokenManagerService } from './../token-manager.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -17,21 +15,22 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { OnlyNumberDirective } from './../only-number.directive';
-import { DsFiltroOrdemPagamento } from './dsfiltroordempagamento';
-import { OrdemPagamento } from '../ordempagamento/ordempagamento';
-import { RelatorioService } from './relatorio.service';
-import { OrdemPagamentoService } from '../ordempagamento/ordempagamento.service';
+import { DsFiltroListagemOrdemPagamento } from './dsfiltrolistagemordempagamento';
+import { OrdemPagamento } from '../../ordempagamento/ordempagamento';
+import { OrdemPagamentoService } from '../../ordempagamento/ordempagamento.service';
+import { TokenManagerService } from '../../token-manager.service';
+import { RelatorioService } from '../relatorio.service';
+import { DialogService } from '../../dialog/dialog.service';
 
 @Component({
-  selector: 'app-filtroordempagamento',
-  templateUrl: './filtroordempagamento-list.component.html',
-  styleUrls: ['./filtroordempagamento-list.component.css']
+  selector: 'app-filtrolistagemordempagamento',
+  templateUrl: './filtrolistagemordempagamento-list.component.html',
+  styleUrls: ['./filtrolistagemordempagamento-list.component.css']
 })
-export class FiltroOrdemPagamentoListComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['select', 'id', 'descricao', 'servico', 'centrocusto', 'fornecedor', 'contratante', 'vencimento', 'valor_total'];
+export class FiltroListagemOrdemPagamentoListComponent implements OnInit, AfterViewInit {
+  displayedColumns = ['id', 'descricao', 'servico', 'centrocusto', 'fornecedor', 'contratante', 'vencimento', 'valor_total'];
   // displayedColumns = ['id', 'codigo', 'descricao'];
-  dataSource: DsFiltroOrdemPagamento | null;
+  dataSource: DsFiltroListagemOrdemPagamento | null;
   selectedRowIndex = -1;
   selectedRow: any | null;
   ordempagamentos: OrdemPagamento[];
@@ -141,9 +140,9 @@ export class FiltroOrdemPagamentoListComponent implements OnInit, AfterViewInit 
   }
 
   filtrarRegistro() {
-    if (this.selection.selected.length > 0) {
-      this._relatorioService.setOrdemPagamentos(this.selection.selected);
-      this._router.navigate(['/relatorios/ordempagamento']);
+    if (this.dataSource.data.length > 0) {
+      this._relatorioService.setOrdemPagamentos(this.dataSource.data);
+      this._router.navigate(['/relatorios/listagemordempagamento']);
     }
   }
 
@@ -235,7 +234,7 @@ export class FiltroOrdemPagamentoListComponent implements OnInit, AfterViewInit 
 
     this.isLoadingResults = false;
 
-    this.dataSource = new DsFiltroOrdemPagamento(this._tokenManager, this._ordempagamentoService, this.paginator, this.sort);
+    this.dataSource = new DsFiltroListagemOrdemPagamento(this._tokenManager, this._ordempagamentoService, this.paginator, this.sort);
     this.selection.clear();
     this.dataSource.data = new Array<OrdemPagamento>();
 

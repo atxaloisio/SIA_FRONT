@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this._omieService.getListEmpresas().subscribe(
       data => {
-        this.empresas = JSON.parse(data._body);
+        this.empresas = data.json();
       }
     );
   }

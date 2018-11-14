@@ -1,6 +1,5 @@
 import { UtilitarioModule } from './../utilitario/utilitario.module';
 import { DatepipeModule } from './../datepipe/datepipe.module';
-import { FornecedorDocumentoService } from './fornecedordocumento.service';
 import { UpperCaseModule } from './../uppercase/uppercase.module';
 import { FornecedorFindComponent } from './fornecedor-find.component';
 import { MatNativeDateModule } from '@angular/material';
@@ -39,8 +38,7 @@ import { FornecedorRoutingModule } from './fornecedor-routing.module';
     FornecedorFindComponent
   ],
   providers: [
-    FornecedorService,
-    FornecedorDocumentoService
+    FornecedorService
   ],
   entryComponents: [FornecedorFindComponent]
 })

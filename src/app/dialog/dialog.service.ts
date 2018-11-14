@@ -2,6 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { of } from 'rxjs';
 
 @Injectable()
 export class DialogService {
@@ -120,6 +121,6 @@ export class DialogService {
   confirm(message?: string): Observable<boolean> {
     const confirmation = window.confirm(message);
 
-    return Observable.of(confirmation);
+    return of(confirmation);
   }
 }

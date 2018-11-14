@@ -55,8 +55,8 @@ export class TipoAtividadeFormComponent implements OnInit, AfterViewInit, AfterV
       if (id) {
         this._tipoatividadeService.getTipoAtividade(this._tokenManager.retrieve(), id)
         .subscribe( data => {
-          this.tipoatividade = JSON.parse(data._body);
-          this.tipoatividade_ant = JSON.parse(data._body);
+          this.tipoatividade = data.json();
+          this.tipoatividade_ant = data.json();
           this.emProcessamento = false;
         });
       } else {

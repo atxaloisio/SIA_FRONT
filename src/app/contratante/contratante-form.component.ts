@@ -55,8 +55,8 @@ export class ContratanteFormComponent implements OnInit, AfterViewInit, AfterVie
       if (id) {
         this._contratanteService.getContratante(this._tokenManager.retrieve(), id)
         .subscribe( data => {
-          this.contratante = JSON.parse(data._body);
-          this.contratante_ant = JSON.parse(data._body);
+          this.contratante = data.json();
+          this.contratante_ant = data.json();
           this.emProcessamento = false;
         });
       } else {
@@ -71,7 +71,7 @@ export class ContratanteFormComponent implements OnInit, AfterViewInit, AfterVie
 
   ngAfterViewInit(): void {
     // this.vc.first.nativeElement.focus();
-    Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
+    // Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
   }
 
   onlyNumber(event: any) {

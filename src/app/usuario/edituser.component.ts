@@ -112,13 +112,13 @@ export class EditUserComponent implements OnInit {
     this.usuarios = new Array<User>();
     this._userService.getListPerfis(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.perfis = JSON.parse(data._body);
+        this.perfis = data.json();
       }
     );
 
     this._userService.getListUsers(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.usuarios = JSON.parse(data._body);
+        this.usuarios = data.json();
       }
     );
   }

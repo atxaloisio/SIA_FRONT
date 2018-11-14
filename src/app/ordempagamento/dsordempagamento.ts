@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import { OrdemPagamento, OrdemPagamentoFilter } from './ordempagamento';
+import { merge } from 'rxjs';
 
 export class DsOrdemPagamento extends DataSource<OrdemPagamento> {
   _filterChange = new BehaviorSubject( {
@@ -60,7 +61,7 @@ export class DsOrdemPagamento extends DataSource<OrdemPagamento> {
     ];
     this._sort.sortChange.subscribe(() => this._paginator.pageIndex = 0);
 
-    return Observable.merge(...displayDataChanges)
+    return merge(...displayDataChanges)
     .startWith(null)
     .switchMap(() => {
       // this.isLoadingResults = true;

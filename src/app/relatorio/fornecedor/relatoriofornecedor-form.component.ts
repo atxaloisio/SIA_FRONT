@@ -148,7 +148,7 @@ export class RelatorioFornecedorFormComponent implements OnInit, AfterViewInit, 
     //     .getCliente(this._tokenManager.retrieve(), Number(event.id))
     //     .subscribe(
     //       data => {
-    //         cliente = JSON.parse(data._body);
+    //         cliente = data.json();
     //         this.relatorio.id_cliente = cliente.id;
     //         this.relatorio.cliente = cliente.razao_social;
     //       },
@@ -167,7 +167,7 @@ export class RelatorioFornecedorFormComponent implements OnInit, AfterViewInit, 
     //     .getManifesto(this._tokenManager.retrieve(), Number(event.id))
     //     .subscribe(
     //       data => {
-    //         manifesto = JSON.parse(data._body);
+    //         manifesto = data.json();
     //         this.relatorio.id_manifesto = manifesto.id;
     //         this.relatorio.manifesto = manifesto.descricao;
     //       },

@@ -1,25 +1,19 @@
-import { MyTelInput } from './form-field-custom-control-example';
-import { UpperCaseModule } from './../uppercase/uppercase.module';
+import { CurrencyInputComponent } from './currency-input.component';
+import { UpperCaseModule } from '../uppercase/uppercase.module';
 import { MatNativeDateModule } from '@angular/material';
-import { MyMaterialModule } from './../my-material/my-material.module';
+import { MyMaterialModule } from '../my-material/my-material.module';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { OrdemPagamentoListComponent } from './ordempagamento-list.component';
-import { OrdemPagamentoFormComponent } from './ordempagamento-form.component';
-import { OrdemPagamentoService } from './ordempagamento.service';
-import { CustomCurrencyMaskConfig } from './../customcurrencymaskconfig';
+import { CustomCurrencyMaskConfig } from '../customcurrencymaskconfig';
 import { CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrdemPagamentoRoutingModule } from './ordempagamento-routing.module';
 import { DatepipeModule } from '../datepipe/datepipe.module';
 import { FocusModule } from '../focus/focus.module';
-import { AprovacaoPagamentoListComponent } from './aprovacaopagamento-list.component';
-
 
 @NgModule({
   imports: [
@@ -35,19 +29,15 @@ import { AprovacaoPagamentoListComponent } from './aprovacaopagamento-list.compo
     UpperCaseModule,
     CurrencyMaskModule,
     DatepipeModule,
-    FocusModule,
-    OrdemPagamentoRoutingModule
+    FocusModule
   ],
   declarations: [
-    AprovacaoPagamentoListComponent,
-    OrdemPagamentoListComponent,
-    OrdemPagamentoFormComponent,
-    MyTelInput
+    CurrencyInputComponent
   ],
+  exports: [ CurrencyInputComponent],
   providers: [
-    OrdemPagamentoService,
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
-  entryComponents: [MyTelInput]
+  entryComponents: [CurrencyInputComponent],
 })
-export class OrdemPagamentoModule { }
+export class  CurrencyInputModule { }

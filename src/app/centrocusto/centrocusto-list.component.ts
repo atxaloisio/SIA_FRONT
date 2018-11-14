@@ -21,6 +21,7 @@ import 'rxjs/add/operator/debounceTime';
 import { CentroCusto } from './centrocusto';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-centrocusto',
@@ -162,7 +163,7 @@ export class CentroCustoListComponent implements OnInit, AfterViewInit {
     const idFilter$ = this.idFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const descricaoFilter$ = this.descricaoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$, descricaoFilter$).debounceTime(500).distinctUntilChanged().
+    combineLatest(idFilter$, descricaoFilter$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao ]) => ({id, descricao})).subscribe(filter => {
         if (!this.dataSource) { return; }

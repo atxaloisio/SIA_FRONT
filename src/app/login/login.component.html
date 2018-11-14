@@ -33,7 +33,7 @@
             </div>
             <div fxFlex="100">
               <mat-form-field style="width:100%">
-                <input matInput tabindex="1" [(ngModel)]="data.email" [formControl]="valEmail" placeholder="E-Mail" required (click)="setErroLogin('')">
+                <input matInput tabindex="1" [(ngModel)]="data.email" [formControl]="valEmail" placeholder="E-Mail" required>
                 <mat-error *ngIf="valEmail.invalid">{{getEmailErrorMessage()}}</mat-error>
               </mat-form-field>
             </div>

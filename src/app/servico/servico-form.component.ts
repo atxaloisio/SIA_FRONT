@@ -18,7 +18,7 @@ import { ChangeDetectorRef, ViewChildren, ViewChild, ElementRef } from '@angular
 import { OnlyNumberDirective } from './../only-number.directive';
 import { Servico } from './servico';
 import { ActivatedRoute, Params} from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-servico-form',
@@ -32,19 +32,18 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
   emProcessamento = false;
   exibeIncluir = false;
 
-  valDescricao = new FormControl('', [Validators.required]);
-
   @ViewChildren('input') vc;
   @ViewChild('focuscomp') focuscomp: ElementRef;
+  @ViewChild('servicoForm') public form: NgForm;
 
   constructor(private _servicoService: ServicoService,
     private _tokenManager: TokenManagerService,
     private _route: ActivatedRoute,
     private dialog: DialogService) {}
 
-  validaCampos() {
+  validaCampos(form: NgForm) {
     return (
-      this.valDescricao.valid
+      form.form.valid
     );
   }
 
@@ -58,8 +57,8 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
         this._servicoService.getServico(this._tokenManager.retrieve(), id)
         .retry(3)
         .subscribe( dt => {
-          this.servico = JSON.parse(dt._body);
-          this.servico_ant = JSON.parse(dt._body);
+          this.servico = dt.json();
+          this.servico_ant = dt.json();
           // console.log(1);
           this.emProcessamento = false;
         });
@@ -86,9 +85,9 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
       }
   }
 
-  btnSalvar_click() {
+  btnSalvar_click(form: NgForm) {
     this.emProcessamento = true;
-    if (this.validaCampos()) {
+    if (this.validaCampos(form)) {
       if (isNullOrUndefined(this.servico.id)) {
         this._servicoService.addServico(
           this._tokenManager.retrieve(),
@@ -98,6 +97,7 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
               this.servico = data;
               this.servico_ant = data;
               this.exibeIncluir = true;
+              form.resetForm();
               this.dialog.success('SIA', 'Servico salvo com sucesso.');
             },
             error => {
@@ -115,6 +115,7 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
           this.servico = data;
           this.servico_ant = data;
           this.exibeIncluir = true;
+          form.resetForm();
           this.dialog.success('SIA', 'Servico salvo com sucesso.');
         },
         error => {
@@ -129,15 +130,19 @@ export class ServicoFormComponent implements OnInit, AfterViewInit, AfterViewChe
     }
   }
 
-  btnIncluir_click() {
+  btnIncluir_click(form: NgForm) {
     this.servico = new Servico();
     this.servico_ant = new Servico();
+    // form.form.reset();
+    // form.controls['descricao'].reset('');
+    form.controls['descricao'].clearValidators();
+    document.getElementById('descricao').focus();
   }
 
-  getDescricaoErrorMessage() {
+  getDescricaoErrorMessage(control: any) {
     let mensagem = '';
 
-    if (this.valDescricao.hasError('required')) {
+    if (control.hasError('required')) {
       mensagem = mensagem + 'Campo obrigatório.';
     }
     return mensagem;

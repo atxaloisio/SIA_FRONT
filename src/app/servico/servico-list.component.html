@@ -53,7 +53,7 @@
         <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
       </div>
       <div fxFlex="400px" fxFlexAlign="start" style="width: 100%">
-        <mat-table #table [dataSource]="dataSource" matSort>
+        <table mat-table #table [dataSource]="dataSource" matSort>
           <!-- ID Column -->
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
@@ -67,8 +67,9 @@
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}" (click)="highlight(row)" (dblclick)="dblck(row)"></mat-row>
-        </mat-table>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': selectedRowIndex == row.id}"
+            (click)="highlight(row)" (dblclick)="dblck(row)"></mat-row>
+        </table>
         <mat-paginator #paginator [length]="dataSource.nrRegistros" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 15, 25, 100]">
         </mat-paginator>
       </div>

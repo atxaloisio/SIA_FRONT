@@ -21,6 +21,7 @@ import 'rxjs/add/operator/debounceTime';
 import { Fornecedor } from './fornecedor';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-fornecedor',
@@ -181,15 +182,15 @@ export class FornecedorListComponent implements OnInit, AfterViewInit {
     const emailFilter$ = this.emailFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const inativoFilter$ = this.inativoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$,
-                             codigoFilter$,
-                             cnpjCpfFilter$,
-                             razaoSocialFilter$,
-                             contatoFilter$,
-                             telefoneFilter$,
-                             emailFilter$,
-                             inativoFilter$
-                            ).debounceTime(500).distinctUntilChanged().map(
+    combineLatest(idFilter$,
+                  codigoFilter$,
+                  cnpjCpfFilter$,
+                  razaoSocialFilter$,
+                  contatoFilter$,
+                  telefoneFilter$,
+                  emailFilter$,
+                  inativoFilter$
+                ).debounceTime(500).distinctUntilChanged().map(
       ([id, codigo_omie, cnpj_cpf, razao_social, contato, telefone, email, inativo ]) =>
       ({id, codigo_omie, cnpj_cpf, razao_social, contato, telefone, email, inativo})).subscribe(filter => {
         if (!this.dataSource) { return; }

@@ -39,7 +39,7 @@ import {
   MAT_DATE_LOCALE,
   DateAdapter,
 } from '@angular/material';
-import {MatMomentDateModule, MomentDateAdapter} from '@angular/material/material-moment-adapter';
+import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {HttpModule} from '@angular/http';
 import {CdkTableModule} from '@angular/cdk/table';
 

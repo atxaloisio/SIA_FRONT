@@ -28,6 +28,7 @@ import { MatDialog } from '@angular/material';
 import { FornecedorFindComponent } from '../fornecedor/fornecedor-find.component';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-ordempagamento-form',
@@ -78,19 +79,19 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
 
     this._servicoService.getListServicos(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.servicos = JSON.parse(data._body);
+        this.servicos = data.json();
       }
     );
 
     this._centroCustoService.getListCentroCusto(this._tokenManager.retrieve()).subscribe(
       data2 => {
-        this.centrocustos = JSON.parse(data2._body);
+        this.centrocustos = data2.json();
       }
     );
 
     this._userService.getListUsers(this._tokenManager.retrieve()).subscribe(
       data3 => {
-        this.usuarios = JSON.parse(data3._body);
+        this.usuarios = data3.json();
       }
     );
 
@@ -99,8 +100,8 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
       if (id) {
         this._ordempagamentoService.getOrdemPagamento(this._tokenManager.retrieve(), id)
         .subscribe( data1 => {
-          this.ordempagamento = JSON.parse(data1._body);
-          this.ordempagamento_ant = JSON.parse(data1._body);
+          this.ordempagamento = data1.json();
+          this.ordempagamento_ant = data1.json();
           this.emProcessamento = false;
         });
       } else {
@@ -112,7 +113,7 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
       .debounceTime(500)
       .distinctUntilChanged()
       .startWith('');
-    Observable.combineLatest(idFilter$)
+    combineLatest(idFilter$)
       .debounceTime(500)
       .distinctUntilChanged()
       .map(([id]) => ({ id }))
@@ -227,7 +228,7 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
         .getFornecedor(this._tokenManager.retrieve(), Number(event.id))
         .subscribe(
           data => {
-            fornecedor = JSON.parse(data._body);
+            fornecedor = data.json();
             this.ordempagamento.id_fornecedor = fornecedor.id;
             this.ordempagamento.fornecedor = fornecedor.razao_social;
           },

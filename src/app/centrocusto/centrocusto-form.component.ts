@@ -61,13 +61,13 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
 
     this._omieService.getListCategorias(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.categorias = JSON.parse(data._body);
+        this.categorias = data.json();
       }
     );
 
     this._omieService.getListContaCorrente(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.contacorrentes = JSON.parse(data._body);
+        this.contacorrentes = data.json();
       }
     );
 
@@ -76,8 +76,8 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
       if (id) {
         this._centrocustoService.getCentroCusto(this._tokenManager.retrieve(), id)
         .subscribe( data => {
-          this.centrocusto = JSON.parse(data._body);
-          this.centrocusto_ant = JSON.parse(data._body);
+          this.centrocusto = data.json();
+          this.centrocusto_ant = data.json();
           this.emProcessamento = false;
         });
       } else {
@@ -92,7 +92,7 @@ export class CentroCustoFormComponent implements OnInit, AfterViewInit, AfterVie
 
   ngAfterViewInit(): void {
     // this.vc.first.nativeElement.focus();
-    Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
+    // Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
   }
 
   onlyNumber(event: any) {

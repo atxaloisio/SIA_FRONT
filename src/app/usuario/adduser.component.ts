@@ -91,7 +91,7 @@ export class AddUserComponent implements OnInit {
     this.perfis = new Array<Perfil>();
     this._userService.getListPerfis(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.perfis = JSON.parse(data._body);
+        this.perfis = data.json();
       }
     );
   }

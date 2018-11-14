@@ -1,7 +1,6 @@
 import { UtilitarioModule } from './../utilitario/utilitario.module';
 import { StrToBooleanPipe } from './../utilitario/strToBooleanPipe';
 import { DatepipeModule } from './../datepipe/datepipe.module';
-import { ClienteDocumentoService } from './clientedocumento.service';
 import { ClienteFindComponent } from './cliente-find.component';
 import { MatNativeDateModule } from '@angular/material';
 import { MyMaterialModule } from './../my-material/my-material.module';
@@ -40,8 +39,7 @@ import { UpperCaseModule } from '../uppercase/uppercase.module';
     ClienteFindComponent
   ],
   providers: [
-    ClienteService,
-    ClienteDocumentoService
+    ClienteService
   ],
   entryComponents: [ClienteFindComponent]
 })

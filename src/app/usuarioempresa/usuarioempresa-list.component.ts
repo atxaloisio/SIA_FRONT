@@ -190,7 +190,7 @@ export class UsuarioEmpresaListComponent implements OnInit, AfterViewInit {
 
     this._userService.getListUsers(this._tokenManager.retrieve()).subscribe(
       data => {
-        this.usuarios = JSON.parse(data._body);
+        this.usuarios = data.json();
       }
     );
 

@@ -1,7 +1,4 @@
 import { StrToBooleanPipe } from './../utilitario/strToBooleanPipe';
-import { ClienteDocumentoService } from './clientedocumento.service';
-import { TipoDocumentoService } from './../tipodocumento/tipodocumento.service';
-import { TipoDocumento } from './../tipodocumento/tipodocumento';
 import { EnderecoService } from './../endereco.service';
 import { isNullOrUndefined } from 'util';
 import { DialogService } from './../dialog/dialog.service';
@@ -30,7 +27,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { Estado, Cidade } from './../endereco';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
-import { ClienteDocumento } from './clientedocumento';
 import { environment } from '../../environments/environment';
 import { strToBoolean } from '../utilitario/utilitarios';
 import { booleanToStrSN } from '../utilitario/utilitarios';
@@ -44,12 +40,6 @@ export class ClienteFormComponent
   implements OnInit, AfterViewInit, AfterViewChecked {
   cliente: Cliente;
   cliente_ant: Cliente;
-  clientedocumento: ClienteDocumento;
-  clientedocumentos: ClienteDocumento[];
-  clientedocumentos_ant: ClienteDocumento[];
-  clientedocumentosList: ClienteDocumento[];
-  clientedocumentoAnexos: ClienteDocumento[];
-  tipodocumentos: TipoDocumento[];
   linkDownload = environment.urlbase + '/api/documentos/cliente/downloadanexo?arquivo=';
   emProcessamento = false;
   exibeIncluir = false;
@@ -86,19 +76,11 @@ export class ClienteFormComponent
   filteredOptions: Observable<Cidade[]>;
 
   @Input('inativo')
-  set inativo(inativo: boolean){
+  set inativo(inativo: boolean) {
     this.cliente.inativo = booleanToStrSN(inativo);
   }
   get inativo(): boolean {
     return strToBoolean(this.cliente.inativo);
-  }
-
-  @Input('extensao')
-  set extensao(extensao: boolean){
-    this.clientedocumento.extensao = booleanToStrSN(extensao);
-  }
-  get extensao(): boolean {
-    return strToBoolean(this.clientedocumento.extensao);
   }
 
   @ViewChildren('input') vc;
@@ -110,8 +92,6 @@ export class ClienteFormComponent
     private _tokenManager: TokenManagerService,
     private _route: ActivatedRoute,
     private _enderecoService: EnderecoService,
-    private _clientedocumentoService: ClienteDocumentoService,
-    private _tipodocumentoService: TipoDocumentoService,
     private dialog: DialogService
   ) {}
 
@@ -125,21 +105,11 @@ export class ClienteFormComponent
     this.emProcessamento = true;
     this.cliente = new Cliente();
     this.cliente_ant = new Cliente();
-    this.clientedocumento = new ClienteDocumento();
-    this.clientedocumentos = new Array<ClienteDocumento>();
-    this.clientedocumentos_ant = new Array<ClienteDocumento>();
-    this.clientedocumentosList = new Array<ClienteDocumento>();
-    this.clientedocumentoAnexos = new Array<ClienteDocumento>();
-    this.tipodocumentos = new Array<TipoDocumento>();
-
-    this._tipodocumentoService.getListTipoDocumentos(this._tokenManager.retrieve()).subscribe( data => {
-      this.tipodocumentos = JSON.parse(data._body);
-    });
 
     this._enderecoService
       .getListEstados(this._tokenManager.retrieve())
       .subscribe(data => {
-        this.estados = JSON.parse(data._body);
+        this.estados = data.json();
       });
 
     this._route.params.forEach((params: Params) => {
@@ -148,26 +118,13 @@ export class ClienteFormComponent
         this._clienteService
           .getCliente(this._tokenManager.retrieve(), id)
           .subscribe(data => {
-            this.cliente = JSON.parse(data._body);
-            this.cliente_ant = JSON.parse(data._body);
+            this.cliente = data.json();
+            this.cliente_ant = data.json();
             this.inativo = strToBoolean(this.cliente.inativo);
-            // console.log(JSON.parse(data._body).inativo);
+            // console.log(JSON.parse(data.json();).inativo);
             if (!isNullOrUndefined(this.cliente.estado)) {
               this.loadCidades(this.cliente.estado);
             }
-            this._clientedocumentoService.getClienteDocumento(this._tokenManager.retrieve(), this.cliente.id).subscribe(
-              clidoc => {
-                this.clientedocumentos.length = 0;
-                this.clientedocumentosList.length = 0;
-                this.clientedocumentos = JSON.parse(clidoc._body);
-                this.clientedocumentos_ant = JSON.parse(clidoc._body);
-                this.clientedocumentosList = JSON.parse(clidoc._body);
-              });
-              this._clientedocumentoService.getClienteDocumentoAnexo(this._tokenManager.retrieve(), this.cliente.id).subscribe(
-                clidocAnexo => {
-                  this.clientedocumentoAnexos.length = 0;
-                  this.clientedocumentoAnexos = JSON.parse(clidocAnexo._body);
-                });
             this.emProcessamento = false;
           });
       } else {
@@ -277,7 +234,7 @@ export class ClienteFormComponent
   //     filtro = new ClienteFiltro('', cliente.cnpj_cpf, '', '', '', '');
 
   //     this._clienteService.getClientes(this._tokenManager.retrieve(), 'id', 'id', 1, 15, filtro).subscribe(data => {
-  //       listcliente = JSON.parse(data._body);
+  //       listcliente = data.json();
   //       if (listcliente.length > 0) {
   //         if (listcliente[0].id !== cliente.id) {
   //           this.dialog.warning('SIA', 'CNPJ / CPF informado já se encontra cadastrado no sistema.');
@@ -356,7 +313,7 @@ export class ClienteFormComponent
     this._enderecoService
       .getListCidades(this._tokenManager.retrieve(), cUF)
       .subscribe(data => {
-        this.cidades = JSON.parse(data._body);
+        this.cidades = data.json();
       });
   }
 
@@ -393,31 +350,10 @@ export class ClienteFormComponent
             data => {
               this.cliente = data;
               this.cliente_ant = data;
-              // this.emProcessamento = false;
-              // this.exibeIncluir = true;
-              // this.dialog.success('SIA', 'Cliente salvo com sucesso.');
-              for (let index = 0; index < this.clientedocumentos.length; index++) {
-                this.clientedocumentos[index].id_cliente = this.cliente.id;
-              }
-
-              this._clientedocumentoService.addClienteDocumento(this._tokenManager.retrieve(),
-                this.cliente.id, this.clientedocumentos)
-                .subscribe( clidoc => {
-                  this.clientedocumentos.length = 0;
-                  this.clientedocumentosList.length = 0;
-                  this.clientedocumentos = clidoc;
-                  this.clientedocumentos_ant = clidoc;
-                  this.clientedocumentosList = clidoc;
-                  this.limpaValidadores();
-                  this.emProcessamento = false;
-                  this.exibeIncluir = true;
-                  this.dialog.success('SIA', 'Cliente salvo com sucesso.');
-                },
-                error => {
-                  this.emProcessamento = false;
-                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
-                }
-              );
+              this.limpaValidadores();
+              this.emProcessamento = false;
+              this.exibeIncluir = true;
+              this.dialog.success('SIA', 'Cliente salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
@@ -435,31 +371,10 @@ export class ClienteFormComponent
             data => {
               this.cliente = data;
               this.cliente_ant = data;
-              // this.emProcessamento = false;
-              // this.exibeIncluir = true;
-              // this.dialog.success('SIA', 'Cliente salvo com sucesso.');
-              for (let index = 0; index < this.clientedocumentos.length; index++) {
-                this.clientedocumentos[index].id_cliente = this.cliente.id;
-              }
-
-              this._clientedocumentoService.addClienteDocumento(this._tokenManager.retrieve(),
-                this.cliente.id, this.clientedocumentos)
-                .subscribe( clidoc => {
-                  this.clientedocumentos.length = 0;
-                  this.clientedocumentosList.length = 0;
-                  this.clientedocumentos = clidoc;
-                  this.clientedocumentos_ant = clidoc;
-                  this.clientedocumentosList = clidoc;
-                  this.limpaValidadores();
-                  this.emProcessamento = false;
-                  this.exibeIncluir = true;
-                  this.dialog.success('SIA', 'Cliente salvo com sucesso.');
-                },
-                error => {
-                  this.emProcessamento = false;
-                  this.dialog.error('SIA', 'Erro ao salvar lista de documentos.', error.error + ' - Detalhe: ' + error.message);
-                }
-              );
+              this.limpaValidadores();
+              this.emProcessamento = false;
+              this.exibeIncluir = true;
+              this.dialog.success('SIA', 'Cliente salvo com sucesso.');
             },
             error => {
               this.emProcessamento = false;
@@ -475,11 +390,7 @@ export class ClienteFormComponent
 
   btnIncluir_click() {
     this.cliente = new Cliente();
-    this.clientedocumento = new ClienteDocumento();
-    this.clientedocumentos.length = 0;
-    this.clientedocumentos_ant.length = 0;
-    this.clientedocumentoAnexos.length = 0;
-    this.clientedocumentosList.length = 0;
+    this.cliente_ant = new Cliente();
   }
 
   getRazaoSocialErrorMessage() {
@@ -566,47 +477,6 @@ export class ClienteFormComponent
     }
   }
 
-  addlinha() {
-    // validar se ja foi inserido na lista
-    let mensagem = '';
-
-    if ((this.valTipoDocumento.invalid) && (mensagem === '')) {
-      mensagem = 'Tipo de documento não informado.';
-    }
-
-    if ((this.valNroLicenca.invalid) && (mensagem === '')) {
-      mensagem = 'Número da liçenca não informado.';
-    }
-
-    if ((this.valDtEmissao.invalid) && (mensagem === '')) {
-      mensagem = 'Data de emissão não informada.';
-    }
-
-    if ((this.valDtVencimento.invalid) && (mensagem === '')) {
-      mensagem = 'Data de Vencimento não informada.';
-    }
-
-    if (mensagem === '') {
-      const index = this.clientedocumentos.findIndex(
-        p => p.id_cliente === this.clientedocumento.id_cliente &&
-             p.id_tipo_documento === this.clientedocumento.id_tipo_documento);
-
-      if ((!isNullOrUndefined(index)) && (index > -1)) {
-        mensagem = 'Documento já foi relacionado';
-      }
-    }
-
-    if (mensagem === '') {
-      this.clientedocumento.descricao = this.tipodocumentos.find(p => p.id === this.clientedocumento.id_tipo_documento).descricao;
-      this.clientedocumentos.push(this.clientedocumento);
-      this.limpaValidadores();
-      this.clientedocumento = new ClienteDocumento();
-      document.getElementById('id_tipodocumento').focus();
-    } else {
-      this.dialog.warning('SIA', 'Documento não adicionado', 'Detalhe: ' + mensagem);
-    }
-  }
-
   limpaValidadores() {
     this.valTipoDocumento.clearValidators();
     this.valNroLicenca.clearValidators();
@@ -614,83 +484,9 @@ export class ClienteFormComponent
     this.valDtVencimento.clearValidators();
   }
 
-  remlinha(doc: ClienteDocumento) {
-    if (!isNullOrUndefined(doc.id)) {
-      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
-      result => {
-        if (result.retorno) {
-          this._clientedocumentoService.deleteClienteDocumento(this._tokenManager.retrieve(), doc.id).subscribe(
-            data => {
-              this.dialog.success('SIA', 'Documento excluído do contrato com sucesso.');
-              const index = this.clientedocumentos.indexOf(doc);
-              this.clientedocumentos.splice(index, 1);
-              const index2 = this.clientedocumentoAnexos.indexOf(doc);
-              this.clientedocumentoAnexos.splice(index2, 1);
-            },
-            error => {
-              this.dialog.error('SIA', 'Erro ao excluir o documento.', error.error + ' - Detalhe: ' + error.message);
-            },
-          );
-        }
-      });
-    } else {
-      this.dialog.question('SIA', 'Deseja realmente excluir o documento: ' + doc.descricao  + ' ?').subscribe(
-      result => {
-        if (result.retorno) {
-          const index = this.clientedocumentos.indexOf(doc);
-          this.clientedocumentos.splice(index, 1);
-        }
-      });
-    }
-  }
-
-  editlinha(doc: ClienteDocumento) {
-    this.clientedocumento = doc;
-    const index = this.clientedocumentos.indexOf(doc);
-    this.clientedocumentos.splice(index, 1);
-    this.limpaValidadores();
-  }
-
-  uploadAnexo() {
-    const fileBrowser = this.fileInput.nativeElement;
-    if ((fileBrowser.files.length > 0) && (!isNullOrUndefined(this.id_documento))) {
-      const clidoc = this.clientedocumentosList.find(p => p.id === this.id_documento);
-      this.uploadDocumento(clidoc, fileBrowser.files[0]);
-    }
-  }
-
-  uploadDocumento(_clienteDocumento: ClienteDocumento, _file: File) {
-    this._clientedocumentoService.uploadDocumento(this._tokenManager.retrieve(), _clienteDocumento, _file).subscribe(
-      data => {
-        this._clientedocumentoService.getClienteDocumentoAnexo(this._tokenManager.retrieve(), this.cliente.id)
-        .subscribe( clidoc => {
-          this.clientedocumentoAnexos.length = 0;
-          this.clientedocumentoAnexos = JSON.parse(clidoc._body);
-        });
-        // console.log('upload ok ' + data.anexo);
-      },
-      error => {
-        console.log('falha no upload ' + error);
-      },
-    );
-  }
-
-  deleteAnexo(doc: ClienteDocumento) {
-    this._clientedocumentoService.deleteAnexoDocumento(this._tokenManager.retrieve(), doc.id).subscribe(
-      data => {
-        this._clientedocumentoService.getClienteDocumentoAnexo(this._tokenManager.retrieve(), this.cliente.id)
-        .subscribe( clidoc => {
-          this.clientedocumentoAnexos.length = 0;
-          this.clientedocumentoAnexos = JSON.parse(clidoc._body);
-        });
-      }
-    );
-  }
-
   canDeactivate(): Observable<boolean> | boolean {
 
-    if (((JSON.stringify(this.cliente) === JSON.stringify(this.cliente_ant))) &&
-       ((JSON.stringify(this.clientedocumentos) === JSON.stringify(this.clientedocumentos_ant)))) {
+    if (JSON.stringify(this.cliente) === JSON.stringify(this.cliente_ant)) {
       return true;
     }
     // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged

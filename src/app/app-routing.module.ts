@@ -1,5 +1,4 @@
 import { HomeComponent } from './home/home.component';
-import { MovimentoComponent } from './movimento/movimento.component';
 import { AuthGuard } from './auth-guard';
 
 import { NgModule } from '@angular/core';
@@ -9,8 +8,7 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 const routes: Routes = [
  // { path: '',   redirectTo: '/', pathMatch: 'full' },
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
-  { path: 'movimentos', component: MovimentoComponent, canActivate: [AuthGuard] }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

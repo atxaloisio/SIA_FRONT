@@ -1,3 +1,5 @@
+import { TipoAtividadeEnum } from './../tipoatividade/tipoatividade.enum';
+import { TipoAtividadeService } from './../tipoatividade/tipoatividade.service';
 import { isNullOrUndefined } from 'util';
 import { DialogService } from './../dialog/dialog.service';
 import { TokenManagerService } from './../token-manager.service';
@@ -16,7 +18,7 @@ import { ChangeDetectorRef, ViewChildren, ViewChild, ElementRef } from '@angular
 import { OnlyNumberDirective } from './../only-number.directive';
 import { Funcao } from './funcao';
 import { ActivatedRoute, Params} from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-funcao-form',
@@ -34,15 +36,16 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
 
   @ViewChildren('input') vc;
   @ViewChild('focuscomp') focuscomp: ElementRef;
+  @ViewChild('funcaoForm') public form: NgForm;
 
   constructor(private _funcaoService: FuncaoService,
     private _tokenManager: TokenManagerService,
     private _route: ActivatedRoute,
     private dialog: DialogService) {}
 
-  validaCampos() {
+  validaCampos(form: NgForm) {
     return (
-      this.valDescricao.valid
+      form.form.valid
     );
   }
 
@@ -55,8 +58,8 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
       if (id) {
         this._funcaoService.getFuncao(this._tokenManager.retrieve(), id)
         .subscribe( data => {
-          this.funcao = JSON.parse(data._body);
-          this.funcao_ant = JSON.parse(data._body);
+          this.funcao = data.json();
+          this.funcao_ant = data.json();
           this.emProcessamento = false;
         });
       } else {
@@ -71,7 +74,7 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
 
   ngAfterViewInit(): void {
     // this.vc.first.nativeElement.focus();
-    Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
+    // Promise.resolve(null).then(() => this.focuscomp.nativeElement.focus());
   }
 
   onlyNumber(event: any) {
@@ -82,9 +85,9 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
       }
   }
 
-  btnSalvar_click() {
+  btnSalvar_click(form: NgForm) {
     this.emProcessamento = true;
-    if (this.validaCampos()) {
+    if (this.validaCampos(form)) {
       if (isNullOrUndefined(this.funcao.id)) {
         this._funcaoService.addFuncao(
           this._tokenManager.retrieve(),
@@ -94,6 +97,7 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
               this.funcao = data;
               this.funcao_ant = data;
               this.exibeIncluir = true;
+              form.form.clearValidators();
               this.dialog.success('SIA', 'Funcao salvo com sucesso.');
             },
             error => {
@@ -111,6 +115,7 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
           this.funcao = data;
           this.funcao_ant = data;
           this.exibeIncluir = true;
+          form.form.clearValidators();
           this.dialog.success('SIA', 'Funcao salvo com sucesso.');
         },
         error => {
@@ -125,15 +130,17 @@ export class FuncaoFormComponent implements OnInit, AfterViewInit, AfterViewChec
     }
   }
 
-  btnIncluir_click() {
+  btnIncluir_click(form: NgForm) {
     this.funcao = new Funcao();
     this.funcao_ant = new Funcao();
+    form.form.clearValidators();
+    document.getElementById('descricao').focus();
   }
 
-  getDescricaoErrorMessage() {
+  getDescricaoErrorMessage(control: any) {
     let mensagem = '';
 
-    if (this.valDescricao.hasError('required')) {
+    if (control.hasError('required')) {
       mensagem = mensagem + 'Campo obrigatório.';
     }
     return mensagem;

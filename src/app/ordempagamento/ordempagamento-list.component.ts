@@ -21,6 +21,7 @@ import 'rxjs/add/operator/debounceTime';
 import { OrdemPagamento } from './ordempagamento';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-ordempagamento',
@@ -170,7 +171,7 @@ export class OrdemPagamentoListComponent implements OnInit, AfterViewInit {
     const fornecedorFilter$ = this.fornecedorFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const contratanteFilter$ = this.contratanteFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
+    combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
       centrocustoFilter$, fornecedorFilter$, contratanteFilter$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao, servico, centrocusto, fornecedor, contratante]) =>

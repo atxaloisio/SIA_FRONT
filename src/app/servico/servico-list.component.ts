@@ -13,12 +13,15 @@ import { MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
+import {combineLatest} from 'rxjs/observable/combineLatest';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/combineLatest';
+import 'rxjs/add/observable/combineLatest';
 import { Servico } from './servico';
 import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
@@ -160,7 +163,7 @@ export class ServicoListComponent implements OnInit, AfterViewInit {
     const idFilter$ = this.idFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const descricaoFilter$ = this.descricaoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$, descricaoFilter$).debounceTime(500).distinctUntilChanged().
+    combineLatest(idFilter$, descricaoFilter$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao ]) => ({id, descricao})).subscribe(filter => {
         if (!this.dataSource) { return; }

@@ -8,12 +8,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
-import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import { UsuarioCentroCusto, UsuarioCentroCustoFilter } from './usuariocentrocusto';
+import { merge } from 'rxjs';
 
 export class DsUsuarioCentroCusto extends DataSource<UsuarioCentroCusto> {
   _filterChange = new BehaviorSubject( {id: '', descricao: '', id_usuario: null} );
@@ -54,7 +54,7 @@ export class DsUsuarioCentroCusto extends DataSource<UsuarioCentroCusto> {
     ];
     this._sort.sortChange.subscribe(() => this._paginator.pageIndex = 0);
 
-    return Observable.merge(...displayDataChanges)
+    return merge(...displayDataChanges)
     .startWith(null)
     .switchMap(() => {
       // this.isLoadingResults = true;

@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import { UsuarioEmpresa, UsuarioEmpresaFilter } from './usuarioempresa';
+import { merge } from 'rxjs';
 
 export class DsUsuarioEmpresa extends DataSource<UsuarioEmpresa> {
   _filterChange = new BehaviorSubject( {id: '', descricao: '', id_usuario: null} );
@@ -54,7 +55,7 @@ export class DsUsuarioEmpresa extends DataSource<UsuarioEmpresa> {
     ];
     this._sort.sortChange.subscribe(() => this._paginator.pageIndex = 0);
 
-    return Observable.merge(...displayDataChanges)
+    return merge(...displayDataChanges)
     .startWith(null)
     .switchMap(() => {
       // this.isLoadingResults = true;

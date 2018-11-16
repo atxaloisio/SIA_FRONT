@@ -23,6 +23,7 @@ import { ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { OnlyNumberDirective } from './../only-number.directive';
 import { UserService } from '../user.service';
 import { User } from '../user';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-usuarioempresa',
@@ -202,7 +203,7 @@ export class UsuarioEmpresaListComponent implements OnInit, AfterViewInit {
     const descricaoFilter$ = this.descricaoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const usuarioFilters$ = this.usuarioFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$, descricaoFilter$, usuarioFilters$).debounceTime(500).distinctUntilChanged().
+    combineLatest(idFilter$, descricaoFilter$, usuarioFilters$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao, id_usuario ]) => ({id, descricao, id_usuario})).subscribe(filter => {
         if (!this.dataSource) { return; }

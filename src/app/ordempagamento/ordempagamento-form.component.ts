@@ -73,9 +73,11 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
   }
 
   ngOnInit() {
+    const usuario: User = JSON.parse(localStorage.getItem('currentUser'));
     this.emProcessamento = true;
     this.ordempagamento = new OrdemPagamento();
     this.ordempagamento_ant = new OrdemPagamento();
+    this.centrocustos = new Array<CentroCusto>();
 
     this._servicoService.getListServicos(this._tokenManager.retrieve()).subscribe(
       data => {
@@ -83,9 +85,14 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
       }
     );
 
-    this._centroCustoService.getListCentroCusto(this._tokenManager.retrieve()).subscribe(
+    this._centroCustoService.getListCentroCustoUsuario(this._tokenManager.retrieve(), usuario.id).subscribe(
       data2 => {
         this.centrocustos = data2.json();
+        // seta como default o centro de custo retornado
+        if (this.centrocustos.length === 1) {
+          this.ordempagamento.id_centro_custo = this.centrocustos[0].id;
+        }
+        // console.log(localStorage.getItem('currentUser'));
       }
     );
 

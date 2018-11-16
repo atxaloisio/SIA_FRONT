@@ -1,4 +1,3 @@
-import { MyTelInput } from './form-field-custom-control-example';
 import { UpperCaseModule } from './../uppercase/uppercase.module';
 import { MatNativeDateModule } from '@angular/material';
 import { MyMaterialModule } from './../my-material/my-material.module';
@@ -41,13 +40,11 @@ import { AprovacaoPagamentoListComponent } from './aprovacaopagamento-list.compo
   declarations: [
     AprovacaoPagamentoListComponent,
     OrdemPagamentoListComponent,
-    OrdemPagamentoFormComponent,
-    MyTelInput
+    OrdemPagamentoFormComponent
   ],
   providers: [
     OrdemPagamentoService,
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
-  ],
-  entryComponents: [MyTelInput]
+  ]
 })
 export class OrdemPagamentoModule { }

@@ -5,7 +5,7 @@ import { CentroCusto, CentroCustoFilter } from './centrocusto';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 
@@ -144,6 +144,21 @@ export class CentroCustoService {
 
     return this._http
       .get(listUrl, { headers: headers })
+      .map((res: Response) => res)
+      .catch((error: any) =>
+        Observable.throw(error.json() || 'Server error')
+      );
+  }
+
+  getListCentroCustoUsuario(accessToken: string, _id: number)  {
+    const listUrl = environment.urlbase + '/api/listcentrocustosuser';
+    const headers = new Headers({
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
+    });
+
+    return this._http
+      .get(listUrl + '/' + _id.toString(), { headers: headers })
       .map((res: Response) => res)
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')

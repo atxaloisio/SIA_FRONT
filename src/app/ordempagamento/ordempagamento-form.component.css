@@ -51,10 +51,15 @@
   justify-content: center;
 }
 
+.group {
+  position: relative;
+  margin-bottom: 0px;
+}
+
 .atrainput {
   font-size: 16px;
   font-family: roboto;
-  padding: 10px 10px 10px 0px;
+  padding: 10px 10px 0px 0px;
   display: block;
   border: none;
   border-bottom: 1px solid #757575;
@@ -71,15 +76,15 @@
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 127px;
-  top: 307px;
+  left: 5px;
+  top: 15px;
   transition: 0.2s ease all;
 }
 
 /* active state */
 .atrainput:focus ~ .atralabel,
 .atrainput:valid ~ .atralabel {
-  top: 275px;
+  top: 0px;
   font-size: 12px;
   color: #5264ae;
 }
@@ -95,7 +100,7 @@
   content: "";
   height: 2px;
   width: 0;
-  bottom: 1px;
+  bottom: -1px;
   position: absolute;
   background: #5264ae;
   transition: 0.2s ease all;
@@ -140,49 +145,4 @@
   }
 }
 
-.atrainput2 {
-  font-size: 16px;
-  font-family: roboto;
-  padding: 10px 10px 10px 0px;
-  display: block;
-  border: none;
-  border-bottom: 1px solid #757575;
-}
-
-.atrainput2:focus {
-  outline: none;
-}
-
-/* LABEL ======================================= */
-.atralabel2 {
-  color: #999;
-  font-size: 14px;
-  font-weight: normal;
-  position: absolute;
-  pointer-events: none;
-  left: 257px;
-  top: 307px;
-  transition: 0.2s ease all;
-}
-
-/* active state */
-.atrainput2:focus ~ .atralabel2,
-.atrainput2:valid ~ .atralabel2 {
-  top: 275px;
-  font-size: 12px;
-  color: #5264ae;
-}
-
-
-
-/* active state */
-.atrainput2:focus ~ .bar:before,
-.atrainput2:focus ~ .bar:after {
-  width: 50%;
-}
-
-/* active state */
-.atrainput2:focus ~ .highlight {
-  animation: inputHighlighter 0.3s ease;
-}
 

@@ -1,5 +1,5 @@
 import { UserService } from './../user.service';
-import { Perfil } from './../perfil';
+import { Perfil } from '../perfil/perfil';
 import { User } from './../user';
 import { LoginService } from './../login.service';
 import { isNullOrUndefined } from 'util';

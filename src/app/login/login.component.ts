@@ -1,4 +1,3 @@
-import { Perfil } from './../perfil';
 import { User } from './../user';
 import { LoginService } from './../login.service';
 import { isNullOrUndefined } from 'util';
@@ -9,6 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/ma
 import {FormControl, Validators} from '@angular/forms';
 import { OmieService } from '../omie/omie.service';
 import { Empresa } from '../omie/empresa';
+import { Perfil } from '../perfil/perfil';
 
 @Component({
   selector: 'app-login',

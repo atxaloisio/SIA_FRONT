@@ -1,6 +1,6 @@
 import { TokenManagerService } from './../token-manager.service';
 import { UserService } from './../user.service';
-import { Perfil } from './../perfil';
+import { Perfil } from '../perfil/perfil';
 import { User } from './../user';
 import { LoginService } from './../login.service';
 import { isNullOrUndefined } from 'util';
@@ -33,7 +33,7 @@ export class AddUserComponent implements OnInit {
   emProcessamento = false;
 
   @Input('name')
-  set name(name: string){
+  set name(name: string) {
     this._name = name;
   }
   get name(): string {
@@ -41,7 +41,7 @@ export class AddUserComponent implements OnInit {
   }
 
   @Input('email')
-  set email(email: string){
+  set email(email: string) {
     this._email = email;
   }
   get email(): string {
@@ -49,7 +49,7 @@ export class AddUserComponent implements OnInit {
   }
 
   @Input('password')
-  set password(password: string){
+  set password(password: string) {
     this._password = password;
   }
   get password(): string {
@@ -57,7 +57,7 @@ export class AddUserComponent implements OnInit {
   }
 
   @Input('confpassword')
-  set confpassword(confpassword: string){
+  set confpassword(confpassword: string) {
     this._confpassword = confpassword;
   }
   get confpassword(): string {
@@ -65,7 +65,7 @@ export class AddUserComponent implements OnInit {
   }
 
   @Input('perfil')
-  set perfil(perfil: number){
+  set perfil(perfil: number) {
     this._perfil = perfil;
   }
   get perfil(): number {

@@ -110,7 +110,7 @@ mat-row:nth-child(odd) {
 }
 
 .highlight {
-  background-color: rgb(3, 12, 248) !important; /* green */
+  background-color: cornflowerblue !important; /* green */
 }
 
 /* .mat-form-field {

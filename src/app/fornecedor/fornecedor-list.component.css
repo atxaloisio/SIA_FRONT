@@ -73,7 +73,7 @@
   min-height: 25px;
   display: flex;
   align-items: center;
-  padding-left: 0px;
+  padding-left: 10px;
   font-size: 15px;
   font-weight: bold;
 }
@@ -82,7 +82,7 @@
   min-height: 25px;
   display: flex;
   align-items: center;
-  padding-left: 10px;
+  padding-left: 0px;
   font-size: 15px;
 }
 
@@ -108,7 +108,7 @@ mat-row:nth-child(odd) {
 }
 
 .highlight {
-  background-color: rgb(3, 12, 248) !important; /* green */
+  background-color: cornflowerblue !important; /* green */
 }
 
 /* .mat-form-field {
@@ -142,13 +142,13 @@ mat-row:nth-child(odd) {
 
 .mat-column-id {
   min-width: 90px;
-  max-width: 130px;
+  max-width: 90px;
 }
 
-.mat-column-codigo_omie {
+/* .mat-column-codigo_omie {
   min-width: 90px;
   max-width: 130px;
-}
+} */
 
 .mat-column-cnpj_cpf {
   min-width: 150px;

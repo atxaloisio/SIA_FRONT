@@ -5,7 +5,7 @@ import { Fornecedor, FornecedorFilter } from './fornecedor';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 
@@ -204,6 +204,7 @@ export class FornecedorService {
     if ((!isNullOrUndefined(order)) && (order.length > 0)) {
       search.set('order', order);
     } else {
+      sort = 'id';
       order = 'asc';
       search.set('order', order);
     }

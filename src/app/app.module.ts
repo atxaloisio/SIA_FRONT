@@ -46,6 +46,7 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { CanDeactivateGuard } from './can-deactivate-guard.service';
 import { UsuarioEmpresaModule } from './usuarioempresa/usuarioempresa.module';
 import localePt from '@angular/common/locales/pt';
+import { PerfilModule } from './perfil/perfil.module';
 registerLocaleData(localePt, 'pt-BR');
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ registerLocaleData(localePt, 'pt-BR');
     OrdemPagamentoModule,
     UsuarioCentroCustoModule,
     UsuarioEmpresaModule,
+    PerfilModule,
     OmieModule,
     UpperCaseModule,
     AppRoutingModule

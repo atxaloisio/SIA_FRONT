@@ -1,0 +1,154 @@
+<form #perfilForm="ngForm">
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
+    <div fxFlex="140px" style="padding: 10px;" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="height: 100%">
+        <div fxFlex="80%" fxFlexFill fxFlexAlign="center">
+          <button id="btnSalvar" mat-raised-button color="primary" style="width: 100%" (click)="btnSalvar_click(perfilForm)"
+            [disabled]="!perfilForm.form.valid">
+            <mat-icon>save</mat-icon>
+            <span>Salvar</span>
+          </button>
+          <button id="btnIncluir" mat-raised-button color="primary" style="width: 100%" (click)="btnIncluir_click(perfilForm)"
+            *ngIf="exibeIncluir">
+            <mat-icon>insert_drive_file</mat-icon>
+            <span>Incluir</span>
+          </button>
+        </div>
+        <div fxFlex="40px" fxFlexFill fxFlexAlign="end">
+
+          <a routerLink="/perfis" mat-raised-button color="primary" style="width: 120px">
+            <mat-icon>close</mat-icon>
+            <span>Fechar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div fxFlex="90%">
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <div fxFlex="50px" fxFlexAlign="start" style="padding: 10px;">
+          <button id="lblTitulo" mat-raised-button style="width: 100%" disabled>
+            <i class="fa fa-vcard-o" aria-hidden="true"></i>
+            <span> PERFIL</span>
+          </button>
+        </div>
+        <div fxFlex="80%" fxFlexAlign="center">
+          <div fxLayout="column" class="frm_perfil-loading-shade" fxLayoutAlign="center center" *ngIf="emProcessamento">
+            <div fxFlex="70" fxFlexAlign="center">
+              <mat-spinner></mat-spinner>
+            </div>
+            <div fxFlex="10" fxFlexAlign="center">
+              &nbsp;
+            </div>
+            <div fxFlex="20" fxFlexAlign="center">
+              <label>Aguarde...</label>
+            </div>
+          </div>
+          <mat-card *ngIf="!emProcessamento" style="width: 660px;">
+            <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+              <div fxFlex="60px" fxFlexAlign="start">
+                <mat-form-field class="frm_perfil_codigo">
+                  <input matInput #codigo maxlength="9" type="number" tabindex="-1" placeholder="Código" disabled id="codigo"
+                    name="codigo" [(ngModel)]="perfil.id">
+                  <!-- <mat-hint align="end">{{codigo.value?.length || 0}}/9</mat-hint>
+                <mat-error *ngIf="valCodigo.invalid">{{getCodigoErrorMessage()}}</mat-error> -->
+                </mat-form-field>
+              </div>
+              <div fxFlex="60px" fxFlexAlign="start">
+                <mat-form-field class="frm_perfil_descricao">
+                  <input matInput uppercase autofocus #focuscomp maxlength="50" id="descricao" name="descricao"
+                    placeholder="Descrição" required tabindex="1" [(ngModel)]="perfil.descricao" autofocus #descricao="ngModel">
+                  <mat-hint align="end">{{descricao.value?.length || 0}}/50</mat-hint>
+                  <mat-error *ngIf="descricao.invalid && (descricao.dirty || descricao.touched)">{{getDescricaoErrorMessage(descricao)}}</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <div fxFlex="1px" class="customHrFull"></div> -->
+              <!-- <div fxFlex="25px" fxFlexAlign="start">
+              <label>Tipo de Atividade</label>
+            </div> -->
+              <div fxFlex="70px" fxFlexAlign="start">
+
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+                  <div fxFlex="100%" fxFlexAlign="start" fxFlexFill>
+                    <mat-tab-group>
+                      <mat-tab>
+                          <ng-template mat-tab-label>
+                            <mat-checkbox [(ngModel)]="cadastros" [(indeterminate)]="cadastros_indeterminado" id="cadastros" name="cadastros"></mat-checkbox>
+                            &nbsp; Cadastros
+                          </ng-template>
+                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+                          <div fxFlex="60px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                              <div fxFlex="150px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="servico" id="servico" name="servico">Serviço</mat-checkbox>
+                              </div>
+                              <div fxFlex="150px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="fornecedor" id="fornecedor" name="fornecedor">Fornecedor</mat-checkbox>
+                              </div>
+                              <div fxFlex="150px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="funcao" id="funcao" name="funcao">Função</mat-checkbox>
+                              </div>
+                              <div fxFlex="150px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="centro_custo" id="centrocusto" name="centrocusto">Centro de Custo</mat-checkbox>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-tab>
+                      <mat-tab>
+                          <ng-template mat-tab-label>
+                            <mat-checkbox [(ngModel)]="processos" [(indeterminate)]="processos_indeterminado" id="processos" name="processos">
+                            </mat-checkbox>&nbsp; Processos
+                          </ng-template>
+                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+                          <div fxFlex="60px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                              <div fxFlex="300px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="ordem_pagamento" id="ordempagamento" name="ordempagamento">Ordens de Pagamento</mat-checkbox>
+                              </div>
+                              <div fxFlex="300px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aprovacao_pagamento" id="aprovacaopagamento" name="aprovacaopagamento">Aprovação de Pagamento</mat-checkbox>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-tab>
+                      <mat-tab>
+                        <ng-template mat-tab-label><mat-checkbox ></mat-checkbox>&nbsp; Relatórios</ng-template>
+                      </mat-tab>
+                      <mat-tab label="Controle de Acesso"> Content 3 </mat-tab>
+                    </mat-tab-group>
+                    <!-- <mat-checkbox [ngModel]="perfil.armazenador" [checked]="perfil.armazenador"  (change)="chkArmazenador_change($event)" >Armazenador</mat-checkbox> -->
+                  </div>
+                  <!-- <div fxFlex="100%" fxFlexAlign="start" fxFlexFill>
+                    <mat-radio-group [(ngModel)]="perfil.id_tipo_atividade" [value]="perfil.id_tipo_atividade" style="width: 100%">
+                        <mat-radio-button *ngFor="let tipoatividade of tipoatividades" [value]="tipoatividade.id">
+                          {{tipoatividade.descricao}} &nbsp;&nbsp;&nbsp;
+                        </mat-radio-button>
+                      </mat-radio-group>
+                </div> -->
+
+
+                  <!-- <div fxFlex="130px" fxFlexAlign="end" fxFlexFill>
+                    <mat-checkbox [ngModel]="perfil.armazenador" [checked]="perfil.armazenador"  (change)="chkArmazenador_change($event)" >Armazenador</mat-checkbox>
+                </div>
+                <div fxFlex="130px" fxFlexAlign="end" fxFlexFill>
+                    <mat-checkbox [ngModel]="perfil.destinador" [checked]="perfil.destinador"  (change)="chkDestinador_change($event)" >Destinador</mat-checkbox>
+                </div>
+                <div fxFlex="130px" fxFlexAlign="end" fxFlexFill>
+                    <mat-checkbox [ngModel]="perfil.transportador" [checked]="perfil.transportador" (change)="chkTransportador_change($event)" >Transportador</mat-checkbox>
+                </div>
+                <div fxFlex="130px" fxFlexAlign="end" fxFlexFill>
+                    <mat-checkbox [ngModel]="perfil.outras" [checked]="perfil.outras" (change)="chkOutras_change($event)" >Outras</mat-checkbox>
+                </div> -->
+
+                </div>
+              </div>
+
+            </div>
+          </mat-card>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

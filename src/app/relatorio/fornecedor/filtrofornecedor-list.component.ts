@@ -24,6 +24,7 @@ import { TokenManagerService } from '../../token-manager.service';
 import { DialogService } from '../../dialog/dialog.service';
 import { DsFornecedor } from '../../fornecedor/dsfornecedor';
 import { RelatorioService } from '../relatorio.service';
+import { combineLatest } from 'rxjs';
 
 
 @Component({
@@ -197,7 +198,7 @@ export class FiltroFornecedorListComponent implements OnInit, AfterViewInit {
     const emailFilter$ = this.emailFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
     const inativoFilter$ = this.inativoFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
-    Observable.combineLatest(idFilter$,
+    combineLatest(idFilter$,
                              codigoFilter$,
                              cnpjCpfFilter$,
                              razaoSocialFilter$,

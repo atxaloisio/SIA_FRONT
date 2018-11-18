@@ -33,11 +33,13 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
+  MatTree,
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
   MAT_DATE_LOCALE,
   DateAdapter,
+  MatTreeModule,
 } from '@angular/material';
 import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {HttpModule} from '@angular/http';
@@ -77,6 +79,7 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatSortModule,
     MatTableModule,
     MatTabsModule,
+    MatTreeModule,
     MatToolbarModule,
     MatTooltipModule,
   ],

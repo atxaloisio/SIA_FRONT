@@ -21,6 +21,7 @@ import { OrdemPagamentoService } from '../../ordempagamento/ordempagamento.servi
 import { TokenManagerService } from '../../token-manager.service';
 import { RelatorioService } from '../relatorio.service';
 import { DialogService } from '../../dialog/dialog.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-filtrolistagemordempagamento',
@@ -246,7 +247,7 @@ export class FiltroListagemOrdemPagamentoListComponent implements OnInit, AfterV
     const contratanteFilter$ = this.contratanteFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
 
-    Observable.combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
+    combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
       centrocustoFilter$, fornecedorFilter$, contratanteFilter$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao, servico, centrocusto, fornecedor, contratante]) =>

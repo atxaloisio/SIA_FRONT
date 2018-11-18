@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import { isEmpty } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
-import { Servico, ServicoFilter } from './servico';
+import { Perfil, PerfilFilter } from './perfil';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -10,12 +10,12 @@ import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angul
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 @Injectable()
-export class ServicoService {
-  private servicoUrl = environment.urlbase + '/api/servicos';
+export class PerfilService {
+  private perfilUrl = environment.urlbase + '/api/perfis';
 
   constructor(private _http: Http) {}
 
-  addServico(accessToken: string, _servico: Servico): Observable<any> {
+  addPerfil(accessToken: string, _perfil: Perfil): Observable<any> {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
@@ -23,12 +23,12 @@ export class ServicoService {
 
     // const _params: HttpParams = new HttpParams();
     const _body = {
-      descricao: _servico.descricao
+      descricao: _perfil.descricao
     };
     // _params.set('codigo', '1');
 
     return this._http
-      .post(this.servicoUrl, _body, { headers: headers})
+      .post(this.perfilUrl, _body, { headers: headers})
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
@@ -36,7 +36,7 @@ export class ServicoService {
 
   }
 
-  editServico(accessToken: string, _id: number, _servico: Servico): Observable<any> {
+  editPerfil(accessToken: string, _id: number, _perfil: Perfil): Observable<any> {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
@@ -45,12 +45,12 @@ export class ServicoService {
     // const _params: HttpParams = new HttpParams();
     const _body = {
       id: _id,
-      descricao: _servico.descricao
+      descricao: _perfil.descricao
     };
     // _params.set('id', _id.toString());
 
     return this._http
-      .put(this.servicoUrl + '/' + _id.toString(), _body, { headers: headers })
+      .put(this.perfilUrl + '/' + _id.toString(), _body, { headers: headers })
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
@@ -58,38 +58,38 @@ export class ServicoService {
 
   }
 
-  deleteServico(accessToken: string, _id: number) {
+  deletePerfil(accessToken: string, _id: number) {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
     });
 
     return this._http
-      .delete(this.servicoUrl + '/' + _id.toString(), { headers: headers })
+      .delete(this.perfilUrl + '/' + _id.toString(), { headers: headers })
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
       );
   }
 
-  getServico(accessToken: string, _id: number)  {
+  getPerfil(accessToken: string, _id: number)  {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
     });
 
     return this._http
-      .get(this.servicoUrl + '/' + _id.toString(), { headers: headers })
+      .get(this.perfilUrl + '/' + _id.toString(), { headers: headers })
       .map((res: Response) => res)
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
       );
   }
 
-  /** Metodo que retorna um observable com dados da listagem de servicos
+  /** Metodo que retorna um observable com dados da listagem de perfils
    *  parametro: acessToken: string
   */
-  getServicos(accessToken: string, sort: string, order: string, page: number, pagesize: number, filter: ServicoFilter) {
+  getPerfils(accessToken: string, sort: string, order: string, page: number, pagesize: number, filter: PerfilFilter) {
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')
@@ -124,15 +124,15 @@ export class ServicoService {
     }
 
     return this._http
-      .get(this.servicoUrl, { headers: headers, search: search })
+      .get(this.perfilUrl, { headers: headers, search: search })
       .map((res: Response) => res.json())
       .catch((error: any) =>
         Observable.throw(error.json() || 'Server error')
       );
   }
 
-  getListServicos(accessToken: string)  {
-    const listUrl = environment.urlbase + '/api/listservicos';
+  getListPerfils(accessToken: string)  {
+    const listUrl = environment.urlbase + '/api/listperfis';
     const headers = new Headers({
       Accept: 'application/json',
       Authorization: 'Bearer ' + accessToken.toString().replace(/"/g, '')

@@ -15,6 +15,7 @@ import 'rxjs/add/operator/debounceTime';
 import { OrdemPagamento, OrdemPagamentoFilter } from '../../ordempagamento/ordempagamento';
 import { TokenManagerService } from '../../token-manager.service';
 import { OrdemPagamentoService } from '../../ordempagamento/ordempagamento.service';
+import { merge } from 'rxjs';
 
 
 export class DsFiltroOrdemPagamento extends DataSource<OrdemPagamento> {
@@ -63,7 +64,7 @@ export class DsFiltroOrdemPagamento extends DataSource<OrdemPagamento> {
     ];
     this._sort.sortChange.subscribe(() => this._paginator.pageIndex = 0);
 
-    return Observable.merge(...displayDataChanges)
+    return merge(...displayDataChanges)
     .startWith(null)
     .switchMap(() => {
       // this.isLoadingResults = true;

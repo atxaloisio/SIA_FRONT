@@ -30,11 +30,11 @@
         <span>Fornecedor</span>
       </button>
 
-      <button mat-menu-item [routerLink]="['/funcoes']" *ngIf="perfil.cadastros_equipamento == 'S'">
+      <button mat-menu-item [routerLink]="['/funcoes']" *ngIf="perfil.cadastros_funcao == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-wrench"></mat-icon>
         <span>Função</span>
       </button>
-      <button mat-menu-item [routerLink]="['/centrocustos']" *ngIf="perfil.cadastros_equipamento == 'S'">
+      <button mat-menu-item [routerLink]="['/centrocustos']" *ngIf="perfil.cadastros_centro_custo == 'S'">
         <mat-icon fontSet="fontawesome" fontIcon="fa-creative-commons"></mat-icon>
         <span>Centro de Custo</span>
       </button>
@@ -46,12 +46,13 @@
       <span style="color: white" class="no_print">Processos</span>
     </button>
     <mat-menu #processos="matMenu" [overlapTrigger]="false" class="no_print">
-      <button mat-menu-item [routerLink]="['/ordempagamentos']" *ngIf="perfil.processos_manifesto == 'S'">
-
+      <button mat-menu-item [routerLink]="['/ordempagamentos']" *ngIf="perfil.processos_ordem_pagamento == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-usd"></mat-icon>
         <span>Ordem de Pagamento</span>
       </button>
-      <button mat-menu-item [routerLink]="['/aprovacaopagamentos']" *ngIf="perfil.processos_monitor_documento == 'S'">
-
+      <button mat-menu-item [routerLink]="['/aprovacaopagamentos']" *ngIf="perfil.processos_aprovacao_pagamento == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-check"></mat-icon>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-usd"></mat-icon>
         <span>Aprovação de Pagamento</span>
       </button>
 
@@ -62,17 +63,13 @@
       <span style="color: white" class="no_print">Relatórios</span>
     </button>
     <mat-menu #relatorios="matMenu" [overlapTrigger]="false">
-
-      <button mat-menu-item [routerLink]="['/relatorios/fornecedor']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-
+      <button mat-menu-item [routerLink]="['/relatorios/fornecedor']" *ngIf="perfil.relatorios_listagem_fornecedores == 'S'">
         <span>Listagem de Fornecedores</span>
       </button>
-      <button mat-menu-item [routerLink]="['/relatorios/filtrolistagemordempagamento']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-
+      <button mat-menu-item [routerLink]="['/relatorios/filtrolistagemordempagamento']" *ngIf="perfil.relatorios_listagem_ordem_pagamento == 'S'">
         <span>Listagem de Ordens de Pagamento</span>
       </button>
-      <button mat-menu-item [routerLink]="['/relatorios/filtroordempagamento']" *ngIf="perfil.relatorios_controle_pesagem == 'S'">
-
+      <button mat-menu-item [routerLink]="['/relatorios/filtroordempagamento']" *ngIf="perfil.relatorios_ordem_pagamento == 'S'">
         <span>Ordens de Pagamentos</span>
       </button>
     </mat-menu>
@@ -89,18 +86,25 @@
         <mat-icon fontSet="fontawesome" fontIcon="fa-user-plus"></mat-icon>
         <span>Adicionar Usuário</span>
       </button>
-      <button mat-menu-item *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'" (click)="openEditUsuario()">
+      <button mat-menu-item *ngIf="perfil.aclcontrol_alterar_usuario == 'S'" (click)="openEditUsuario()">
         <mat-icon fontSet="fontawesome" fontIcon="fa-user-times"></mat-icon>
         <span>Alterar Usuário</span>
       </button>
-      <button mat-menu-item [routerLink]="['/usuariocentrocustos']" *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'">
-
+      <button mat-menu-item [routerLink]="['/usuariocentrocustos']" *ngIf="perfil.aclcontrol_usuario_centro_custo == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-user"></mat-icon>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-creative-commons"></mat-icon>
         <span>Usuário x Centro de Custo</span>
       </button>
-      <button mat-menu-item [routerLink]="['/usuarioempresas']" *ngIf="perfil.aclcontrol_adicionar_usuario == 'S'">
+      <button mat-menu-item [routerLink]="['/usuarioempresas']" *ngIf="perfil.aclcontrol_usuario_empresa == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-user"></mat-icon>
+        <mat-icon fontSet="fontawesome" fontIcon="fa-industry"></mat-icon>
         <span>Usuário x Empresa</span>
       </button>
-      <button mat-menu-item (click)="openChangePasswordtUsuario()">
+      <button mat-menu-item [routerLink]="['/perfis']" *ngIf="perfil.aclcontrol_perfil == 'S'">
+        <mat-icon fontSet="fontawesome" fontIcon="fa-vcard-o"></mat-icon>
+        <span>Perfis</span>
+      </button>
+      <button mat-menu-item *ngIf="perfil.aclcontrol_redefinir_senha == 'S'" (click)="openChangePasswordtUsuario()">
         <mat-icon fontSet="fontawesome" fontIcon="fa-lock"></mat-icon>
         <i class="fa fa-exchange" aria-hidden="true"></i>
         <span>Trocar Senha</span>

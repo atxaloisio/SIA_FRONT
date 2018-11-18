@@ -18,6 +18,7 @@ import { DsFiltroOrdemPagamento } from './dsfiltroordempagamento';
 import { OrdemPagamento } from '../../ordempagamento/ordempagamento';
 import { RelatorioService } from '../relatorio.service';
 import { OrdemPagamentoService } from '../../ordempagamento/ordempagamento.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-filtroordempagamento',
@@ -243,7 +244,7 @@ export class FiltroOrdemPagamentoListComponent implements OnInit, AfterViewInit 
     const contratanteFilter$ = this.contratanteFilter.valueChanges.debounceTime(500).distinctUntilChanged().startWith('');
 
 
-    Observable.combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
+    combineLatest(idFilter$, descricaoFilter$, servicoFilter$,
       centrocustoFilter$, fornecedorFilter$, contratanteFilter$).debounceTime(500).distinctUntilChanged().
     map(
       ([id, descricao, servico, centrocusto, fornecedor, contratante]) =>

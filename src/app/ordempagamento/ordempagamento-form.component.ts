@@ -19,7 +19,7 @@ import { ChangeDetectorRef, ViewChildren, ViewChild, ElementRef } from '@angular
 import { OnlyNumberDirective } from './../only-number.directive';
 import { OrdemPagamento } from './ordempagamento';
 import { ActivatedRoute, Params} from '@angular/router';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, NgForm} from '@angular/forms';
 import { Servico } from '../servico/servico';
 import { ServicoService } from '../servico/servico.service';
 import { Fornecedor } from '../fornecedor/fornecedor';
@@ -55,6 +55,7 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
 
   @ViewChildren('input') vc;
   @ViewChild('focuscomp') focuscomp: ElementRef;
+  @ViewChild('ordempagamentoForm') public form: NgForm;
 
   constructor(private _ordempagamentoService: OrdemPagamentoService,
     private _servicoService: ServicoService,
@@ -68,7 +69,7 @@ export class OrdemPagamentoFormComponent implements OnInit, AfterViewInit, After
 
   validaCampos() {
     return (
-      this.valDescricao.valid
+      this.form.valid
     );
   }
 

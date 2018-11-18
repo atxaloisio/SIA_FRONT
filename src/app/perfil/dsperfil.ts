@@ -1,3 +1,5 @@
+import { TokenManagerService } from './../token-manager.service';
+import { PerfilService } from './perfil.service';
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { DataSource} from '@angular/cdk/collections';
 import { MatSort } from '@angular/material';
@@ -11,26 +13,21 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
-import { Fornecedor, FornecedorFilter } from '../../fornecedor/fornecedor';
-import { TokenManagerService } from '../../token-manager.service';
-import { FornecedorService } from '../../fornecedor/fornecedor.service';
+import { Perfil, PerfilFilter } from './perfil';
 import { merge } from 'rxjs';
 
-export class DsFiltroFornecedor extends DataSource<Fornecedor> {
-  _filterChange = new BehaviorSubject( {id: '', codigo_omie: '', cnpj_cpf: '', razao_social: '', contato: '', telefone: '', email: '',
-  inativo: false} );
+export class DsPerfil extends DataSource<Perfil> {
+  _filterChange = new BehaviorSubject( {id: '', descricao: ''} );
 
   public onChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  get filter(): FornecedorFilter {
+  get filter(): PerfilFilter {
     return this._filterChange.value;
   }
 
-  set filter(filter: FornecedorFilter) {
+  set filter(filter: PerfilFilter) {
     this._filterChange.next(filter);
   }
-
-  public filtraAtivos = false;
 
   resultsLength = 0;
   // isLoadingResults: boolean;
@@ -41,16 +38,15 @@ export class DsFiltroFornecedor extends DataSource<Fornecedor> {
   registroDe: number;
   registroAte: number;
   nrRegistros: number;
-  data: Fornecedor[];
 
   constructor(private _tokenManager: TokenManagerService,
-              private _fornecedorService: FornecedorService,
+              private _perfilService: PerfilService,
               private _paginator: MatPaginator,
               private _sort: MatSort) {
     super();
     this.onChange.emit(false);
   }
-  connect(): Observable<Fornecedor[]> {
+  connect(): Observable<Perfil[]> {
     const displayDataChanges = [
       this._sort.sortChange,
       this._paginator.page,
@@ -61,22 +57,19 @@ export class DsFiltroFornecedor extends DataSource<Fornecedor> {
     return merge(...displayDataChanges)
     .startWith(null)
     .switchMap(() => {
-      // this.isLoadingResults = true;
       this.onChange.emit(true);
-      return this._fornecedorService.getFornecedors(this._tokenManager.retrieve(),
-        this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter, this.filtraAtivos);
+      return this._perfilService.getPerfils(this._tokenManager.retrieve(),
+        this._sort.active, this._sort.direction, this._paginator.pageIndex, this._paginator.pageSize, this.filter);
     })
     .retry(3)
     .map(data => {
       // Flip flag to show that loading has finished.
-      // this.isLoadingResults = false;
       this.onChange.emit(false);
       this.paginaInicial = 1;
-      this.paginaFinal = data.meta.last_page;
-      this.registroDe = data.meta.from;
-      this.registroAte = data.meta.to;
-      this.nrRegistros = data.meta.total;
-      this.data = data.data;
+      this.paginaFinal = data.last_page;
+      this.registroDe = data.from;
+      this.registroAte = data.to;
+      this.nrRegistros = data.total;
       return data.data;
     })
     .catch(err => {

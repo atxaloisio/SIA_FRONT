@@ -93,11 +93,11 @@
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="width: 100%">
                   <div fxFlex="90px" fxFlexAlign="start" fxFlexFill>
                     <mat-form-field class="frm_ordempagamento_codigo">
-                      <input matInput autofocus #focuscomp #codigofor="ngModel" maxlength="9" id="id_fornecedor" name="id_fornecedor"
-                        placeholder="Fornecedor" required tabindex="5" [(ngModel)]="ordempagamento.id_fornecedor"
+                      <input matInput autofocus #focuscomp #codigofor maxlength="9" id="id_fornecedor" name="id_fornecedor"
+                        placeholder="Fornecedor" required tabindex="5" [(ngModel)]="ordempagamento.id_fornecedor" [formControl]="valCodigo"
                         (keyup)="validaSaida($event.target.value)" (keypress)="onlyNumber($event)">
                       <mat-hint align="end">{{codigofor.value?.length || 0}}/9</mat-hint>
-                      <mat-error *ngIf="codigofor.invalid">{{getErrorMessage(codigofor)}}</mat-error>
+                      <mat-error *ngIf="valCodigo.invalid">{{getErrorMessage(valCodigo)}}</mat-error>
                     </mat-form-field>
                   </div>
                   <div fxFlex="30px" fxFlexAlign="center" fxFlexFill>
@@ -140,7 +140,7 @@
                   <div fxFlex="90px" fxFlexAlign="start" fxFlexFill>
                     <mat-form-field class="frm_ordempagamento_parcela">
                       <input matInput uppercase autofocus #nrparcela #focuscomp maxlength="8" id="nrparcela" name="nrparcela"
-                        placeholder="Nº Parcela" required tabindex="8" [(ngModel)]="ordempagamento.parcela">
+                        placeholder="Nº Parcela" tabindex="8" [(ngModel)]="ordempagamento.parcela">
                       <mat-hint align="end">{{nrparcela.value?.length || 0}}/9</mat-hint>
                       <mat-error *ngIf="nrparcela.invalid">{{getErrorMessage(nrparcela)}}</mat-error>
                     </mat-form-field>
@@ -148,7 +148,7 @@
                   <div fxFlex="120px" fxFlexAlign="start" fxFlexFill>
                     <div class="group">
                       <input currencyMask type="text" class="atrainput" [(ngModel)]="ordempagamento.valor_parcela" id="vlrparcela" name="vlrparcela"
-                        style="height: 35px; width: 110px;" tabindex="9" required>
+                        style="height: 35px; width: 110px;" tabindex="9">
                       <span class="highlight"></span>
                       <span class="bar"></span>
                       <label class="atralabel">Valor Parcela</label>

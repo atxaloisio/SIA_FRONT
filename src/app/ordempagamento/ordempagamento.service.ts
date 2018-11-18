@@ -5,11 +5,12 @@ import { OrdemPagamento, OrdemPagamentoFilter } from './ordempagamento';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Http, Headers, Response, RequestOptions, URLSearchParams } from '@angular/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { User } from '../user';
 import * as moment from 'moment';
+import { Perfil } from '../perfil/perfil';
 
 @Injectable()
 export class OrdemPagamentoService {
@@ -305,6 +306,14 @@ export class OrdemPagamentoService {
 
   if ((!isNullOrUndefined(filter.fornecedor)) && (filter.fornecedor.length > 0)) {
     search.set('fornecedor', filter.fornecedor);
+  }
+
+  // Busca somente pelas aprovações direcionadas para o usuario logado.
+  // caso seja um administrador ele irá visualizar todas as aprovações
+  const perfil: Perfil = JSON.parse(localStorage.getItem('Perfil'));
+  if (perfil.descricao !== 'ADMINISTRADOR') {
+    const usuario: User = JSON.parse(localStorage.getItem('currentUser'));
+    filter.contratante = usuario.name;
   }
 
   if ((!isNullOrUndefined(filter.contratante)) && (filter.contratante.length > 0)) {

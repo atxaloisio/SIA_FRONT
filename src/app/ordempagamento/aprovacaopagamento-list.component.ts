@@ -84,7 +84,7 @@ export class AprovacaoPagamentoListComponent implements OnInit, AfterViewInit {
   }
 
   dblck(row) {
-    this._router.navigate(['/ordempagamentos/ordempagamento', {id: row.id}]);
+    // this._router.navigate(['/ordempagamentos/ordempagamento', {id: row.id}]);
   }
 
 

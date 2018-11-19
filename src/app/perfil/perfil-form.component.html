@@ -43,8 +43,8 @@
               <label>Aguarde...</label>
             </div>
           </div>
-          <mat-card *ngIf="!emProcessamento" style="width: 660px;">
-            <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+          <mat-card *ngIf="!emProcessamento" style="width: 750px;">
+            <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
               <div fxFlex="60px" fxFlexAlign="start">
                 <mat-form-field class="frm_perfil_codigo">
                   <input matInput #codigo maxlength="9" type="number" tabindex="-1" placeholder="Código" disabled id="codigo"
@@ -65,19 +65,20 @@
               <!-- <div fxFlex="25px" fxFlexAlign="start">
               <label>Tipo de Atividade</label>
             </div> -->
-              <div fxFlex="70px" fxFlexAlign="start">
+              <div fxFlex="130px" fxFlexAlign="start">
 
                 <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
                   <div fxFlex="100%" fxFlexAlign="start" fxFlexFill>
                     <mat-tab-group>
                       <mat-tab>
-                          <ng-template mat-tab-label>
-                            <mat-checkbox [(ngModel)]="cadastros" [(indeterminate)]="cadastros_indeterminado" id="cadastros" name="cadastros"></mat-checkbox>
-                            &nbsp; Cadastros
-                          </ng-template>
-                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
-                          <div fxFlex="60px" fxFlexFill>
-                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                        <ng-template mat-tab-label>
+                          <mat-checkbox [(ngModel)]="cadastros" [(indeterminate)]="cadastros_indeterminado" id="cadastros"
+                            name="cadastros"></mat-checkbox>
+                          &nbsp; Cadastros
+                        </ng-template>
+                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+                          <div fxFlex="40px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
                               <div fxFlex="150px" fxFlexFill>
                                 <mat-checkbox [(ngModel)]="servico" id="servico" name="servico">Serviço</mat-checkbox>
                               </div>
@@ -88,34 +89,94 @@
                                 <mat-checkbox [(ngModel)]="funcao" id="funcao" name="funcao">Função</mat-checkbox>
                               </div>
                               <div fxFlex="150px" fxFlexFill>
-                                <mat-checkbox [(ngModel)]="centro_custo" id="centrocusto" name="centrocusto">Centro de Custo</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="centro_custo" id="centrocusto" name="centrocusto">Centro de
+                                  Custo</mat-checkbox>
                               </div>
                             </div>
                           </div>
                         </div>
                       </mat-tab>
                       <mat-tab>
-                          <ng-template mat-tab-label>
-                            <mat-checkbox [(ngModel)]="processos" [(indeterminate)]="processos_indeterminado" id="processos" name="processos">
-                            </mat-checkbox>&nbsp; Processos
-                          </ng-template>
+                        <ng-template mat-tab-label>
+                          <mat-checkbox [(ngModel)]="processos" [(indeterminate)]="processos_indeterminado" id="processos"
+                            name="processos">
+                          </mat-checkbox>&nbsp; Processos
+                        </ng-template>
                         <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
-                          <div fxFlex="60px" fxFlexFill>
+                          <div fxFlex="40px" fxFlexFill>
                             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
                               <div fxFlex="300px" fxFlexFill>
-                                <mat-checkbox [(ngModel)]="ordem_pagamento" id="ordempagamento" name="ordempagamento">Ordens de Pagamento</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="ordem_pagamento" id="ordempagamento" name="ordempagamento">Ordens
+                                  de Pagamento</mat-checkbox>
                               </div>
                               <div fxFlex="300px" fxFlexFill>
-                                <mat-checkbox [(ngModel)]="aprovacao_pagamento" id="aprovacaopagamento" name="aprovacaopagamento">Aprovação de Pagamento</mat-checkbox>
+                                <mat-checkbox [(ngModel)]="aprovacao_pagamento" id="aprovacaopagamento" name="aprovacaopagamento">Aprovação
+                                  de Pagamento</mat-checkbox>
                               </div>
                             </div>
                           </div>
                         </div>
                       </mat-tab>
                       <mat-tab>
-                        <ng-template mat-tab-label><mat-checkbox ></mat-checkbox>&nbsp; Relatórios</ng-template>
+                        <ng-template mat-tab-label>
+                          <mat-checkbox [(ngModel)]="relatorios" [(indeterminate)]="relatorios_indeterminado" id="relatorios"
+                            name="relatorios">
+                          </mat-checkbox>&nbsp; Relatórios
+                        </ng-template>
+                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+                          <div fxFlex="40px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                              <div fxFlex="240px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="listagem_fornecedores" id="listagemfornecedor" name="listagemfornecedor">Listagem
+                                  de Fornecedores</mat-checkbox>
+                              </div>
+                              <div fxFlex="300px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="listagem_ordem_pagamento" id="listagemordem" name="listagemordem">Listagem
+                                  de Ordens de Pagamento</mat-checkbox>
+                              </div>
+                              <div fxFlex="220px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="relatorios_ordem_pagamento" id="relatorioordem" name="relatorioordem">Ordens
+                                  de Pagamento</mat-checkbox>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </mat-tab>
-                      <mat-tab label="Controle de Acesso"> Content 3 </mat-tab>
+                      <mat-tab>
+                        <ng-template mat-tab-label>
+                          <mat-checkbox [(ngModel)]="aclcontrol" [(indeterminate)]="aclcontrol_indeterminado" id="aclcontrol"
+                            name="aclcontrol">
+                          </mat-checkbox>&nbsp; Controle de Acesso
+                        </ng-template>
+                        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+                          <div fxFlex="40px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                              <div fxFlex="240px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_adicionar_usuario" id="aclcontrol_adicionar_usuario" name="aclcontrol_adicionar_usuario">Adicionar Usuário</mat-checkbox>
+                              </div>
+                              <div fxFlex="300px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_alterar_usuario" id="aclcontrol_alterar_usuario" name="aclcontrol_alterar_usuario">Alterar Usuário</mat-checkbox>
+                              </div>
+                              <div fxFlex="220px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_redefinir_senha" id="aclcontrol_redefinir_senha" name="aclcontrol_redefinir_senha">Redefinir Senha</mat-checkbox>
+                              </div>
+                            </div>
+                          </div>
+                          <div fxFlex="40px" fxFlexFill>
+                            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px">
+                              <div fxFlex="240px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_usuario_centro_custo" id="aclcontrol_usuario_centro_custo" name="aclcontrol_usuario_centro_custo">Usuário x Centro de Custo</mat-checkbox>
+                              </div>
+                              <div fxFlex="300px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_usuario_empresa" id="aclcontrol_usuario_empresa" name="aclcontrol_usuario_empresa">Usuario x Empresa</mat-checkbox>
+                              </div>
+                              <div fxFlex="220px" fxFlexFill>
+                                <mat-checkbox [(ngModel)]="aclcontrol_perfil" id="aclcontrol_perfil" name="aclcontrol_perfil">Perfil</mat-checkbox>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-tab>
                     </mat-tab-group>
                     <!-- <mat-checkbox [ngModel]="perfil.armazenador" [checked]="perfil.armazenador"  (change)="chkArmazenador_change($event)" >Armazenador</mat-checkbox> -->
                   </div>

@@ -3,11 +3,11 @@
     <div fxFlex="140px" style="padding: 10px;" fxLayoutGap="10px">
       <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="5px" style="height: 100%">
         <div fxFlex="80%" fxFlexFill fxFlexAlign="center">
-          <button id="btnSalvar" mat-raised-button color="primary" style="width: 100%" (click)="btnSalvar_click()">
+          <button id="btnSalvar" mat-raised-button color="primary" style="width: 100%" (click)="btnSalvar_click(funcaoForm)">
             <mat-icon>save</mat-icon>
             <span>Salvar</span>
           </button>
-          <button id="btnIncluir" mat-raised-button color="primary" style="width: 100%" (click)="btnIncluir_click()"
+          <button id="btnIncluir" mat-raised-button color="primary" style="width: 100%" (click)="btnIncluir_click(funcaoForm)"
             *ngIf="exibeIncluir">
             <mat-icon>insert_drive_file</mat-icon>
             <span>Incluir</span>

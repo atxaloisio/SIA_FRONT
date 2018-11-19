@@ -96,6 +96,7 @@ export class PerfilFormComponent implements OnInit, AfterViewInit, AfterViewChec
   //#endregion
 
   //#region Campos Processos
+
   @Input('ordem_pagamento')
   set ordem_pagamento(ordem_pagamento: boolean) {
     this.perfil.processos_ordem_pagamento = booleanToStrSN(ordem_pagamento);
@@ -118,6 +119,109 @@ export class PerfilFormComponent implements OnInit, AfterViewInit, AfterViewChec
     return strToBoolean(this.perfil.processos_aprovacao_pagamento);
   }
 
+  //#endregion
+
+  //#region Campos Relatorio
+  @Input('listagem_fornecedores')
+  set listagem_fornecedores(listagem_fornecedores: boolean) {
+    this.perfil.relatorios_listagem_fornecedores = booleanToStrSN(listagem_fornecedores);
+    if (! this._desabilitarel) {
+      this.marcaRelatorio();
+    }
+  }
+  get listagem_fornecedores(): boolean {
+    return strToBoolean(this.perfil.relatorios_listagem_fornecedores);
+  }
+
+  @Input('listagem_ordem_pagamento')
+  set listagem_ordem_pagamento(listagem_ordem_pagamento: boolean) {
+    this.perfil.relatorios_listagem_ordem_pagamento = booleanToStrSN(listagem_ordem_pagamento);
+    if (! this._desabilitarel) {
+      this.marcaRelatorio();
+    }
+  }
+  get listagem_ordem_pagamento(): boolean {
+    return strToBoolean(this.perfil.relatorios_listagem_ordem_pagamento);
+  }
+
+  @Input('relatorios_ordem_pagamento')
+  set relatorios_ordem_pagamento(relatorios_ordem_pagamento: boolean) {
+    this.perfil.relatorios_ordem_pagamento = booleanToStrSN(relatorios_ordem_pagamento);
+    if (! this._desabilitarel) {
+      this.marcaRelatorio();
+    }
+  }
+  get relatorios_ordem_pagamento(): boolean {
+    return strToBoolean(this.perfil.relatorios_ordem_pagamento);
+  }
+  //#endregion
+
+  //#region Campos Controle de Acesso
+  @Input('aclcontrol_adicionar_usuario')
+  set aclcontrol_adicionar_usuario(aclcontrol_adicionar_usuario: boolean) {
+    this.perfil.aclcontrol_adicionar_usuario = booleanToStrSN(aclcontrol_adicionar_usuario);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_adicionar_usuario(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_adicionar_usuario);
+  }
+
+  @Input('aclcontrol_redefinir_senha')
+  set aclcontrol_redefinir_senha(aclcontrol_redefinir_senha: boolean) {
+    this.perfil.aclcontrol_redefinir_senha = booleanToStrSN(aclcontrol_redefinir_senha);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_redefinir_senha(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_redefinir_senha);
+  }
+
+  @Input('aclcontrol_alterar_usuario')
+  set aclcontrol_alterar_usuario(aclcontrol_alterar_usuario: boolean) {
+    this.perfil.aclcontrol_alterar_usuario = booleanToStrSN(aclcontrol_alterar_usuario);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_alterar_usuario(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_alterar_usuario);
+  }
+
+  @Input('aclcontrol_usuario_centro_custo')
+  set aclcontrol_usuario_centro_custo(aclcontrol_usuario_centro_custo: boolean) {
+    this.perfil.aclcontrol_usuario_centro_custo = booleanToStrSN(aclcontrol_usuario_centro_custo);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_usuario_centro_custo(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_usuario_centro_custo);
+  }
+
+  @Input('aclcontrol_usuario_empresa')
+  set aclcontrol_usuario_empresa(aclcontrol_usuario_empresa: boolean) {
+    this.perfil.aclcontrol_usuario_empresa = booleanToStrSN(aclcontrol_usuario_empresa);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_usuario_empresa(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_usuario_empresa);
+  }
+
+  @Input('aclcontrol_perfil')
+  set aclcontrol_perfil(aclcontrol_perfil: boolean) {
+    this.perfil.aclcontrol_perfil = booleanToStrSN(aclcontrol_perfil);
+    if (! this._desabilitaacl) {
+      this.marcaAclControl();
+    }
+  }
+  get aclcontrol_perfil(): boolean {
+    return strToBoolean(this.perfil.aclcontrol_perfil);
+  }
   //#endregion
 
   @Input('cadastros')
@@ -168,6 +272,62 @@ export class PerfilFormComponent implements OnInit, AfterViewInit, AfterViewChec
   }
   get processos(): boolean {
     return this._processos;
+  }
+
+  @Input('relatorios')
+  set relatorios(relatorios: boolean) {
+    if (!this._desabilitarel) {
+      this._relatorios = relatorios;
+      this._desabilitarel = true;
+      if (relatorios) {
+        this.relatorios_indeterminado = false;
+        this.listagem_fornecedores = true;
+        this.listagem_ordem_pagamento = true;
+        this.relatorios_ordem_pagamento = true;
+        this.perfil.relatorios = booleanToStrSN(true);
+      } else {
+        this.relatorios_indeterminado = false;
+        this.listagem_fornecedores = false;
+        this.listagem_ordem_pagamento = false;
+        this.relatorios_ordem_pagamento = false;
+        this.perfil.relatorios = booleanToStrSN(false);
+      }
+    }
+    this._desabilitarel = false;
+  }
+  get relatorios(): boolean {
+    return this._relatorios;
+  }
+
+  @Input('aclcontrol')
+  set aclcontrol(aclcontrol: boolean) {
+    if (!this._desabilitaacl) {
+      this._aclcontrol = aclcontrol;
+      this._desabilitaacl = true;
+      if (aclcontrol) {
+        this.aclcontrol_indeterminado = false;
+        this.aclcontrol_adicionar_usuario = true;
+        this.aclcontrol_redefinir_senha = true;
+        this.aclcontrol_alterar_usuario = true;
+        this.aclcontrol_usuario_centro_custo = true;
+        this.aclcontrol_usuario_empresa = true;
+        this.aclcontrol_perfil = true;
+        this.perfil.aclcontrol = booleanToStrSN(true);
+      } else {
+        this.aclcontrol_indeterminado = false;
+        this.aclcontrol_adicionar_usuario = false;
+        this.aclcontrol_redefinir_senha = false;
+        this.aclcontrol_alterar_usuario = false;
+        this.aclcontrol_usuario_centro_custo = false;
+        this.aclcontrol_usuario_empresa = false;
+        this.aclcontrol_perfil = false;
+        this.perfil.aclcontrol = booleanToStrSN(false);
+      }
+    }
+    this._desabilitaacl = false;
+  }
+  get aclcontrol(): boolean {
+    return this._aclcontrol;
   }
 
   constructor(private _perfilService: PerfilService,
@@ -227,6 +387,59 @@ export class PerfilFormComponent implements OnInit, AfterViewInit, AfterViewChec
     }
   }
 
+  marcaRelatorio() {
+    if (this.listagem_fornecedores &&
+      this.listagem_ordem_pagamento &&
+      this.relatorios_ordem_pagamento) {
+      this.relatorios = true;
+      this.perfil.relatorios = booleanToStrSN(true);
+      this.relatorios_indeterminado = false;
+    } else {
+      if ((this.listagem_fornecedores ||
+        this.listagem_ordem_pagamento ||
+        this.relatorios_ordem_pagamento) && (!this.relatorios_indeterminado)) {
+        this.relatorios_indeterminado = true;
+        this.perfil.relatorios = booleanToStrSN(true);
+      } else {
+        if (!this.listagem_fornecedores && !this.listagem_ordem_pagamento && !this.relatorios_ordem_pagamento) {
+          this.relatorios = false;
+          this.relatorios_indeterminado = false;
+          this.perfil.relatorios = booleanToStrSN(false);
+        }
+      }
+    }
+  }
+
+  marcaAclControl() {
+    if (this.aclcontrol_adicionar_usuario &&
+      this.aclcontrol_redefinir_senha &&
+      this.aclcontrol_alterar_usuario &&
+      this.aclcontrol_usuario_centro_custo &&
+      this.aclcontrol_usuario_empresa &&
+      this.aclcontrol_perfil) {
+      this.aclcontrol = true;
+      this.perfil.aclcontrol = booleanToStrSN(true);
+      this.aclcontrol_indeterminado = false;
+    } else {
+      if ((this.aclcontrol_adicionar_usuario ||
+        this.aclcontrol_redefinir_senha ||
+        this.aclcontrol_alterar_usuario ||
+        this.aclcontrol_usuario_centro_custo ||
+        this.aclcontrol_usuario_empresa ||
+        this.aclcontrol_perfil ) && (!this.aclcontrol_indeterminado)) {
+        this.aclcontrol_indeterminado = true;
+        this.perfil.aclcontrol = booleanToStrSN(true);
+      } else {
+        if (!this.aclcontrol_adicionar_usuario && !this.aclcontrol_redefinir_senha && !this.aclcontrol_alterar_usuario &&
+          !this.aclcontrol_usuario_centro_custo && !this.aclcontrol_usuario_empresa && !this.aclcontrol_perfil) {
+          this.aclcontrol = false;
+          this.aclcontrol_indeterminado = false;
+          this.perfil.aclcontrol = booleanToStrSN(false);
+        }
+      }
+    }
+  }
+
   ngOnInit() {
     this.emProcessamento = true;
     this.perfil = new Perfil();
@@ -238,6 +451,10 @@ export class PerfilFormComponent implements OnInit, AfterViewInit, AfterViewChec
         .retry(3)
         .subscribe( dt => {
           this.perfil = dt.json();
+          this.marcaCadastro();
+          this.marcaProcesso();
+          this.marcaRelatorio();
+          this.marcaAclControl();
           this.perfil_ant = dt.json();
           // console.log(1);
           this.emProcessamento = false;

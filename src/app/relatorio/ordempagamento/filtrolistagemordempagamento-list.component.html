@@ -141,7 +141,7 @@
 
           <ng-container matColumnDef="valor_total">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Valor Total </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.valor_total | currency:'BRL':true}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.valor_total | currency:'BRL':'symbol-narrow'}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -137,7 +137,7 @@
                   <td style="width: 120px; font-weight: bold">Nº Parcela:</td>
                   <td>{{item.parcela}}</td>
                   <td style="width: 120px; font-weight: bold">Valor Parcela:</td>
-                  <td>{{item.valor_parcela | currency:'BRL':true}}</td>
+                  <td>{{item.valor_parcela | currency:'BRL':'symbol-narrow'}}</td>
                 </tr>
                 <tr style="background-color: #FFFFFF; font-size: 14px; height: 30px;">
                   <td style="width: 120px; font-weight: bold">Solicitado por:</td>
@@ -149,7 +149,7 @@
                   <td style="width: 120px; font-weight: bold">Autorizado por:</td>
                   <td>{{item.usuario_aprovacao}}</td>
                   <td style="width: 120px; font-weight: bold">Valor Total:</td>
-                  <td>{{item.valor_total | currency:'BRL':true}}</td>
+                  <td>{{item.valor_total | currency:'BRL':'symbol-narrow'}}</td>
                 </tr>
                 <tr style="background-color: #FFFFFF; font-size: 14px; height: 30px;">
                   <td style="width: 120px; font-weight: bold">Rubrica:</td>

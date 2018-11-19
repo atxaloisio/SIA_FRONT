@@ -47,6 +47,7 @@ import { CanDeactivateGuard } from './can-deactivate-guard.service';
 import { UsuarioEmpresaModule } from './usuarioempresa/usuarioempresa.module';
 import localePt from '@angular/common/locales/pt';
 import { PerfilModule } from './perfil/perfil.module';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 registerLocaleData(localePt, 'pt-BR');
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ registerLocaleData(localePt, 'pt-BR');
     DialogComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ForbiddenComponent,
     PasswordEqualsDirective
   ],
   imports: [

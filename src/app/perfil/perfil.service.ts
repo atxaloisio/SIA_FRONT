@@ -23,7 +23,26 @@ export class PerfilService {
 
     // const _params: HttpParams = new HttpParams();
     const _body = {
-      descricao: _perfil.descricao
+      descricao: _perfil.descricao,
+      cadastros : _perfil.cadastros,
+      cadastros_servico: _perfil.cadastros_servico,
+      cadastros_centro_custo: _perfil.cadastros_centro_custo,
+      cadastros_funcao: _perfil.cadastros_funcao,
+      cadastros_fornecedor: _perfil.cadastros_fornecedor,
+      processos: _perfil.processos,
+      processos_ordem_pagamento: _perfil.processos_ordem_pagamento,
+      processos_aprovacao_pagamento: _perfil.processos_aprovacao_pagamento,
+      relatorios: _perfil.relatorios,
+      relatorios_listagem_fornecedores: _perfil.relatorios_listagem_fornecedores,
+      relatorios_listagem_ordem_pagamento: _perfil.relatorios_listagem_ordem_pagamento,
+      relatorios_ordem_pagamento: _perfil.relatorios_ordem_pagamento,
+      aclcontrol: _perfil.aclcontrol,
+      aclcontrol_adicionar_usuario: _perfil.aclcontrol_adicionar_usuario,
+      aclcontrol_redefinir_senha: _perfil.aclcontrol_redefinir_senha,
+      aclcontrol_alterar_usuario: _perfil.aclcontrol_alterar_usuario,
+      aclcontrol_usuario_centro_custo: _perfil.aclcontrol_usuario_centro_custo,
+      aclcontrol_usuario_empresa: _perfil.aclcontrol_usuario_empresa,
+      aclcontrol_perfil: _perfil.aclcontrol_perfil
     };
     // _params.set('codigo', '1');
 
@@ -45,7 +64,26 @@ export class PerfilService {
     // const _params: HttpParams = new HttpParams();
     const _body = {
       id: _id,
-      descricao: _perfil.descricao
+      descricao: _perfil.descricao,
+      cadastros : _perfil.cadastros,
+      cadastros_servico: _perfil.cadastros_servico,
+      cadastros_centro_custo: _perfil.cadastros_centro_custo,
+      cadastros_funcao: _perfil.cadastros_funcao,
+      cadastros_fornecedor: _perfil.cadastros_fornecedor,
+      processos: _perfil.processos,
+      processos_ordem_pagamento: _perfil.processos_ordem_pagamento,
+      processos_aprovacao_pagamento: _perfil.processos_aprovacao_pagamento,
+      relatorios: _perfil.relatorios,
+      relatorios_listagem_fornecedores: _perfil.relatorios_listagem_fornecedores,
+      relatorios_listagem_ordem_pagamento: _perfil.relatorios_listagem_ordem_pagamento,
+      relatorios_ordem_pagamento: _perfil.relatorios_ordem_pagamento,
+      aclcontrol: _perfil.aclcontrol,
+      aclcontrol_adicionar_usuario: _perfil.aclcontrol_adicionar_usuario,
+      aclcontrol_redefinir_senha: _perfil.aclcontrol_redefinir_senha,
+      aclcontrol_alterar_usuario: _perfil.aclcontrol_alterar_usuario,
+      aclcontrol_usuario_centro_custo: _perfil.aclcontrol_usuario_centro_custo,
+      aclcontrol_usuario_empresa: _perfil.aclcontrol_usuario_empresa,
+      aclcontrol_perfil: _perfil.aclcontrol_perfil
     };
     // _params.set('id', _id.toString());
 

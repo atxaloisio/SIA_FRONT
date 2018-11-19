@@ -81,8 +81,8 @@
                     <th style="width: 120px">{{item.nota_fiscal}}</th>
                     <th style="width: 120px">{{item.recibo}}</th>
                     <th style="width: 120px">{{item.parcela}}</th>
-                    <th style="width: 120px">{{item.valor_parcela | currency:'BRL':true}}</th>
-                    <th style="width: 120px">{{item.valor_total | currency:'BRL':true}}</th>
+                    <th style="width: 120px">{{item.valor_parcela | currency:'BRL':'symbol-narrow'}}</th>
+                    <th style="width: 120px">{{item.valor_total | currency:'BRL':'symbol-narrow'}}</th>
                     <th style="width: 120px">{{item.vencimento | formatDate}}</th>
                 </tr>
               </table>
